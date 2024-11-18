@@ -1,0 +1,238 @@
+---
+title: Estimación de parámetros
+lang: es
+---
+
+:::{#exr-distribución-media-trabajadores-pymes}
+El número medio de trabajadores en las PYMES españolas es $5$ y su varianza $4$. Realizado un muestreo aleatorio de $16$ PYMES, calcular:
+
+a. La esperanza y varianza de la media muestral.
+
+b. La esperanza de la varianza y de la cuasivarianza muestral.
+
+c. Mínimo tamaño que ha de tener la muestra para que exista una probabilidad mayor o igual al $95$% de que la media muestral se desvíe de la media poblacional a lo sumo $0.5$ unidades.
+
+d. Si realizamos un muestreo aleatorio de tamaño $320$ obtener $P(4.9\leq \bar x  \leq 5.2)$.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X$ la variable aleatoria que mide el número de trabajadores en una muestra de 16 PYMES españolas. 
+
+a.  $E(\bar x) = 5$ y $Var(\bar x) = \frac{4}{16} = 0.25$.
+a.  $E(s^2) = 3.75$ y $E(\hat s^2) = 4$.
+a.  $P(|\bar x - 5| \leq 0.5) = 0.95$ si $n\geq 320$.
+a.  Sea $Y$ la variable aleatoria que mide el número de trabajadores en una muestra de 320 PYMES españolas. Entonces, $Y\sim N\left(5, \sqrt{\frac{4}{320}}\right)$ y $P(4.9\leq \bar x  \leq 5.2) = 0.777$.
+:::
+
+:::{#exr-distribución-cuasivarianza-iberpapel}
+El precio de las acciones de Iberpapel se distribuyen según un modelo normal $N(\mu, 2)$. Si se analizan $16$ sesiones de la Bolsa de Madrid elegidas aleatoriamente, ¿cuál es la probabilidad de que la cuasivarianza muestral del precio de las acciones sea mayor o igual que $2.136$?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sabemos que $\frac{ns^2}{\sigma^2}\sim \chi^2(n-1)$. Por tanto, $P(\hat s^2\geq 2.136) = P\left(\frac{16\cdot s^2}{2}\geq 4\cdot 2.136\right) = P\left(\chi^2(15)\geq 8.544\right) = 0.9$.
+:::
+
+:::{#exr-diferencia-proporciones-votos}
+El porcentaje de votantes con preferencia de un determinado partido es del $5$% en una región $A$, y el $10$% en otra $B$. Consultados $100$ electores de la región $A$ y $150$ de la $B$, determinar la probabilidad de que el porcentaje de electores consultados favorables a dicho partido en la segunda región supere en más de $2$% al porcentaje de electores favorables a dicho partido en la primera.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X_1$ proporción de votantes favorables al partido en la región $A$ en una muestra de $100$ electores y $X_2$ proporción de votantes favorables al partido en la región $B$ en una muestra de $150$ electores. Entonces, $X_1\sim N\left(0.05, \sqrt{\frac{0.05\cdot (1-0.05)}{100}}\right)$ y $X_2\sim N\left(0.1, \sqrt{\frac{0.1\cdot (1-0.1)}{150}}\right)$, y $P(X_2-X_1>0.02) = 0.8212$.
+:::
+
+:::{#exr-intervalo-confianza-media-carne-porcino}
+Se sabe que el gasto mensual en carne de porcino en las familias españolas se distribuye de manera normal. Se ha realizado un muestreo aleatorio simple en el que se ha preguntado a $20$ familias sobre el gasto mensual en carne de porcino, y se ha obtenido una media de $170.31$ € y una cuasidesviación típica de $36$ €.
+
+a.  Obtener el intervalo de confianza para el gasto medio mensual en carne de porcino con un 95% de confianza.
+
+a.  ¿Cómo podría obtenerse un intervalo de confianza más preciso para el gasto medio suponiendo que no varían la media muestral, la cuasivarianza muestral y el tamaño de la muestra? ¿Y si no varían la media muestral, la cuasivarianza muestral y el nivel de confianza?
+
+a.  Obtener el intervalo de confianza para la desviación típica del gasto mensual en carne de porcino con un 95% de confianza.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim N(\mu,\sigma)$ la variable aleatoria que mide el gasto mensual en carne de porcino en una muestra de 20 familias españolas.
+
+a.  Usando el intervalo de confianza de la t de Student se tiene $\mu \in (153.46, 187.16)$ con una confianza del $95$%.
+
+a.  Para obtener un intervalo de confianza más preciso para el gasto medio manteniendo la misma media muestral, cuasivarianza muestral y tamaño de la muestra, se puede reducir el nivel de confianza.
+
+    Y para obtener un intervalo de confianza más preciso para el gasto medio manteniendo la misma media muestral, cuasivarianza muestral y nivel de confianza, se puede aumentar el tamaño de la muestra.
+
+a.  Usando el intervalo de confianza de la $\chi^2$ se tiene $\sigma \in (27.37, 52.58)$ con una confianza del $95$%.
+:::
+
+:::{#exr-intervalo-confianza-media-peso}
+La OMS ha obtenido una muestra de los pesos de $50$ niños de $12$ años, que proporciona una media muestral de $47$ kg y una cuasidesviación típica muestral de $11$ kg. Suponiendo que la población sigue una distribución normal:
+
+a.  Obtener un intervalo de confianza para la media poblacional con un $95$% de nivel de confianza.
+
+b. El director de la OMS considera que el intervalo es poco preciso, pero quiere mantener el nivel de confianza. Por ello decide reducir a la mitad la amplitud del intervalo. En estas condiciones, ¿cuál debería ser el tamaño de la muestra para cumplir los objetivos del director?
+
+c. Los resultados obtenidos en los análisis anteriores siguen sin convencer al director de la OMS y le pide a su equipo que establezca un intervalo de confianza para la media poblacional con un $99$% de nivel de confianza, manteniendo la misma muestra del primer apartado.
+
+d. El director decide reducir en un tercio la amplitud del intervalo anterior, pero quiere mantener el nivel de confianza ¿cuál debería ser el tamaño de la muestra para cumplir dicho objetivo?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim N(\mu,\sigma)$ la variable aleatoria que mide el peso de los niños de 12 años.
+
+a.  Usando el intervalo de confianza de la t de Student se tiene $\mu \in (43.88, 50.12)$ con una confianza del $95$%.
+
+a.  Para reducir a la mitad la amplitud del intervalo manteniendo el nivel de confianza, se debe cuadruplicar el tamaño de la muestra, es decir, se necesita $n=200$ niños.
+
+a.  Usando el intervalo de confianza de la t de Student se tiene $\mu \in (42.83, 51.16)$ con una confianza del $99$%.
+
+a.  Para reducir en un tercio la amplitud del intervalo manteniendo el nivel de confianza, se debe multiplicar por $9$ el tamaño de la muestra, es decir, se necesita $n=450$ niños.
+:::
+
+:::{#exr-intervalo-confianza-media-ventas-bicicletas}
+Un fabricante de bicicletas quiere estimar la media de ventas de bicicletas en un año. Para ello, ha tomado una muestra aleatoria simple de $17$ establecimientos, y ha obtenido una media muestral $3650$ bicicletas con una cuasidesviación típica muestral de $55$ bicicletas. Suponiendo que las ventas de bicicletas siguen una distribución normal:
+
+a.  Calcular el intervalo de confianza para la media con un nivel de confianza del 95%.
+
+a.  Calcular el intervalo de confianza para la varianza con un grado de confianza del 95%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim N(\mu,\sigma)$ la variable aleatoria que mide las ventas de bicicletas en un año.
+
+a.  Usando el intervalo de confianza de la t de Student se tiene $\mu \in (3621.70, 3678.30)$ con una confianza del $95$%.
+
+a.  Usando el intervalo de confianza de la $\chi^2$ se tiene $\sigma^2 \in (1512.5, 7006.38)$ con una confianza del $95$%.
+:::
+
+:::{#exr-intervalo-confianza-media-bitcoin}
+Un banco quiere saber el nivel de implantación de la criptomoneda Bitcoin y para ello se ha realizado un muestreo aleatorio simple de $100$ españoles, resultando que $15$ tienen bitcoins.
+
+a. Obtener un intervalo de confianza del $95$% para la proporción poblacional de españoles que poseen bitcoins.
+
+b. ¿A cuántos españoles se debería encuestar para lograr una semiamplitud del intervalo de $0.02$, utilizando un nivel de confianza del $90$%?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim B(100, p)$ la variable aleatoria que mide el número de españoles que poseen bitcoins.
+
+a.  Usando el intervalo de confianza de la normal se tiene $p \in (0.0801, 0.2199)$ con una confianza del $95$%.
+
+a.  Para lograr una semiamplitud del intervalo de $0.02$ con un nivel de confianza del $90$%, se necesita encuestar a $n=861$ españoles.
+:::
+
+:::{#exr-intervalo-confianza-proporción-covid}
+Para conocer la prevalencia de la COVID en una población se ha tomado una muestra aleatoria de $500$ personas y se ha observado que $36$ tenían COVID. ¿Qué precisión tiene el intervalo de confianza del $95$% para la proporción de personas infectadas en la población? ¿Qué tamaño muestral habría que tomar para doblar la precisión del intervalo?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim B(500, p)$ la variable aleatoria que mide el número de personas infectadas por COVID.
+
+Usando el intervalo de confianza de la normal se tiene el error en la estimación es $E = 0.0227$, es decir, un $2.27$%. 
+
+Para doblar la precisión del intervalo se necesita un tamaño muestral de $n=1993$ personas.
+:::
+
+:::{#exr-intervalo-confianza-proporción-uso-alta-velocidad}
+Tras la liberalización del transporte ferroviario de pasajeros en las líneas de alta velocidad en España, la compañía francesa SNCF estudia la proporción de clientes que utiliza al menos una vez al mes el servicio de alta velocidad. A tal efecto la empresa realiza un muestreo aleatorio en el que se seleccionan $50$ usuarios y en el que resulta que $35$ de ellos afirma utilizar este servicio una vez al mes como mínimo. Calcular el intervalo de confianza del $98$% para la proporción poblacional de usuarios que utilizan la alta velocidad al menos una vez al mes.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X\sim B(50, p)$ la variable aleatoria que mide el número de usuarios que utilizan la alta velocidad una vez al mes como mínimo.
+
+Usando el intervalo de confianza de la normal se tiene $p \in (0.549, 0.851)$ con una confianza del $98$%.
+:::
+
+:::{#exr-tamaño-muestra-proporción-encuesta}
+Leemos en un periódico que la intención de voto a un partido político está entre el $25$% y el $31$% con un $95$% de confianza. ¿Cuál es el tamaño muestral que se ha utilizado para dar esta estimación?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+Usando el intervalo de confianza de la normal se tiene que el tamaño muestral necesario para obtener este intervalo para la proporción de personas que votaría al partido es $n=861$.
+:::
+
+:::{#exr-intervalo-confianza-comparación-proporciones-voto}
+En una encuesta realizada a $1000$ personas sobre la intención de voto en unas elecciones, $350$ comentaron que votarían al partido $A$ y $390$ al partido $B$. Calcular los intervalos de confianza del $95$% para el porcentaje de voto a cada partido. ¿Se puede afirmar con un $95$% de confianza que el partido $B$ ganaría las elecciones?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $A\sim B(500, p_A)$ la variable aleatoria que mide el número de personas que votarían al partido $A$ y $B\sim B(1000, p_B)$ la variable aleatoria que mide el número de personas que votarían al partido $B$ en una muestra de 1000 personas.
+
+Usando el intervalo de confianza de la normal se tiene que el porcentaje de voto al partido $A$ está entre el $32.04$% y el $37.96$% y el porcentaje de voto al partido $B$ está entre el $35.98$% y el $42.02$ con una confianza del $95$%.
+:::
+
+:::{#exr-intervalo-confianza-ventas-fármaco}
+Para ver si una campaña de publicidad sobre un fármaco ha influido en sus ventas, se tomó una muestra de $8$ farmacias y se midió el número de fármacos vendidos durante un mes, antes y después de la campaña, obteniéndose los siguientes resultados:
+
+$$
+\begin{array}{lcccccccc}
+\hline
+\mbox{Antes} & 147 & 163 & 121 & 205 & 132 & 190 & 176 & 147  \\
+\mbox{Después} & 150 & 171 & 132 & 208 & 141 & 184 & 182 & 145  \\
+\hline
+\end{array}
+$$
+
+Obtener la variable diferencia y construir un intervalo de confianza para la media de la diferencia con un nivel de significación $0.05$.
+¿Existen pruebas suficientes para afirmar con un $95$% de confianza que la campaña de publicidad ha aumentado las ventas?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X$ la variable aleatoria que mide la diferencia entre el número de fármacos vendidos en una farmacia en un mes antes y después de la campaña de publicidad.
+
+Usando el intervalo de confianza de la t de Student se tiene que $\mu \in (-1.75, 21.75)$ con una confianza del $95$%.
+:::
+
+:::{#exr-intervalo-confianza-comparación-medias-ventas}
+Se ha realizado un estudio para comparar los ingresos medios de las personas de dos ciudades. Para ello, se ha tomado una muestra de $100$ personas en una ciudad y $120$ en la otra. En la primera ciudad se ha observado una media de $1630$ € mensuales y una cuasidesviación típica de $150$ €, mientras que en la segunda ciudad se ha observado una media de $1780$€ y una cuasidesviación típica de $160$ €. Calcular el intervalo de confianza del $95$% para la diferencia de medias de ingresos mensuales entre las dos ciudades.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Sea $X_1\sim N(\mu_1, \sigma_1)$ la variable aleatoria que mide los ingresos mensuales de las personas en la primera ciudad y $X_2\sim N(\mu_2, \sigma_2)$ la variable aleatoria que mide los ingresos mensuales de las personas en la segunda ciudad.
+
+El intervalo de confianza del %95% para el cociente de varianzas es $\frac{\sigma_1 2}{\sigma_2^2}\in (0.6273, 1.2492)$ por lo que podemos asumir varianzas iguales, y el intervalo de confianza para para la diferencia de medias es $\mu_1-\mu_2\in (-191.20, -108.80)$ con una confianza del $95$%.
+:::
+
+:::{#exr-intervalo-confianza-comparación-proporciones-emisiones}
+La siguiente tabla muestra el porcentaje de industrias españolas y europeas según el consumo de energía primaria de
+las mismas durante el año 2002 (se estudiaron 1000 industrias españolas y 1000 del resto de europa).
+
+$$
+\begin{array}{lcc}
+\hline
+\mbox{Fuente energética}  &  \mbox{España}  & \mbox{Resto de Europa} \\
+\mbox{Petróleo}            & 52.2\% &    40.4\%     \\
+\mbox{Carbón}              & 15.2\% &    14.8\%     \\
+\mbox{Nuclear}             & 13.0\% &    15.2\%     \\
+\mbox{Gas}                 & 12.8\% &    23.5\%     \\
+\mbox{Energías Renovables} & 6.5\%  &     6.1\%     \\
+\hline
+\end{array}
+$$
+
+Estudiar, según los intervalos de confianza para diferencia de proporciones, para qué energías el porcentaje de industrias de España es significativamente diferente del resto de Europa.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Los intervalos de confianza del $95$% para la diferencia de proporciones de industrias que usan las diferentes fuentes de energía en España y en el resto de Europa son:
+
+- Petróleo: $(0.0747, 0.1613)$. Hay diferencias significativas.
+- Carbón: $(-0.0273, 0.0353)$. No hay diferencias significativas.
+- Nuclear: $(-0.0525, 0.0085)$. No hay diferencias significativas.
+- Gas: $(-0.1405, -0.0735)$. Hay diferencias significativas.
+- Energías Renovables: $(-0.0173, 0.0253)$. No hay diferencias significativas.
+:::
+
+
