@@ -50,7 +50,7 @@ Como el p-valor es mayor que el nivel de significación $\alpha = 0.10$, no se r
 :::
 
 :::{#exr-contraste-comparacion-medias-pareadas-hierro}
-Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero [niveles-hierro-ejercicio.csv](datos/niveles-hierro-tratamiento.csv). Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.
+Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero [niveles-hierro-ejercicio.csv](datos/niveles-hierro-ejercicio.csv). Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.
 :::
 
 :::{.callout-tip collapse="true"}
@@ -129,3 +129,40 @@ p-valor: $p=0.0163$.
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre el consumo de alcohol de chicos y chicas.
 :::
 
+:::{#exr-contraste-anova-suplementacion}
+En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero [expresion-genica-suplementacion.csv](datos/expresion-genica-suplementacion.csv). Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 3 poblaciones independientes (población 1: Carbohidratos, población 2: Proteínas, población 3: Grasas).  
+Variable dependiente: Expresión génica (cuantitativa).  
+Tamaños muestrales: $n_1=75$, $n_2=75$ y $n_3=75$.  
+Contraste de normalidad de Kolmogorov-Smirnov: p-valor primera muestra: $0.7571$, p-valor segunda muestra: $0.6459$, p-valor tercera muestra: $0.9643$. Se acepta la normalidad en los tres grupos.  
+Contraste de homocedasticidad de Levene: p-valor: $0.2126$. Se acepta la hipótesis de igualdad de varianzas.  
+Contraste de ANOVA: $H_0:\mu_1=\mu_2=\mu_3$, $H_1:$ Al menos dos medias son diferentes.  
+p-valor: $p=0.000283$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre las medias de la expresión génica de los grupos de suplementación.  
+Contraste post hoc de Tukey:  
+- Carbohidratos vs Proteínas: $p=0.0016$. Hay diferencias significativas.  
+- Carbohidratos vs Grasas: $p=0.0009$. Hay diferencias significativas.  
+- Proteínas vs Grasas: $p=0.9809$. No hay diferencias significativas.
+:::
+
+:::{#exr-contraste-anova-interaccion-dieta-farmaco}
+En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero [interaccion-dieta-farmaco.csv](datos/interaccion-dieta-farmaco.csv). Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 4 poblaciones independientes (población 1: Dieta No + Fármaco No, población 2: Dieta No + Fármaco Si, población 3: Dieta Si + Fármaco No, población 4: Dieta Si + Fármaco Si).  
+Variable dependiente: Peso perdido (cuantitativa).  
+Tamaños muestrales: $n_1=5$, $n_2=6$, $n_3=5$ y $n_4=6$.  
+Contraste de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.4677$, p-valor segunda muestra: $0.9672$, p-valor tercera muestra: $0.741$, p-valor cuarta muestra: $0.719$. Se acepta la normalidad en los cuatro grupos.  
+Contraste de homocedasticidad de Levene: p-valor: $0.845$. Se acepta la hipótesis de igualdad de varianzas.   
+Contraste de ANOVA de dos factores con interacción: $H_0:$ No hay interacción entre la dieta y el fármaco, $H_1:$ Hay interacción entre la dieta y el fármaco.  
+- p-valor dieta: $p=0.0000$.  
+- p-valor fármaco: $p=0.0000$.  
+- p-valor interacción: $p=0.0012$.  
+Como el p-valor es menor que el nivel de significación en los tres casos, se rechaza la hipótesis nula y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos.
+:::
