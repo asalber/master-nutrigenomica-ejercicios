@@ -34,6 +34,8 @@ book:
   chapters:
     - index.qmd
     - 01-contrastes-parametricos.qmd
+    - 01-contrastes-parametricos-practicas.qmd
+
     
 #bibliography: references.bib
 

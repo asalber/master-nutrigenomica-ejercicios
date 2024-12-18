@@ -1,0 +1,716 @@
+---
+title: Prácticas de contrastes de hipótesis paramétricos con R
+lang: es
+---
+
+:::{#exr-contraste-media-consumo}
+Se sabe que el consumo anual de helado correspondiente a cada español sigue una distribución normal y que el año pasado el consumo medio fue de 20 kg.  Queremos contrastar si este año se va a mantener el consumo medio de helado que el año pasado, y para comprobarlo se efectúa una muestra aleatoria de 22 españoles. Los datos obtenidos están disponibles en el fichero [consumo-helado.csv](datos/consumo-helado.csv).
+
+Realizar el contraste con un nivel de significación de 0.10.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+En primer lugar cargamos los datos en un data frame y mostramos las primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/consumo-helado.csv")
+head(df)
+```
+
+Hacemos un análisis descriptivo básico.
+
+```{r}
+df |> 
+    summarise(
+        n = n(),
+        media = mean(helado, na.rm = TRUE),
+        desviación_típica = sd(helado, na.rm = TRUE)
+    ) |> 
+    kable()
+```
+
+Comprobamos la normalidad de los datos.
+
+```{r}
+tidy(shapiro.test(df$helado)) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación 0.05, aceptamos la hipótesis de normalidad.
+
+Aplicamos el contraste t para la media de una población normal.
+
+```{r}
+tidy(t.test(df$helado, mu = 20, alternative = "two.sided")) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación $0.10$ aceptamos la hipótesis nula y concluimos que no hay evidencias significativas de que el consumo medio de helado este año será distinto del año pasado.
+:::
+
+:::{#exr-contraste-proporcion-bolleria-industrial}
+En una clase de alumnos de primaria se ha comprobado que el $20$% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de $50$ alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del $5$% si el programa es efectivo.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+tidy(prop.test(8, 50, alternative = "less", p = 0.2)) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación $0.05$, concluimos que no hay evidencias significativas para afirmar que el programa está siendo efectivo.
+:::
+
+:::{#exr-contraste-comparacion-medias-pareadas-hierro}
+Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero [niveles-hierro-ejercicio.csv](datos/niveles-hierro-ejercicio.csv). Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+En primer lugar cargamos los datos en un data frame y mostramos la primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/niveles-hierro-ejercicio.csv")
+```
+
+Creamos una nueva variable con la diferencia entre el nivel de hierro después y antes de hacer ejercicio.
+
+```{r}
+df <- df |> 
+    mutate(incremento = Hierro.Despues - Hierro.Antes)
+```
+
+Comprobamos la normalidad de la variable `incremento`.
+
+```{r}
+tidy(shapiro.test(df$incremento)) |> 
+    kable()
+```
+
+Aplicamos el contraste t para la comparación de medias de dos poblaciones pareadas.
+
+```{r}
+tidy(t.test(df$Hierro.Despues, df$Hierro.Antes, alternative = "greater", paired = TRUE)) |> 
+    kable()
+```
+
+Como el p-valor es menor que el nivel de significación $0.01$ aceptamos la hipótesis nula y concluimos que hay evidencias significativas de que el ejercicio aumenta el nivel de hierro. Además, de acuerdo al intervalo de confianza, el incremento de hierro estaría por encima de 0.341 $\mu$mol/L$.
+:::
+
+:::{#exr-contraste-comparacion-medias-glucosa}
+Se ha realizado un estudio para comparar los niveles de glucosa en sangre de dos grupos: uno sigue una dieta baja en carbohidratos y otro una dieta estándar. Los datos del estudio están en el fichero [niveles-glucosa-dietas.csv](datos/niveles-glucosa-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos con un nivel de significación del 5%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+En primer lugar cargamos los datos en un data frame y mostramos las primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/niveles-glucosa-dietas.csv")
+head(df)
+```
+
+Hacemos un análisis descriptivo básico.
+
+```{r}
+df |> 
+    group_by(Grupo) |> 
+    summarise(
+        n = n(),
+        media = mean(Glucosa, na.rm = TRUE),
+        desviación_típica = sd(Glucosa, na.rm = TRUE)
+    ) |> 
+    kable()
+```
+
+Comprobamos la normalidad de los datos.
+
+```{r}
+df |> 
+    group_by(Grupo) |> 
+    summarise(test = tidy(shapiro.test(Glucosa))) |> 
+    unnest(test) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación 0.05 en ambos grupos aceptamos la hipótesis de normalidad.
+
+A continuación aplicamos el contraste de comparación de varianzas de poblaciones normales.
+
+```{r}
+tidy(var.test (Glucosa ~ Grupo, data = df)) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación $0.05$ asumimos varianzas iguales.
+
+A ahora aplicamos el contraste t para la comparación de medias de dos poblaciones independientes con varianzas iguales.
+
+```{r}
+tidy(t.test(Glucosa ~ Grupo, data = df, alternative = "two.sided", var.equal = TRUE)) |> 
+    kable()
+```
+
+Como el p-valor es menor que el nivel de significación $0.05$ rechazamos la hipótesis nula y concluimos que existen diferencias estadísticamente significativas entre el nivel medio de glucosa en sangre de las dos dietas.
+
+Por último mostramos el diagrama de medias con los respectivos intervalos de confianza.
+
+```{r}
+df |> 
+    ggplot(aes(x = Grupo, y = Glucosa, color = I("blue"))) +
+	stat_summary(fun.data = ~ mean_cl_normal(., conf.int = 0.95), geom = "pointrange", position = position_dodge(width = 0.5))
+```
+:::
+
+:::{#exr-contraste-comparacion-medias-expresion-genica}
+Se ha realizado un estudio para comparar los niveles de expresión de un gen en función de la dieta (vegetariana u omnívora). Los datos del estudio están en el fichero [expresion-genica-dietas.csv](datos/expresion-genica-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos.
+
+:::
+:::{.callout-tip collapse="true"}
+## Solución
+
+En primer lugar cargamos los datos en un data frame y mostramos las primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/expresion-genica-dietas.csv")
+head(df)
+```
+
+Hacemos un análisis descriptivo básico.
+
+```{r}
+df |> 
+    group_by(Grupo) |> 
+    summarise(
+        n = n(),
+        media = mean(Expresion.Genica, na.rm = TRUE),
+        desviación_típica = sd(Expresion.Genica, na.rm = TRUE)
+    ) |> 
+    kable()
+```
+
+Comprobamos la normalidad de los datos.
+
+```{r}
+df |> 
+    group_by(Grupo) |> 
+    summarise(test = tidy(shapiro.test(Expresion.Genica))) |> 
+    unnest(test) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación 0.05 en ambos grupos aceptamos la hipótesis de normalidad.
+
+A continuación aplicamos el contraste de comparación de varianzas de poblaciones normales.
+
+```{r}
+tidy(var.test (Expresion.Genica ~ Grupo, data = df)) |> 
+    kable()
+```
+
+Como el p-valor es mayor que el nivel de significación $0.05$ asumimos varianzas iguales.
+
+Finalmente aplicamos el contraste t para la comparación de medias de dos poblaciones independientes con varianzas iguales.
+
+```{r}
+tidy(t.test(Expresion.Genica ~ Grupo, data = df, alternative = "two.sided", var.equal = TRUE), conf.int = TRUE) |> 
+    kable()
+```
+
+Como el p-valor es menor que el nivel de significación $0.05$ rechazamos la hipótesis nula y concluimos que existen diferencias estadísticamente significativas entre el nivel medio de expresión génica de las dos dietas. Además, según el intervalo de confianza del 95%, el nivel de expresión génica con la dieta omnívora estaría sería entre $0.261$ y $0.699$ mayor que con la dieta vegetariana.
+:::
+
+:::{#exr-contraste-comparacion-proporciones-vitamina-c}
+Se utiliza un grupo de 150 pacientes para comprobar la teoría de que la vitamina C tiene alguna influencia en el tratamiento del cáncer. Los 150 pacientes fueron divididos en dos grupos de 75. Un grupo recibió 10 gramos de vitamina C y el otro un placebo cada día, además de la medicación habitual. De los que recibieron la vitamina C, 47 presentaban alguna mejoría al cabo de cuatro semanas, mientras que de los que
+recibieron el placebo, 43 experimentaron mejoría.
+Contrastar la hipótesis de que la vitamina C tiene influencia en el tratamiento del cáncer con un nivel de significación del 5%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+tidy(prop.test(c(47, 43), c(75, 75), alternative = "two.sided")) |> 
+    kable()
+```
+
+Como el p-valor del contraste es mayor que el nivel de significación $0.05$, se acepta la hipótesis nula y se concluye que no hay evidencias significativas de que la vitamina C influya en el tratamiento del cáncer.
+:::
+
+:::{#exr-contraste-proporcion-consumo-alcohol}
+En un estudio sobre el consumo de alcohol entre los jóvenes durante los fines de semana, se preguntó a 100 chicos y a
+125 chicas, de los que 63 chicos y 59 chicas contestaron que consumían.
+En vista de estos datos, ¿existe alguna diferencia significativa entre las proporciones de chicos y chicas que consumen alcohol los fines de semana?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+```{r}
+tidy(prop.test(c(63, 59), c(100, 125), alternative = "two.sided"), conf.int = TRUE) |> 
+    kable()
+```
+
+Como el p-valor del contraste es menor que el nivel de significación $0.05$, se rechaza la hipótesis nula y se concluye que hay diferencias estadísticamente significativas entre la proporción de chicos y chicas que consumen alcohol los fines de semana. Además, según el intervalo de confianza del 95%, el porcentaje de chicos sería entre un $2.01$% y un $29.6$% mayor que el de chicas. 
+:::
+
+:::{#exr-contraste-anova-suplementacion}
+En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero [expresion-genica-suplementacion.csv](datos/expresion-genica-suplementacion.csv). Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+En primer lugar cargamos los datos en un data frame y mostramos las primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/expresion-genica-suplementacion.csv")
+head(df)
+```
+
+Hacemos un análisis descriptivo básico.
+
+```{r}
+df |> 
+    group_by(Suplementacion) |> 
+    summarise(
+        n = n(),
+        media = mean(Expresion.genica, na.rm = TRUE),
+        desviación_típica = sd(Expresion.genica, na.rm = TRUE)
+    ) |> 
+    kable()
+```
+
+Aplicamos el contraste de ANOVA para la comparación de medias de más de dos poblaciones independientes.
+
+```{r}
+anova <- aov(Expresion.genica ~ Suplementacion, data = df)
+tidy(anova) |> 
+    kable()
+```
+
+Como el p-valor es menor que el nivel de significación $0.05$, rechazamos la hipótesis nula y concluimos que existen pruebas estadísticamente significativas de que el nivel de expresión génica depende del la dieta.
+
+A continuación comprobamos si se cumplen los requisitos del contraste de ANOVA. 
+
+a.  Normalidad de los residuos.
+
+    ```{r}
+    residuals <- residuals(anova)
+    par(mfrow = c(1, 2))  
+    hist(residuals)
+    qqnorm(residuals, main = "Q-Q Plot of Residuals")
+    qqline(residuals, col = "red", lwd = 2)
+    tidy(shapiro.test(residuals)) |> 
+    kable()
+    ```
+
+    Tanto el histograma como el gráfico de cuantiles no muestran una desviación significativa de una distribución normal, y 
+    como el p-valor del contraste de normalidad es mayor que el nivel de significación $0.05$, se asume que los residuos siguen una distribución normal.
+
+a.  Homogeneidad de varianzas. Aplicamos el test de Levene para la comparación de varianzas.
+
+    ```{r}
+    library(car)
+    tidy(leveneTest(Expresion.genica ~ Suplementacion, data = df)) |> 
+    kable()
+    ```
+
+    Como el p-valor es mayor que el nivel de significación $0.05$ se acepta la hipótesis nula y se asume homogeneidad de varianzas.
+
+    Así pues, se cumplen los requisitos para el contraste de ANOVA.
+
+Finalmente hacemos una comparación de medias por pares para ver entre qué grupos hay diferencias estadísticamente significativas.
+
+```{r}
+tidy(TukeyHSD(anova)) |> 
+    kable()
+```
+
+Se observan diferencias estadísticamente significativas entre las medias de la dieta basada en grasas y la basada en carbohidratos (p-valor $0.0008 < 0.05$) y también entre la dieta basada en proteínas y la basada en carbohidratos (p-valor $0.0016 < 0.05$), pero no entre la dieta basada en proteínas y la basada en grasas (p-valor $0.981 > 0.05$).
+
+```{r}
+tidy(TukeyHSD(anova)) |> 
+    ggplot(aes(x = contrast, y = estimate)) +
+    geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, color = "blue") +
+    geom_point(size = 3, color = "red") +
+    geom_hline(yintercept = 0, linetype = "dashed")
+```
+:::
+
+:::{#exr-contraste-anova-interaccion-dieta-farmaco}
+En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero [interaccion-dieta-farmaco.csv](datos/interaccion-dieta-farmaco.csv). Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+En primer lugar cargamos los datos en un data frame y mostramos las primeras filas.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+df <- read.csv("datos/interaccion-dieta-farmaco.csv")
+head(df)
+```
+
+Hacemos un análisis descriptivo básico.
+
+```{r}
+df |> 
+    group_by(Dieta, Farmaco) |> 
+    summarise(
+        n = n(),
+        media = mean(Perdida_peso, na.rm = TRUE),
+        desviación_típica = sd(Perdida_peso, na.rm = TRUE)
+    ) |> 
+    kable()
+```
+
+Aplicamos el contraste de ANOVA de dos factores para la comparación de medias de más de dos poblaciones independientes.
+
+```{r}
+anova <- aov(Perdida_peso ~ Dieta * Farmaco, data = df)
+tidy(anova) |> 
+    kable()
+```
+
+Se observa que la dieta es significativa (p-valor $5.93e-9 < 0.05$), el fármaco es significativo (p-valor $3.11e-11 < 0.05$) y también la interacción entre la dieta y el fármaco es significativa (p-valor $0.00117 < 0.05$).
+
+A continuación comprobamos si se cumplen los requisitos del contraste de ANOVA. 
+
+a.  Normalidad de los residuos.
+
+    ```{r}
+    residuals <- residuals(anova)
+    par(mfrow = c(1, 2))  
+    hist(residuals)
+    qqnorm(residuals, main = "Q-Q Plot of Residuals")
+    qqline(residuals, col = "red", lwd = 2)
+    tidy(shapiro.test(residuals)) |> 
+    kable()
+    ```
+
+    Tanto el histograma como el gráfico de cuantiles no muestran una desviación significativa de una distribución normal, y 
+    como el p-valor del contraste de normalidad es mayor que el nivel de significación $0.05$, se asume que los residuos siguen una distribución normal.
+
+a.  Homogeneidad de varianzas. Aplicamos el test de Levene para la comparación de varianzas.
+
+    ```{r}
+    library(car)
+    tidy(leveneTest(Perdida_peso ~ Dieta * Farmaco, data = df)) |> 
+    kable()
+    ```
+
+    Como el p-valor es mayor que el nivel de significación $0.05$ se acepta la hipótesis nula y se asume homogeneidad de varianzas.
+
+    Así pues, se cumplen los requisitos para el contraste de ANOVA.
+
+Finalmente hacemos una comparación de medias por pares para ver entre qué grupos hay diferencias estadísticamente significativas.
+
+```{r}
+tidy(TukeyHSD(anova)) |> 
+    kable()
+```
+
+Se observan diferencias estadísticamente significativas entre todos los grupos de comparación.
+
+```{r}
+tidy(TukeyHSD(anova)) |> 
+    ggplot(aes(x = contrast, y = estimate)) +
+    geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, color = "blue") +
+    geom_point(size = 3, color = "red") +
+    geom_hline(yintercept = 0, linetype = "dashed")
+```
+:::
+
+:::{#exr-regresion-metabolismo-alcohol}
+Después de tomar un litro de vino se ha medido la concentración de alcohol en la sangre en distintos instantes, obteniendo los siguientes datos
+
+$$
+\begin{array}{lrrrrrrr}
+\hline 
+\mbox{Tiempo después (minutos)} & 30 & 60 & 90 & 120 & 150 & 180 & 210\\ 
+\mbox{Alcohol (gramos/litro)} & 1.6 & 1.7 & 1.5 & 1.1 & 0.7 & 0.2 & 2.1\\
+\hline
+\end{array}
+$$
+
+a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(
+        Tiempo = c(30, 60, 90, 120, 150, 180, 210),
+        Alcohol = c(1.6, 1.7, 1.5, 1.1, 0.7, 0.2, 2.1)
+    )
+    df
+    ```
+    :::
+
+a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal entre la concentración de alcohol y el tiempo que pasa?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Para calcular el coeficiente de correlación lineal de Pearson se puede utilar la función [`cor`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor) del paquete `stats`.
+
+    ```{r}
+    cor(df$Tiempo, df$Alcohol)
+    ```
+
+    El valore del coeficiente de correlación lineal es muy bajo, por lo que aparentemente no hay relación lineal entre la concentración de alcohol en sangre y el tiempo que pasa.
+    :::
+
+a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión de la concentración de alcohol sobre el tiempo. ¿Por qué el ajuste es tan malo?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Tiempo, y = Alcohol)) +
+        geom_point(col = "red") +
+        geom_smooth(method = "lm") +
+        labs(title = "Diagrama de dispersión", x = "Tiempo en minutos", y = "Concentración de alcohol en sangre (g/l)")
+    ```
+
+    El ajuste es malo porque hay un dato atípico que no sigue la misma tendencia que el resto. 
+    :::
+
+a.  Eliminar el dato atípico y calcular la recta de la concentración de alcohol sobre el tiempo. ¿Ha mejorado el modelo?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    # Eliminamos el dato atípico que está en la fila 
+    df <- df[-c(7), ]
+    recta_alcohol_tiempo <- lm(Alcohol ~ Tiempo, df) 
+    summary(recta_alcohol_tiempo)
+    ```
+
+    La recta de regresión de la concentración de alcohol en sangre sobre el tiempo es $\textsf{alcohol}= `r recta_alcohol_tiempo$coefficients[["(Intercept)"]]` + `r recta_alcohol_tiempo$coefficients[["Tiempo"]]` \textsf{tiempo}$.
+
+    El modelo ha mejorado notablemente ya que ahora el coeficiente de determinación lineal $R^2=`r summary(recta_alcohol_tiempo)$r.squared`$, que está muy próximo a 1.
+    :::
+
+a.  Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta persona el alcohol?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de regresión de la concentración de alchol sobre el tiempo:", recta_alcohol_tiempo$coefficients[["Tiempo"]]))
+    ```
+
+    Así pues, la velocidad de metabolización del alcohol es `r recta_alcohol_tiempo$coefficients[["Tiempo"]]*(-1)` g/l$\cdot$min.
+    :::
+
+a.  Si la concentración máxima de alcohol en la sangre que permite la ley para poder conducir es $0.3$ g/l, ¿cuánto tiempo habrá que esperar después de tomarse un litro de vino para poder conducir sin infringir la ley? ¿Es fiable esta predicción?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Como ahora queremos predecir el tiempo, necesitamos calcular la recta de regresión del tiempo sobre la concentración de alcohol.
+
+    ```{r}
+    recta_tiempo_alcohol <- lm(Tiempo ~ Alcohol, df) 
+    predict.lm(recta_tiempo_alcohol, newdata = list(Alcohol = 0.3))
+    ```
+
+    Aunque el coeficiente de determinación lineal está próximo a 1, el tamaño muestral es demasiado pequeño para que la predicción sea fiable.
+    :::
+:::
+
+:::{#exr-regresion-dieta}
+El fichero [`dieta.csv`](datos/dieta.csv) contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.
+
+a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv).
+
+    :::{.callout-tip collapse="true"} 
+    ## Solución
+
+    ```{r}
+    library(readr)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
+    df
+    ```
+    :::
+
+a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = dias, y = peso.perdido)) +
+        geom_point(col = "red") +
+        labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
+    ```
+
+    La nube de puntos es bastante difusa aunque parece apreciarse una tendencia logarítmica o sigmoidal.
+    :::
+
+a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial, logarítmico, potencial, inverso y sigmoidal. ¿Qué tipo de modelo explica mejor la relación entre los kilos perdidos y el número de días de dieta? ¿Qué porcentaje de la variabilidad de peso perdido explica el mejor modelo de regresión?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(dplyr)
+    library(tidyr)
+    library(purrr)
+    library(broom)
+    library(kableExtra)
+    # Construimos un data frame con el ajuste de los modelos.
+    modelos <- tibble(
+            Lineal = list(lm(peso.perdido ~ dias, df)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), df)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, df)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), df)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), df)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), df)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), df)),
+        )  |> 
+        # 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(everything(), names_to = "Tipo_Modelo", values_to = "Modelo")  |> 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) |> 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  |> 
+        # Ordenamos el data frame por el coeficiente de determinación.
+        arrange(-r.squared)
+        
+    modelos  |>
+        select(Tipo_Modelo, r.squared)  |> 
+        kable(col.names = c("Tipo de Modelo", "R²")) |>
+        kable_styling(full_width = F)
+    ```
+
+    El mejor modelo es el Sigmoidal que explica el `r modelos[1, "r.squared"]*100`% de la variabilidad del peso perdido. 
+    :::
+
+a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta según si la persona hace ejercicio o no. ¿Qué conclusiones se pueden sacar?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
+        geom_point() +
+        labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
+    ```
+
+    Claramente la nube de puntos de las personas que hacen ejercicio está por encima de la de los que no hacen ejercicio, lo que indica que hacer ejercicio favorece la pérdida de peso. Los más razonable es construir modelos de regresión para cada grupo.
+    :::
+
+a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los días de dieta en el grupo de las personas que hacen ejercicio? ¿Y en el grupo de las que no hacen ejercicio? ¿Han mejorado los modelos con respecto al modelo anterior?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    modelos <- df  |> 
+        # Anidamos por la columna ejercicio.
+        nest_by(ejercicio)  |> 
+        # Ajustamos los modelos de regresión.
+        mutate(
+            Lineal = list(lm(peso.perdido ~ dias, data)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), data)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, data)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), data)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), data)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), data)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), data)),
+        )  |> 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(-c(ejercicio, data), names_to = "Tipo_Modelo", values_to = "Modelo")  |> 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) |> 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  |> 
+        # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
+        arrange(ejercicio, -r.squared)  
+    modelos |> 
+        select(ejercicio, Tipo_Modelo, r.squared)  |> 
+        kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) |>
+        pack_rows(index = table(modelos$ejercicio))  |> 
+        kable_styling(full_width = F)
+    ```
+
+    El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.
+    :::
+
+a.  Construir el mejor modelo de regresión del peso perdido sobre los días de dieta para el grupo de las personas que hacen ejercicio y para el grupo de las que no.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
+
+    ```{r}
+    inverso_ejercicio <- lm(peso.perdido ~ I(1/dias), df[df$ejercicio == "si", ])
+    summary(inverso_ejercicio)
+    ```
+
+    <!-- ```{r}
+    df |>
+        nest_by(ejercicio) |> 
+        filter(ejercicio == "si") |>
+        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) |>
+        summarize(tidy(modelo)) |>
+        kable() |>
+        kable_styling()
+    ``` -->
+
+    Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
+    
+    ```{r}
+    sigmoidal_no_ejercicio <- lm(log(peso.perdido) ~ I(1/dias), df[df$ejercicio == "no", ])
+    summary(sigmoidal_no_ejercicio)
+    ```
+    :::
+
+a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.
+
+    ```{r}
+    predict.lm(inverso_ejercicio, newdata = list(dias = 100))
+    ```
+
+    Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.
+    
+    ```{r}
+    # El modelo sigmoidal devuelve el logaritmo del peso perdido por lo que hay que aplicar la función exponencial para obtener el peso perdido.
+    exp(predict.lm(sigmoidal_no_ejercicio, newdata = list(dias = 100)))
+    ```
+    :::
+:::

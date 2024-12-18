@@ -20,7 +20,7 @@ Como el p-valor es menor que el nivel de significación $\alpha = 0.1$, se recha
 :::
 
 
-:::{#exr-contraste-proporcion-asistencia-clase}
+:::{#exr-contraste-proporcion-bolleria-industrial}
 En una clase de alumnos de primaria se ha comprobado que el $20$% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de $50$ alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del $5$% si el programa es efectivo.
 :::
 
