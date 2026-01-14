@@ -2615,7 +2615,7 @@ F-statistic: 51.26 on 1 and 18 DF,  p-value: 1.146e-06</code></pre>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
 <span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargamos los datos en un data frame</span></span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"datos/genotipo-respuesta-dieta.csv"</span>)</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://aprendeconalf.es/master-nutrigenomica-ejercicios/datos/genotipo-respuesta-dieta.csv"</span>)</span>
 <span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos la tabla de contingencia</span></span>
 <span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>tabla_contingencia <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>Genotipo, df<span class="sc">$</span>Respuesta)</span>
 <span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tabla_contingencia)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>

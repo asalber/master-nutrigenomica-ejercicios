@@ -738,7 +738,7 @@ library(tidyverse)
 library(knitr)
 library(broom)
 # Cargamos los datos en un data frame
-df <- read.csv("datos/genotipo-respuesta-dieta.csv")
+df <- read.csv("https://aprendeconalf.es/master-nutrigenomica-ejercicios/datos/genotipo-respuesta-dieta.csv")
 # Creamos la tabla de contingencia
 tabla_contingencia <- table(df$Genotipo, df$Respuesta)
 kable(tabla_contingencia)
