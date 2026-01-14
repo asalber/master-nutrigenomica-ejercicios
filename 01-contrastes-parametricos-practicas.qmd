@@ -714,3 +714,47 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     ```
     :::
 :::
+
+:::{#exr-chi-cuadrado-genotipo-respuesta-dieta}
+En un ensayo se estudia si un polimorfismo en el gen FTO influye en la respuesta a una dieta hipocalórica. El genotipo de los participantes se determina mediante un SNP de tipo A/T y se clasifica a los participantes en tres grupos según su genotipo: homocigotos AA, heterocigotos AT y homocigotos TT. Después de 6 meses de dieta, se clasifica a los participantes en dos grupos según su respuesta a la dieta: _respondedores_ (pérdida de peso clínicamente relevante ≥5%) y _no respondedores_. Los datos obtenidos están recogidos en el fichero [genotipo-respuesta-dieta.csv](datos/genotipo-respuesta-dieta.csv) y se corresponden con la siguiente tabla de contingencia:
+
+| Genotipo FTO | No Respondedor | Respondedor | Total |
+| ------------ | ----------: | -------------: | -----:|
+| AA           |          60 |             40 | 100   |
+| AT           |          40 |             50 | 90    |
+| TT           |          25 |             35 | 60    |
+| **Total**    |         125 |            125 | 250   |
+
+Contrastar si la respuesta a la dieta depende del genotipo FTO con un nivel de significación del 5%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+Primero creamos la tabla de contingencia a partir del fichero de datos.
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(broom)
+# Cargamos los datos en un data frame
+df <- read.csv("datos/genotipo-respuesta-dieta.csv")
+# Creamos la tabla de contingencia
+tabla_contingencia <- table(df$Genotipo, df$Respuesta)
+kable(tabla_contingencia)
+```
+
+Si no disponemos del fichero de datos, podemos crear directamente la tabla de contingencia con los datos proporcionados.
+
+```{r}
+# Creamos la tabla de contingencia
+tabla_contingencia <- matrix(c(40, 60, 50, 40, 35, 25), nrow = 3, byrow = TRUE)
+dimnames(tabla_contingencia) <- list(c("AA", "AT", "TT"), c("Respondedor", "No respondedor"))
+```
+Finalmente aplicamos el contraste de independencia de chi-cuadrado.
+
+```{r}
+tidy(chisq.test(tabla_contingencia)) |> 
+    kable()
+```
+:::
