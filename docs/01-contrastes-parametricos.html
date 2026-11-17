@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>1&nbsp; Contrastes de hipótesis paramétricos – Problemas de Bioestadística</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -35,17 +38,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="./img/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-5a2acb6f4ed5aeb23a104ba421924b87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-de8af6d6517050dea70ce10de1895a41.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8d7c51f3ec8028eac7aae1b5795d51c0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-33940b3b74f16fa390481c4f98a91fca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5060fabfb1026f921748f42b193c34eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -105,9 +107,11 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="1&nbsp; Contrastes de hipótesis paramétricos – Problemas de Bioestadística">
+<meta property="og:description" content="">
 <meta property="og:image" content="img/logos/sticker.png">
 <meta property="og:site_name" content="Problemas de Bioestadística">
 <meta name="twitter:title" content="1&nbsp; Contrastes de hipótesis paramétricos – Problemas de Bioestadística">
+<meta name="twitter:description" content="">
 <meta name="twitter:image" content="img/logos/sticker.png">
 <meta name="twitter:site" content="@aprendeconalf">
 <meta name="twitter:card" content="summary_large_image">
@@ -372,8 +376,16 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#una-población" id="toc-una-población" class="nav-link active" data-scroll-target="#una-población"><span class="header-section-number">1.1</span> Una población</a></li>
+  <li><a href="#dos-poblaciones" id="toc-dos-poblaciones" class="nav-link" data-scroll-target="#dos-poblaciones"><span class="header-section-number">1.2</span> Dos poblaciones</a></li>
+  <li><a href="#más-de-dos-poblaciones" id="toc-más-de-dos-poblaciones" class="nav-link" data-scroll-target="#más-de-dos-poblaciones"><span class="header-section-number">1.3</span> Más de dos poblaciones</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -398,33 +410,45 @@ window.Quarto = {
 </header>
 
 
-<div id="exr-contraste-media-consumo-azucar" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.1</strong></span> Sabiendo que el año pasado el consumo per cápita de azúcar en España fue de <span class="math inline">\(4.8\)</span> kg y que este consumo sigue una distribución normal, hemos seleccionado aleatoriamente a <span class="math inline">\(20\)</span> españoles obteniendo una media muestral de <span class="math inline">\(5\)</span> kg y una cuasidesviación típica muestral de <span class="math inline">\(0.4\)</span> kg. Contrastar la hipótesis de que el consumo de azúcar per cápita de este año en España no ha variado utilizando un nivel de significación del <span class="math inline">\(10\)</span>%.</p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<p>Los ejercicios de este capítulo están pensados para resolverse con ayuda de un asistente de IA. En ellos el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solución
+<span class="screen-reader-only">Nota</span>Pautas para trabajar con la IA
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Sea <span class="math inline">\(X\sim N(\mu,\sigma)\)</span> la variable aleatoria que mide el consumo per cápita de azúcar en España.<br>
-Número de poblaciones: 1 población. Variable dependiente: Consumo de azúcar (cuantitativa).<br>
-Tamaño muestral: <span class="math inline">\(n=20\)</span>.<br>
-Contraste de la media de una población normal (prueba t): <span class="math inline">\(H_0:\mu=4.8\)</span>, <span class="math inline">\(H_1:\mu\neq 4.8\)</span>.<br>
-Estadístico del contraste: <span class="math inline">\(t=2.24\)</span><br>
-p-valor: <span class="math inline">\(p =2 P(t(19)&gt;2.24) = 0.037\)</span>.<br>
-Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha = 0.1\)</span>, se rechaza la hipótesis nula y se concluye que el consumo de azúcar per cápita de este año en España ha variado.</p>
+<p><strong>Los cinco pasos de cada ejercicio</strong></p>
+<ol type="1">
+<li><strong>Plantear</strong> (sin IA): variable dependiente y su tipo, número de poblaciones, si las muestras son independientes o pareadas, parámetro de interés (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(p\)</span>, <span class="math inline">\(\sigma^2\)</span>) e hipótesis <span class="math inline">\(H_0\)</span> y <span class="math inline">\(H_1\)</span>, justificando si el contraste es bilateral o unilateral.</li>
+<li><strong>Elegir el contraste y listar sus supuestos</strong> (sin IA): normalidad, independencia, igualdad de varianzas, tamaño muestral suficiente, etc.</li>
+<li><strong>Pedir los cálculos a la IA</strong>: estadísticos descriptivos, comprobación de los supuestos y el contraste, junto con el código (R o Python) utilizado.</li>
+<li><strong>Verificar</strong> la respuesta (ver la lista de comprobación).</li>
+<li><strong>Interpretar</strong>: decisión sobre <span class="math inline">\(H_0\)</span>, estimación con intervalo de confianza, tamaño del efecto y significado práctico en el contexto nutricional, además de alguna limitación del estudio.</li>
+</ol>
+<p><strong>Cómo preguntar a la IA</strong></p>
+<ul>
+<li><p>Una buena petición incluye el contexto, los datos, el contraste elegido por el alumno y el formato de salida. No hay que pedirle a la IA que elija el contraste; si se quiere contrastar la elección, se le puede preguntar después y discutir su respuesta. Ejemplo:</p>
+<pre><code>Tengo estos datos (CSV adjunto). Quiero contrastar H0: μ = 5 frente a H1: μ &gt; 5
+con una t de Student para una muestra, α = 0.05.
+1. Calcula n, media, desviación típica, mínimo y máximo.
+2. Comprueba la normalidad con Shapiro-Wilk.
+3. Haz el contraste: estadístico, grados de libertad, p-valor e IC del 95 %.
+4. Muestra el código R que has ejecutado para obtenerlo.</code></pre></li>
+<li><p>Pedir siempre el código y, si el asistente puede, que lo ejecute. Un número sin código no es verificable. La IA puede inventar números con total seguridad, sobre todo si no ejecuta código. Si dos respuestas no coinciden, la que vale es la que se puede reproducir.</p></li>
+<li><p>Indicar la dirección de la hipótesis alternativa y el orden de los grupos (por ejemplo, «diferencia = AA − TT»).</p></li>
+<li><p>En datos pareados, indicar explícitamente que cada fila corresponde al mismo individuo.</p></li>
+<li><p>Pedir el p-valor exacto, no «p &lt; 0.05».</p></li>
+</ul>
 </div>
 </div>
-</div>
-<div id="exr-contraste-proporcion-bolleria-industrial" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.2</strong></span> En una clase de alumnos de primaria se ha comprobado que el <span class="math inline">\(20\)</span>% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de <span class="math inline">\(50\)</span> alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del <span class="math inline">\(5\)</span>% si el programa es efectivo.</p>
+<section id="una-población" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="una-población"><span class="header-section-number">1.1</span> Una población</h2>
+<div id="exr-contraste-media-consumo-azucar" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.1</strong></span> Sabiendo que el año pasado el consumo per cápita de azúcar en España fue de <span class="math inline">\(4.8\)</span> kg y que este consumo sigue una distribución normal, hemos seleccionado aleatoriamente a <span class="math inline">\(20\)</span> españoles obteniendo una media muestral de <span class="math inline">\(5\)</span> kg y una cuasidesviación típica muestral de <span class="math inline">\(0.4\)</span> kg. Contrastar la hipótesis de que el consumo de azúcar per cápita de este año en España no ha variado utilizando un nivel de significación del <span class="math inline">\(10\)</span>%.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -439,16 +463,21 @@ Como el p-valor es menor que el nivel de significación <span class="math inline
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Número de poblaciones: 1 población.<br>
-Variable dependiente: Consumo de bollería industrial (cualitativa binaria).<br>
-Tamaño muestral: <span class="math inline">\(n=50\)</span>.<br>
-Contraste para la proporción de una población: <span class="math inline">\(H_0:p=0.2\)</span>, <span class="math inline">\(H_1:p&lt; 0.2\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.2979\)</span>.<br>
-Como el p-valor es mayor que el nivel de significación <span class="math inline">\(\alpha = 0.05\)</span>, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que el programa sea efectivo.</p>
+Variable dependiente: Consumo de azúcar per cápita (cuantitativa), <span class="math inline">\(X\sim N(\mu,\sigma)\)</span>.<br>
+Tamaño muestral: <span class="math inline">\(n=20\)</span>.<br>
+Descriptivos: <span class="math inline">\(\bar x=5\)</span> kg, <span class="math inline">\(s=0.4\)</span> kg.<br>
+Normalidad: se asume por el enunciado.<br>
+Contraste de la media de una población normal (prueba t): <span class="math inline">\(H_0:\mu=4.8\)</span>, <span class="math inline">\(H_1:\mu\neq 4.8\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=\dfrac{5-4.8}{0.4/\sqrt{20}}=2.24\)</span> con 19 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=2P(t(19)&gt;2.24)=0.0375\)</span>.<br>
+Intervalo de confianza del 90 % para <span class="math inline">\(\mu\)</span>: <span class="math inline">\((4.85, 5.15)\)</span> kg.<br>
+Tamaño del efecto: <span class="math inline">\(d=(5-4.8)/0.4=0.5\)</span> (moderado).<br>
+Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha=0.1\)</span>, se rechaza la hipótesis nula y se concluye que el consumo de azúcar per cápita de este año en España ha variado. El intervalo no contiene 4.8 kg y sugiere un aumento de entre 0.05 y 0.35 kg por persona.</p>
 </div>
 </div>
 </div>
 <div id="exr-contraste-media-consumo" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.3</strong></span> Se sabe que el consumo anual de helado correspondiente a cada español sigue una distribución normal y que el año pasado el consumo medio fue de 20 kg. Queremos contrastar si este año se va a mantener el consumo medio de helado que el año pasado, y para comprobarlo se efectúa una muestra aleatoria de 22 españoles, obteniéndose los resultados recogidos en el fichero <a href="datos/consumo-helado.csv">consumo-helado.csv</a>. Realizar el contraste con un nivel de significación de <span class="math inline">\(0.10\)</span>.</p>
+<p><span class="theorem-title"><strong>Ejercicio 1.2</strong></span> Se sabe que el consumo anual de helado correspondiente a cada español sigue una distribución normal y que el año pasado el consumo medio fue de 20 kg. Queremos contrastar si este año se va a mantener el consumo medio de helado que el año pasado, y para comprobarlo se efectúa una muestra aleatoria de 22 españoles, obteniéndose los resultados recogidos en el fichero <a href="datos/consumo-helado.csv">consumo-helado.csv</a>. Realizar el contraste con un nivel de significación de <span class="math inline">\(0.10\)</span>.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -465,15 +494,19 @@ Como el p-valor es mayor que el nivel de significación <span class="math inline
 <p>Número de poblaciones: 1 población.<br>
 Variable dependiente: Consumo de helado (cuantitativa).<br>
 Tamaño muestral: <span class="math inline">\(n=22\)</span>.<br>
-Prueba de normalidad de Kolmogorov-Smirnov. p-valor: <span class="math inline">\(p=0.632\)</span>. Se acepta la normalidad.<br>
+Descriptivos: <span class="math inline">\(\bar x=19.5\)</span> kg, <span class="math inline">\(s=9.30\)</span> kg.<br>
+Prueba de normalidad de Shapiro-Wilk: <span class="math inline">\(p=0.76\)</span>. Se acepta la normalidad.<br>
 Contraste de la media de una población normal (prueba t): <span class="math inline">\(H_0:\mu=20\)</span>, <span class="math inline">\(H_1:\mu\neq 20\)</span>.<br>
-p-valor: <span class="math inline">\(p = 0.8033\)</span>.<br>
-Como el p-valor es mayor que el nivel de significación <span class="math inline">\(\alpha = 0.10\)</span>, no se rechaza la hipótesis nula y se concluye que el consumo medio de helado de este año en España se va a mantener.</p>
+Estadístico del contraste: <span class="math inline">\(t=-0.25\)</span> con 21 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.8033\)</span>.<br>
+Intervalo de confianza del 90 % para <span class="math inline">\(\mu\)</span>: <span class="math inline">\((16.09, 22.91)\)</span> kg.<br>
+Tamaño del efecto: <span class="math inline">\(d=(19.5-20)/9.30=-0.05\)</span> (despreciable).<br>
+Como el p-valor es mayor que el nivel de significación <span class="math inline">\(\alpha=0.10\)</span>, no se rechaza la hipótesis nula y se concluye que no hay evidencias de que el consumo medio de helado de este año sea distinto del del año pasado. El intervalo es ancho, por lo que la muestra no permite descartar cambios de unos 3 kg en cualquier sentido.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-comparacion-medias-pareadas-hierro" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.4</strong></span> Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero <a href="datos/niveles-hierro-ejercicio.csv">niveles-hierro-ejercicio.csv</a>. Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.</p>
+<div id="exr-contraste-ia-media-homocisteina-mthfr" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.3</strong></span> El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la enzima y tiende a elevar la homocisteína plasmática. Un grupo de investigación considera que una homocisteína media de 12 µmol/L es el límite a partir del cual merece la pena suplementar con folato. Se ha medido la homocisteína en ayunas de 18 adultos TT sin suplementación y los resultados están en el fichero <a href="datos/homocisteina-mthfr.csv">homocisteina-mthfr.csv</a>. ¿Se puede afirmar con un nivel de significación del 5% que la homocisteína media de los portadores TT supera el umbral a partir del cual se recomienda suplementar? ¿Cambia la conclusión si se excluye el valor de 8.3 µmol/L?</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -487,18 +520,23 @@ Como el p-valor es mayor que el nivel de significación <span class="math inline
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 2 poblaciones pareadas (población 1: antes de hacer ejercicio, población 2: después de hacer ejercicio).<br>
-Variable dependiente: Nivel de hierro (cuantitativa).<br>
-Tamaño muestral: <span class="math inline">\(n=20\)</span>.<br>
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor de la diferencia: <span class="math inline">\(0.804\)</span>. Se acepta la normalidad.<br>
-Contraste para la comparación de medias de poblaciones pareadas: <span class="math inline">\(H_0:\mu_d=0\)</span>, <span class="math inline">\(H_1:\mu_d&lt; 0\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.0011\)</span>.<br>
-Como el p-valor es menor que el nivel de significación se rechaza la hipótesis nula y se concluye que el programa de ejercicios ha aumentado significativamente el nivel de hierro en sangre.</p>
+<p>Número de poblaciones: 1 población.<br>
+Variable dependiente: Homocisteína plasmática (cuantitativa).<br>
+Tamaño muestral: <span class="math inline">\(n=18\)</span>.<br>
+Descriptivos: <span class="math inline">\(\bar x=14.37\)</span> µmol/L, <span class="math inline">\(s=2.48\)</span> µmol/L.<br>
+Prueba de normalidad de Shapiro-Wilk: <span class="math inline">\(p=0.439\)</span>. Se acepta la normalidad (el gráfico Q-Q muestra un valor bajo, 8.3, algo separado del resto).<br>
+Contraste de la media de una población normal (prueba t): <span class="math inline">\(H_0:\mu=12\)</span>, <span class="math inline">\(H_1:\mu&gt;12\)</span>. El contraste unilateral se justifica porque la decisión (suplementar) solo depende de superar el umbral, y debe fijarse antes de ver los datos.<br>
+Estadístico del contraste: <span class="math inline">\(t=4.06\)</span> con 17 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.0004\)</span>.<br>
+Intervalo de confianza del 95 % bilateral para <span class="math inline">\(\mu\)</span>: <span class="math inline">\((13.14, 15.60)\)</span> µmol/L; cota inferior unilateral: <span class="math inline">\(13.36\)</span> µmol/L.<br>
+Tamaño del efecto: <span class="math inline">\(d=(14.37-12)/2.48=0.96\)</span> (grande).<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la homocisteína media de los portadores TT supera los 12 µmol/L. Con un 95 % de confianza la media es al menos 13.4 µmol/L, lo que respaldaría la suplementación, aunque la decisión clínica también depende del estado de folato y vitamina B12, que no se ha medido.<br>
+Sin el valor 8.3: <span class="math inline">\(n=17\)</span>, <span class="math inline">\(\bar x=14.73\)</span>, <span class="math inline">\(s=2.02\)</span>, <span class="math inline">\(t=5.57\)</span>, <span class="math inline">\(p&lt;0.0001\)</span>. La conclusión no cambia: el valor atípico va en contra de <span class="math inline">\(H_1\)</span> y hace el contraste más conservador. Un dato no debe eliminarse solo porque moleste.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-comparacion-medias-glucosa" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.5</strong></span> Se ha realizado un estudio para comparar los niveles de glucosa en sangre de dos grupos: uno sigue una dieta baja en carbohidratos y otro una dieta estándar. Los datos del estudio están en el fichero <a href="datos/niveles-glucosa-dietas.csv">niveles-glucosa-dietas.csv</a>. Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos con un nivel de significación del 5%.</p>
+<div id="exr-contraste-proporcion-bolleria-industrial" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.4</strong></span> En una clase de alumnos de primaria se ha comprobado que el <span class="math inline">\(20\)</span>% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de <span class="math inline">\(50\)</span> alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del <span class="math inline">\(5\)</span>% si el programa es efectivo.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -512,17 +550,21 @@ Como el p-valor es menor que el nivel de significación se rechaza la hipótesis
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 2 poblaciones independientes (población 1: dieta baja en carbohidratos, población 2: dieta estándar).<br>
-Variable dependiente: Nivel de glucosa (cuantitativa).<br>
-Tamaños muestrales: <span class="math inline">\(n_1=30\)</span>, <span class="math inline">\(n_2=30\)</span>.<br>
-Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. p-valor: <span class="math inline">\(p=0.25\)</span>. Se acepta la hipótesis nula de igualdad de varianzas.<br>
-Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1&lt;\mu_2\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.00009\)</span>. Como el p-valor es menor que el nivel de significación se rechaza la hipótesis nula y se concluye que el nivel de glucosa en sangre es significativamente menor en el grupo que sigue una dieta baja en carbohidratos.</p>
+<p>Número de poblaciones: 1 población.<br>
+Variable dependiente: Consumo de bollería industrial (cualitativa binaria).<br>
+Tamaño muestral: <span class="math inline">\(n=50\)</span>.<br>
+Proporción muestral: <span class="math inline">\(\hat p=8/50=0.16\)</span>.<br>
+Condiciones: <span class="math inline">\(np_0=10\)</span> y <span class="math inline">\(n(1-p_0)=40\)</span>, ambas mayores o iguales que 5, por lo que la aproximación normal es válida.<br>
+Contraste para la proporción de una población: <span class="math inline">\(H_0:p=0.2\)</span>, <span class="math inline">\(H_1:p&lt;0.2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(z=\dfrac{0.16-0.2}{\sqrt{0.2\cdot 0.8/50}}=-0.71\)</span> (con corrección de continuidad, <span class="math inline">\(\chi^2=0.28\)</span> con 1 grado de libertad).<br>
+p-valor: <span class="math inline">\(p=0.2979\)</span> con corrección de continuidad (<span class="math inline">\(0.2398\)</span> sin ella; test binomial exacto: <span class="math inline">\(0.3073\)</span>).<br>
+Intervalo de confianza del 95 % unilateral para <span class="math inline">\(p\)</span>: <span class="math inline">\((0, 0.274)\)</span>.<br>
+Como el p-valor es mayor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que el programa sea efectivo. El intervalo admite proporciones de hasta el 27 %, mayores incluso que la inicial, de modo que con 50 alumnos el estudio tiene poca potencia para detectar una reducción moderada.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-comparacion-medias-expresion-genica" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.6</strong></span> Se ha realizado un estudio para comparar los niveles de expresión de un gen en función de la dieta (vegetariana u omnívora). Los datos del estudio están en el fichero <a href="datos/expresion-genica-dietas.csv">expresion-genica-dietas.csv</a>. Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos.</p>
+<div id="exr-contraste-ia-proporcion-fto-obesidad" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.5</strong></span> En población europea, alrededor del 16 % de los adultos son homocigotos AA para el alelo de riesgo del polimorfismo FTO rs9939609. En una consulta de obesidad (IMC <span class="math inline">\(\geq 30\)</span>) se genotipan 220 pacientes no emparentados y 49 resultan ser AA. ¿Es la frecuencia del genotipo AA entre los pacientes con obesidad distinta de la de la población general? ¿Permite este resultado afirmar que el genotipo AA causa obesidad?</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -536,19 +578,21 @@ p-valor: <span class="math inline">\(p=0.00009\)</span>. Como el p-valor es meno
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 2 poblaciones independientes (población 1: dieta vegetariana, población 2: dieta omnívora).<br>
-Variable dependiente: Expresión génica (cuantitativa).<br>
-Tamaños muestrales: <span class="math inline">\(n_1=20\)</span>, <span class="math inline">\(n_2=25\)</span>.<br>
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor primera muestra: <span class="math inline">\(0.4164\)</span>, p-valor segunda muestra: <span class="math inline">\(0.2767\)</span>. Se acepta la normalidad en ambos grupos.<br>
-Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. p-valor: <span class="math inline">\(p=0.1373\)</span>. Se acepta la hipótesis nula de igualdad de varianzas.<br>
-Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1&lt;\mu_2\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.00006\)</span>.<br>
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que existen diferencias estadísticamente significativas en los niveles de expresión génica en función de la dieta.</p>
+<p>Número de poblaciones: 1 población.<br>
+Variable dependiente: Genotipo FTO AA (cualitativa binaria).<br>
+Tamaño muestral: <span class="math inline">\(n=220\)</span>.<br>
+Proporción muestral: <span class="math inline">\(\hat p=49/220=0.223\)</span>.<br>
+Condiciones: <span class="math inline">\(np_0=35.2\)</span> y <span class="math inline">\(n(1-p_0)=184.8\)</span>, ambas mayores que 5, por lo que la aproximación normal es válida.<br>
+Contraste para la proporción de una población: <span class="math inline">\(H_0:p=0.16\)</span>, <span class="math inline">\(H_1:p\neq 0.16\)</span> (un contraste unilateral <span class="math inline">\(H_1:p&gt;0.16\)</span> es defendible si se fijó a priori; en ese caso <span class="math inline">\(p=0.0056\)</span>).<br>
+Estadístico del contraste: <span class="math inline">\(z=2.54\)</span>.<br>
+p-valor: <span class="math inline">\(p=0.011\)</span> (test binomial exacto: <span class="math inline">\(p=0.016\)</span>).<br>
+Intervalo de confianza del 95 % de Wilson: <span class="math inline">\((0.173, 0.282)\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la frecuencia del genotipo AA en la consulta de obesidad (22 %) es mayor que la de referencia (16 %), lo que es compatible con la asociación conocida entre FTO y adiposidad. El diseño no permite hablar de causalidad: se compara con una cifra externa, la ascendencia de la muestra puede diferir de la población de referencia (estratificación) y la consulta no es una muestra aleatoria de personas con obesidad.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-comparacion-proporciones-vitamina-c" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.7</strong></span> Se utiliza un grupo de 150 pacientes para comprobar la teoría de que la vitamina C tiene alguna influencia en el tratamiento del cáncer. Los 150 pacientes fueron divididos en dos grupos de 75. Un grupo recibió 10 gramos de vitamina C y el otro un placebo cada día, además de la medicación habitual. De los que recibieron la vitamina C, 47 presentaban alguna mejoría al cabo de cuatro semanas, mientras que de los que recibieron el placebo, 43 experimentaron mejoría. Contrastar la hipótesis de que la vitamina C tiene influencia en el tratamiento del cáncer con un nivel de significación del 5%.</p>
+<div id="exr-contraste-ia-varianza-hba1c" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.6</strong></span> El fabricante de un analizador de hemoglobina glicada (HbA1c) para la consulta de nutrición afirma que su desviación típica de repetibilidad no supera 0.15 puntos porcentuales. Para comprobarlo, se mide 15 veces la misma muestra de control. Los resultados están en el fichero <a href="datos/hba1c-analizador.csv">hba1c-analizador.csv</a>. ¿Hay evidencias, con un nivel de significación del 5%, de que la imprecisión del analizador es mayor que la que anuncia el fabricante? ¿Cambia la conclusión si se excluye la medición 10?</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
@@ -562,17 +606,25 @@ Como el p-valor es menor que el nivel de significación, se rechaza la hipótesi
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 2 poblaciones independientes (población 1: vitamina C, población 2: placebo).<br>
-Variable dependiente: Mejoría en el tratamiento del cáncer (cualitativa binaria).<br>
-Tamaños muestrales: <span class="math inline">\(n_1=75\)</span>, <span class="math inline">\(n_2=75\)</span>.<br>
-Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.6824\)</span>.<br>
-Como el p-valor es mayor que el nivel de significación, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que la vitamina C tenga influencia en el tratamiento del cáncer.</p>
+<p>Número de poblaciones: 1 población.<br>
+Variable dependiente: HbA1c de la muestra de control (cuantitativa).<br>
+Tamaño muestral: <span class="math inline">\(n=15\)</span>.<br>
+Descriptivos: <span class="math inline">\(\bar x=6.47\)</span> %, <span class="math inline">\(s=0.201\)</span> (<span class="math inline">\(s^2=0.0404\)</span>).<br>
+Prueba de normalidad de Shapiro-Wilk: <span class="math inline">\(p=0.070\)</span> (en el límite, con la medición 10, 6.97, claramente alejada). El contraste <span class="math inline">\(\chi^2\)</span> no es robusto: la distribución de <span class="math inline">\(s^2\)</span> depende de la curtosis y unas colas pesadas inflan la varianza muestral sin que el teorema central del límite lo corrija.<br>
+Contraste para la varianza de una población normal: <span class="math inline">\(H_0:\sigma\leq 0.15\)</span>, <span class="math inline">\(H_1:\sigma&gt;0.15\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(\chi^2=14\cdot 0.0404/0.0225=25.13\)</span> con 14 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.033\)</span>.<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(\sigma\)</span>: <span class="math inline">\((0.147, 0.317)\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay evidencia (moderada) de que la imprecisión del analizador supera la anunciada por el fabricante.<br>
+Sin la medición 10: <span class="math inline">\(s=0.151\)</span>, <span class="math inline">\(\chi^2=13.3\)</span> con 13 grados de libertad, <span class="math inline">\(p=0.43\)</span>, y la conclusión se invierte. Solo estaría justificado eliminarla si hubiese una causa técnica documentada. Lo correcto es informar de ambos análisis y repetir la prueba con más mediciones.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-proporcion-consumo-alcohol" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.8</strong></span> En un estudio sobre el consumo de alcohol entre los jóvenes durante los fines de semana, se preguntó a 100 chicos y a 125 chicas, de los que 63 chicos y 59 chicas contestaron que consumían. En vista de estos datos, ¿existe alguna diferencia significativa entre las proporciones de chicos y chicas que consumen alcohol los fines de semana?</p>
+</section>
+<section id="dos-poblaciones" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="dos-poblaciones"><span class="header-section-number">1.2</span> Dos poblaciones</h2>
+<div id="exr-contraste-ia-comparacion-medias-imc-fto" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.7</strong></span> En un estudio transversal con adultos sanos de 30 a 50 años se compara el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609. Ambos grupos se reclutaron de forma independiente en la misma cohorte. Los datos están en el fichero <a href="datos/imc-fto.csv">imc-fto.csv</a>. ¿Hay diferencias significativas en el IMC medio de ambos genotipos con un nivel de significación del 5%? ¿Qué variables podrían confundir esta comparación?</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -586,17 +638,22 @@ Como el p-valor es mayor que el nivel de significación, no se rechaza la hipót
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 2 poblaciones independientes (población 1: chicos, población 2: chicas).<br>
-Variable dependiente: Consumo de alcohol (cualitativa binaria).<br>
-Tamaños muestrales: <span class="math inline">\(n_1=100\)</span>, <span class="math inline">\(n_2=125\)</span>.<br>
-Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
-p-valor: <span class="math inline">\(p=0.0163\)</span>.<br>
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre el consumo de alcohol de chicos y chicas.</p>
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: genotipo AA, población 2: genotipo TT).<br>
+Variable dependiente: IMC (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=22\)</span>, <span class="math inline">\(n_2=25\)</span>.<br>
+Descriptivos: AA: <span class="math inline">\(\bar x_1=31.23\)</span>, <span class="math inline">\(s_1=4.68\)</span>; TT: <span class="math inline">\(\bar x_2=28.25\)</span>, <span class="math inline">\(s_2=3.65\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.71\)</span>, p-valor segunda muestra: <span class="math inline">\(0.71\)</span>. Se acepta la normalidad en ambos grupos.<br>
+Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. <span class="math inline">\(F=1.65\)</span>, p-valor: <span class="math inline">\(p=0.24\)</span> (Levene: <span class="math inline">\(p=0.30\)</span>). Se acepta la igualdad de varianzas.<br>
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1\neq\mu_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=2.44\)</span> con 45 grados de libertad. p-valor: <span class="math inline">\(p=0.018\)</span>. Intervalo de confianza del 95 % para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((0.52, 5.43)\)</span> kg/m².<br>
+Contraste de Welch: <span class="math inline">\(t=2.41\)</span> con 39.5 grados de libertad, <span class="math inline">\(p=0.021\)</span>, intervalo <span class="math inline">\((0.48, 5.48)\)</span>. Ambas versiones coinciden.<br>
+Tamaño del efecto: <span class="math inline">\(d=0.71\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que los portadores AA tienen de media unos 3 kg/m² más de IMC que los TT. El intervalo es ancho, así que la magnitud está poco precisada; en población general el efecto de FTO es menor (en torno a 0.4 kg/m² por alelo), lo que sugiere que una muestra pequeña puede sobrestimarlo. Posibles variables de confusión: sexo, edad, actividad física, ingesta energética, nivel socioeconómico y ascendencia (estratificación poblacional).</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-anova-suplementacion" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.9</strong></span> En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero <a href="datos/expresion-genica-suplementacion.csv">expresion-genica-suplementacion.csv</a>. Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.</p>
+<div id="exr-contraste-comparacion-medias-glucosa" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.8</strong></span> Se ha realizado un estudio para comparar los niveles de glucosa en sangre de dos grupos: uno sigue una dieta baja en carbohidratos y otro una dieta estándar. Los datos del estudio están en el fichero <a href="datos/niveles-glucosa-dietas.csv">niveles-glucosa-dietas.csv</a>. Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos con un nivel de significación del 5%.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -610,23 +667,23 @@ Como el p-valor es menor que el nivel de significación, se rechaza la hipótesi
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 3 poblaciones independientes (población 1: Carbohidratos, población 2: Proteínas, población 3: Grasas).<br>
-Variable dependiente: Expresión génica (cuantitativa).<br>
-Tamaños muestrales: <span class="math inline">\(n_1=75\)</span>, <span class="math inline">\(n_2=75\)</span> y <span class="math inline">\(n_3=75\)</span>.<br>
-Contraste de normalidad de Kolmogorov-Smirnov: p-valor primera muestra: <span class="math inline">\(0.7571\)</span>, p-valor segunda muestra: <span class="math inline">\(0.6459\)</span>, p-valor tercera muestra: <span class="math inline">\(0.9643\)</span>. Se acepta la normalidad en los tres grupos.<br>
-Contraste de homocedasticidad de Levene: p-valor: <span class="math inline">\(0.2126\)</span>. Se acepta la hipótesis de igualdad de varianzas.<br>
-Contraste de ANOVA: <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3\)</span>, <span class="math inline">\(H_1:\)</span> Al menos dos medias son diferentes.<br>
-p-valor: <span class="math inline">\(p=0.000283\)</span>.<br>
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre las medias de la expresión génica de los grupos de suplementación.<br>
-Contraste post hoc de Tukey:<br>
-- Carbohidratos vs Proteínas: <span class="math inline">\(p=0.0016\)</span>. Hay diferencias significativas.<br>
-- Carbohidratos vs Grasas: <span class="math inline">\(p=0.0009\)</span>. Hay diferencias significativas.<br>
-- Proteínas vs Grasas: <span class="math inline">\(p=0.9809\)</span>. No hay diferencias significativas.</p>
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: dieta baja en carbohidratos, población 2: dieta estándar).<br>
+Variable dependiente: Nivel de glucosa (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=30\)</span>, <span class="math inline">\(n_2=30\)</span>.<br>
+Descriptivos: baja en carbohidratos: <span class="math inline">\(\bar x_1=83.13\)</span>, <span class="math inline">\(s_1=8.99\)</span>; estándar: <span class="math inline">\(\bar x_2=93.55\)</span>, <span class="math inline">\(s_2=11.17\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.68\)</span>, p-valor segunda muestra: <span class="math inline">\(0.91\)</span>. Se acepta la normalidad en ambos grupos.<br>
+Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. <span class="math inline">\(F=0.65\)</span> con 29 y 29 grados de libertad, p-valor: <span class="math inline">\(p=0.248\)</span>. Se acepta la igualdad de varianzas.<br>
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1&lt;\mu_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=-3.98\)</span> con 58 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.00009\)</span>.<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((-15.67, -5.18)\)</span>.<br>
+Tamaño del efecto: <span class="math inline">\(d=-1.03\)</span> (grande).<br>
+Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, se rechaza la hipótesis nula y se concluye que el nivel de glucosa en sangre es significativamente menor en el grupo que sigue una dieta baja en carbohidratos, en unos 10 puntos de media.</p>
 </div>
 </div>
 </div>
-<div id="exr-contraste-anova-interaccion-dieta-farmaco" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 1.10</strong></span> En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero <a href="datos/interaccion-dieta-farmaco.csv">interaccion-dieta-farmaco.csv</a>. Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.</p>
+<div id="exr-contraste-comparacion-medias-expresion-genica" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.9</strong></span> Se ha realizado un estudio para comparar los niveles de expresión de un gen en función de la dieta (vegetariana u omnívora). Los datos del estudio están en el fichero <a href="datos/expresion-genica-dietas.csv">expresion-genica-dietas.csv</a>. Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -640,21 +697,368 @@ Contraste post hoc de Tukey:<br>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Número de poblaciones: 4 poblaciones independientes (población 1: Dieta No + Fármaco No, población 2: Dieta No + Fármaco Si, población 3: Dieta Si + Fármaco No, población 4: Dieta Si + Fármaco Si).<br>
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: dieta vegetariana, población 2: dieta omnívora).<br>
+Variable dependiente: Expresión génica (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=20\)</span>, <span class="math inline">\(n_2=25\)</span>.<br>
+Descriptivos: vegetariana: <span class="math inline">\(\bar x_1=1.147\)</span>, <span class="math inline">\(s_1=0.292\)</span>; omnívora: <span class="math inline">\(\bar x_2=1.627\)</span>, <span class="math inline">\(s_2=0.409\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.21\)</span>, p-valor segunda muestra: <span class="math inline">\(0.37\)</span>. Se acepta la normalidad en ambos grupos.<br>
+Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. <span class="math inline">\(F=0.51\)</span> con 19 y 24 grados de libertad, p-valor: <span class="math inline">\(p=0.1373\)</span>. Se acepta la igualdad de varianzas.<br>
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1\neq\mu_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=-4.42\)</span> con 43 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.00007\)</span>.<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((-0.70, -0.26)\)</span>.<br>
+Tamaño del efecto: <span class="math inline">\(d=-1.33\)</span> (grande).<br>
+Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, se rechaza la hipótesis nula y se concluye que existen diferencias estadísticamente significativas en los niveles de expresión génica en función de la dieta: la expresión es menor en el grupo vegetariano.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-comparacion-medias-omega3" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.10</strong></span> En un ensayo con 42 adultos, 14 reciben 1 g/día de EPA+DHA durante 12 semanas y 28 un placebo de aceite de oliva. Al final se mide el índice omega-3 eritrocitario (% de EPA+DHA sobre los ácidos grasos totales). Los datos están en el fichero <a href="datos/indice-omega3.csv">indice-omega3.csv</a>. ¿Aumenta el suplemento el índice omega-3 con un nivel de significación del 5%? ¿Qué proporción de los participantes de cada grupo alcanza el 8 %, valor que suele considerarse cardioprotector?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: suplemento, población 2: placebo).<br>
+Variable dependiente: Índice omega-3 (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=14\)</span>, <span class="math inline">\(n_2=28\)</span>.<br>
+Descriptivos: suplemento: <span class="math inline">\(\bar x_1=6.81\)</span> %, <span class="math inline">\(s_1=1.71\)</span>; placebo: <span class="math inline">\(\bar x_2=5.29\)</span> %, <span class="math inline">\(s_2=0.61\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.41\)</span>, p-valor segunda muestra: <span class="math inline">\(0.83\)</span>. Se acepta la normalidad en ambos grupos.<br>
+Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2\neq \sigma_2^2\)</span>. <span class="math inline">\(F=7.90\)</span>, p-valor: <span class="math inline">\(p&lt;0.0001\)</span>. Se rechaza la igualdad de varianzas.<br>
+Con varianzas y tamaños distintos la t clásica no es válida: si el grupo pequeño tiene la varianza mayor, como aquí, la varianza combinada la infraestima y el contraste se vuelve anticonservador.<br>
+Contraste de Welch para la comparación de medias de poblaciones independientes con varianzas distintas: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1&gt;\mu_2\)</span>. El contraste unilateral es razonable porque la hipótesis es direccional, pero debe fijarse en el protocolo antes del análisis.<br>
+Estadístico del contraste: <span class="math inline">\(t=3.23\)</span> con 14.7 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.003\)</span>. Intervalo de confianza del 95 % bilateral para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((0.51, 2.53)\)</span>.<br>
+Con la t de varianzas iguales (incorrecta) se obtiene <span class="math inline">\(t=4.24\)</span> con 40 grados de libertad y <span class="math inline">\(p&lt;0.0001\)</span>, un p-valor unas 40 veces menor y un intervalo demasiado estrecho <span class="math inline">\((0.80, 2.25)\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el suplemento aumenta el índice omega-3 en 1.5 puntos de media. La mayor dispersión en el grupo suplementado indica una respuesta heterogénea (adherencia, absorción, índice basal, peso corporal o variantes genéticas, por ejemplo en FADS1/FADS2). Solo 4 de 14 suplementados (29 %) alcanzan el 8 % que suele considerarse cardioprotector.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-comparacion-varianzas-tcf7l2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.11</strong></span> La nutrición personalizada parte de que la respuesta glucémica a una misma comida varía mucho entre personas. Se quiere saber si esa variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2 rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2 horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el fichero <a href="datos/auc-glucosa-tcf7l2.csv">auc-glucosa-tcf7l2.csv</a>. ¿Es más variable la respuesta glucémica de los TT que la de los CC con un nivel de significación del 5%? ¿Difieren también las respuestas medias de ambos genotipos?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: genotipo TT, población 2: genotipo CC).<br>
+Variable dependiente: AUC de glucosa (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=16\)</span>, <span class="math inline">\(n_2=20\)</span>.<br>
+Descriptivos: TT: <span class="math inline">\(\bar x_1=204.1\)</span>, <span class="math inline">\(s_1=56.5\)</span>; CC: <span class="math inline">\(\bar x_2=192.9\)</span>, <span class="math inline">\(s_2=28.0\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.41\)</span>, p-valor segunda muestra: <span class="math inline">\(0.22\)</span>. Se acepta la normalidad en ambos grupos. Como el contraste <span class="math inline">\(\chi^2\)</span> de una varianza, el contraste F no es robusto a la falta de normalidad; la alternativa robusta es el test de Levene (o Brown-Forsythe).<br>
+Contraste de comparación de varianzas: <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1:\sigma_1^2&gt;\sigma_2^2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(F=56.5^2/28.0^2=4.09\)</span> con 15 y 19 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.002\)</span> (bilateral: <span class="math inline">\(0.005\)</span>). Intervalo de confianza del 95 % para <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span>: <span class="math inline">\((1.56, 11.34)\)</span>. Test de Levene: <span class="math inline">\(p=0.002\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la respuesta glucémica de los TT es unas 4 veces más variable (la desviación típica, el doble).<br>
+Comparación de medias (Welch): <span class="math inline">\(t=0.73\)</span> con 20.8 grados de libertad, <span class="math inline">\(p=0.47\)</span>. Las medias no difieren, pero la dispersión sí. Una recomendación basada en la media del genotipo sería poco informativa para los TT, en quienes tendría más sentido medir la respuesta individual (por ejemplo, con monitorización continua de glucosa). Que no difieran las medias no significa que los grupos sean iguales.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-comparacion-medias-pareadas-hierro" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.12</strong></span> Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero <a href="datos/niveles-hierro-ejercicio.csv">niveles-hierro-ejercicio.csv</a>. Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones pareadas (población 1: antes del ejercicio, población 2: después del ejercicio).<br>
+Variable dependiente: Nivel de hierro (cuantitativa).<br>
+Tamaño muestral: <span class="math inline">\(n=20\)</span>.<br>
+Descriptivos: antes <span class="math inline">\(\bar x_1=12.08\)</span>, después <span class="math inline">\(\bar x_2=12.75\)</span>.<br>
+Variable diferencia: <span class="math inline">\(D=\)</span> antes <span class="math inline">\(-\)</span> después. <span class="math inline">\(\bar d=-0.67\)</span>, <span class="math inline">\(s_d=0.84\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk de la diferencia: <span class="math inline">\(p=0.861\)</span>. Se acepta la normalidad.<br>
+Contraste para la comparación de medias de poblaciones pareadas: <span class="math inline">\(H_0:\mu_d=0\)</span>, <span class="math inline">\(H_1:\mu_d&lt;0\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=-3.53\)</span> con 19 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.0011\)</span>.<br>
+Intervalo de confianza del 95 % para el aumento medio (después <span class="math inline">\(-\)</span> antes): <span class="math inline">\((0.27, 1.06)\)</span>.<br>
+Tamaño del efecto: <span class="math inline">\(d_z=0.79\)</span>.<br>
+Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha=0.01\)</span>, se rechaza la hipótesis nula y se concluye que el programa de ejercicios aumenta significativamente el nivel de hierro en sangre, en unas 0.67 unidades de media. Al no haber grupo control, el aumento no puede atribuirse con seguridad solo al ejercicio.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-comparacion-medias-pareadas-ldl" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.13</strong></span> Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero <a href="datos/ldl-fitoesteroles.csv">ldl-fitoesteroles.csv</a>. ¿Se reduce significativamente el colesterol LDL tras las 8 semanas con un nivel de significación del 5%? ¿A cuánto asciende la reducción media en mg/dL y en porcentaje? ¿Puede atribuirse la reducción al yogur?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones pareadas (población 1: después de 8 semanas, población 2: al inicio).<br>
+Variable dependiente: Colesterol LDL (cuantitativa).<br>
+Tamaño muestral: <span class="math inline">\(n=14\)</span>.<br>
+Variable diferencia: <span class="math inline">\(D=\)</span> LDL a 8 semanas <span class="math inline">\(-\)</span> LDL inicial. <span class="math inline">\(\bar d=-9.93\)</span> mg/dL, <span class="math inline">\(s_d=13.46\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk de la diferencia: <span class="math inline">\(p=0.49\)</span>. Se acepta la normalidad. La normalidad se comprueba en las diferencias; que los valores finales den <span class="math inline">\(p=0.034\)</span> es irrelevante para la t pareada.<br>
+Contraste para la comparación de medias de poblaciones pareadas: <span class="math inline">\(H_0:\mu_d=0\)</span>, <span class="math inline">\(H_1:\mu_d&lt; 0\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=-2.76\)</span> con 13 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.008\)</span> (bilateral: <span class="math inline">\(0.016\)</span>). Intervalo de confianza del 95 % para <span class="math inline">\(\mu_d\)</span>: <span class="math inline">\((-17.7, -2.2)\)</span> mg/dL. Tamaño del efecto: <span class="math inline">\(d_z=0.74\)</span>.<br>
+Con la t para muestras independientes (incorrecta) se obtiene <span class="math inline">\(t=-1.13\)</span> con 26 grados de libertad y <span class="math inline">\(p=0.27\)</span>. La correlación entre LDL inicial y final es <span class="math inline">\(r=0.85\)</span>: la mayor parte de la variabilidad es entre personas y el diseño pareado la elimina.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el LDL baja una media de unos 10 mg/dL (6.3 %), coherente con la reducción que se atribuye habitualmente a 2 g/día de fitoesteroles. Sin grupo control no puede atribuirse al yogur: regresión a la media (se seleccionó a personas con LDL alto), cambios de dieta por sentirse observados, estacionalidad o variabilidad analítica.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-verificacion-folato" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.14</strong></span> Diez mujeres en edad fértil toman 400 µg/día de ácido fólico durante 8 semanas. Se mide el folato sérico (ng/mL) antes y después de la suplementación. Los datos están en el fichero <a href="datos/folato-suplementacion.csv">folato-suplementacion.csv</a>. Un investigador ha comparado las medias de folato antes (<span class="math inline">\(13.28\)</span> ng/mL) y después (<span class="math inline">\(17.21\)</span> ng/mL) con un contraste t de Welch, obteniendo un p-valor <span class="math inline">\(p=0.102\)</span>, y ha concluido que la suplementación no aumenta el folato sérico. ¿Es correcto el análisis? ¿Aumenta realmente la suplementación el folato sérico con un nivel de significación del 5%?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>El análisis no es correcto. Las medias y el p-valor del contraste de Welch están bien calculados, pero el contraste no es el adecuado: son las mismas 10 mujeres medidas dos veces, así que las muestras son pareadas y no independientes. Además, un p-valor no significativo no demuestra la ausencia de efecto.<br>
+Número de poblaciones: 2 poblaciones pareadas (población 1: después, población 2: antes).<br>
+Variable dependiente: Folato sérico (cuantitativa).<br>
+Tamaño muestral: <span class="math inline">\(n=10\)</span>.<br>
+Variable diferencia: <span class="math inline">\(D=\)</span> después <span class="math inline">\(-\)</span> antes. <span class="math inline">\(\bar d=3.93\)</span> ng/mL, <span class="math inline">\(s_d=2.67\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk de la diferencia: <span class="math inline">\(p=0.93\)</span>. Se acepta la normalidad.<br>
+Contraste para la comparación de medias de poblaciones pareadas: <span class="math inline">\(H_0:\mu_d=0\)</span>, <span class="math inline">\(H_1:\mu_d&gt; 0\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(t=4.66\)</span> con 9 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.0006\)</span> (bilateral: <span class="math inline">\(0.001\)</span>). Intervalo de confianza del 95 % para <span class="math inline">\(\mu_d\)</span>: <span class="math inline">\((2.02, 5.84)\)</span> ng/mL.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la suplementación aumenta el folato sérico unos 4 ng/mL. La correlación antes-después es <span class="math inline">\(r=0.91\)</span>, por eso el diseño pareado gana tanta potencia.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-comparacion-proporciones-vitamina-c" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.15</strong></span> Se utiliza un grupo de 150 pacientes para comprobar la teoría de que la vitamina C tiene alguna influencia en el tratamiento del cáncer. Los 150 pacientes fueron divididos en dos grupos de 75. Un grupo recibió 10 gramos de vitamina C y el otro un placebo cada día, además de la medicación habitual. De los que recibieron la vitamina C, 47 presentaban alguna mejoría al cabo de cuatro semanas, mientras que de los que recibieron el placebo, 43 experimentaron mejoría. Contrastar la hipótesis de que la vitamina C tiene influencia en el tratamiento del cáncer con un nivel de significación del 5%.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: vitamina C, población 2: placebo).<br>
+Variable dependiente: Mejoría en el tratamiento del cáncer (cualitativa binaria).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=75\)</span>, <span class="math inline">\(n_2=75\)</span>.<br>
+Proporciones muestrales: <span class="math inline">\(\hat p_1=47/75=0.627\)</span>, <span class="math inline">\(\hat p_2=43/75=0.573\)</span>.<br>
+Frecuencias esperadas: 45, 30, 45 y 30, todas mayores que 5.<br>
+Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(z=0.67\)</span> (<span class="math inline">\(\chi^2=0.44\)</span> con 1 grado de libertad; con corrección de Yates <span class="math inline">\(\chi^2=0.25\)</span>).<br>
+p-valor: <span class="math inline">\(p=0.505\)</span> (con corrección de Yates: <span class="math inline">\(0.617\)</span>).<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(p_1-p_2\)</span>: <span class="math inline">\((-0.103, 0.210)\)</span>.<br>
+Como el p-valor es mayor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que la vitamina C tenga influencia en el tratamiento del cáncer. El intervalo incluye tanto pequeños perjuicios como beneficios de hasta 21 puntos porcentuales, así que el estudio no permite descartar un efecto relevante.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-proporcion-consumo-alcohol" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.16</strong></span> En un estudio sobre el consumo de alcohol entre los jóvenes durante los fines de semana, se preguntó a 100 chicos y a 125 chicas, de los que 63 chicos y 59 chicas contestaron que consumían. En vista de estos datos, ¿existe alguna diferencia significativa entre las proporciones de chicos y chicas que consumen alcohol los fines de semana?</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: chicos, población 2: chicas).<br>
+Variable dependiente: Consumo de alcohol (cualitativa binaria).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=100\)</span>, <span class="math inline">\(n_2=125\)</span>.<br>
+Proporciones muestrales: <span class="math inline">\(\hat p_1=63/100=0.630\)</span>, <span class="math inline">\(\hat p_2=59/125=0.472\)</span>.<br>
+Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(z=2.36\)</span> (<span class="math inline">\(\chi^2=5.59\)</span> con 1 grado de libertad; con corrección de Yates <span class="math inline">\(\chi^2=4.97\)</span>).<br>
+p-valor: <span class="math inline">\(p=0.0181\)</span> (con corrección de Yates: <span class="math inline">\(0.0258\)</span>).<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(p_1-p_2\)</span>: <span class="math inline">\((0.029, 0.287)\)</span>.<br>
+Como el p-valor es menor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre el consumo de alcohol de chicos y chicas: la proporción de chicos que consumen es unos 16 puntos porcentuales mayor.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-comparacion-proporciones-fto-respuesta" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.17</strong></span> En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores. ¿Influye el genotipo FTO en la probabilidad de responder a la dieta con un nivel de significación del 5%? Calcular e interpretar el riesgo relativo de responder de los portadores frente a los no portadores.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 2 poblaciones independientes (población 1: portadores del alelo A, población 2: no portadores TT).<br>
+Variable dependiente: Respuesta a la dieta (cualitativa binaria).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=96\)</span>, <span class="math inline">\(n_2=54\)</span>.<br>
+Proporciones muestrales: <span class="math inline">\(\hat p_1=0.396\)</span>, <span class="math inline">\(\hat p_2=0.574\)</span>.<br>
+Frecuencias esperadas: 44.2, 51.8, 24.8 y 29.2, todas mayores que 5.<br>
+Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
+Estadístico del contraste: <span class="math inline">\(z=-2.10\)</span> (<span class="math inline">\(z^2=4.42=\chi^2\)</span> sin corrección: son el mismo contraste).<br>
+p-valor: <span class="math inline">\(p=0.036\)</span>. Con corrección de Yates: <span class="math inline">\(\chi^2=3.73\)</span>, <span class="math inline">\(p=0.053\)</span>. Test exacto de Fisher: <span class="math inline">\(p=0.041\)</span>.<br>
+Intervalo de confianza del 95 % para <span class="math inline">\(p_1-p_2\)</span>: <span class="math inline">\((-0.342, -0.014)\)</span>.<br>
+Riesgo relativo: <span class="math inline">\(RR=0.69\)</span>; odds ratio: <span class="math inline">\(OR=0.49\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula: los portadores del alelo A tienen una probabilidad de responder un 31 % menor. Sin embargo, la evidencia es débil: el intervalo llega casi a 0 y con la corrección de Yates (conservadora) el p-valor es 0.053. No deben extraerse dos conclusiones opuestas de 0.036 y 0.053; hay que informar del intervalo y pedir replicación. Un metaanálisis de datos individuales (Livingstone et al., BMJ 2016) no encontró diferencias en la pérdida de peso por genotipo FTO.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-ia-caso-integrador-dieta-fto" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.18</strong></span> En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan al azar a una dieta mediterránea hipocalórica o a una dieta baja en grasa hipocalórica (40 por grupo). El fichero <a href="datos/dieta-fto-ensayo.csv">dieta-fto-ensayo.csv</a> contiene el identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses (kg) y glucosa basal y a 6 meses (mg/dL). La pérdida de peso en porcentaje se calcula como <span class="math inline">\(100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}\)</span> y se considera respondedor a quien pierde al menos el 5 % de su peso. Utilizar un nivel de significación del 5%.</p>
+<ol type="a">
+<li>¿Difiere el porcentaje medio de pérdida de peso entre las dos dietas?</li>
+<li>¿Disminuye la glucosa en ayunas con la dieta mediterránea? ¿Y con la baja en grasa? ¿Es una dieta mejor que la otra para reducir la glucosa?</li>
+<li>¿Difiere la proporción de respondedores entre las dos dietas?</li>
+<li>¿Pierden menos peso los homocigotos AA para el polimorfismo FTO que el resto de participantes?</li>
+</ol>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Número de poblaciones: 2 poblaciones independientes (población 1: dieta mediterránea, población 2: dieta baja en grasa).<br>
+Variable dependiente: Pérdida de peso en % (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=40\)</span>, <span class="math inline">\(n_2=40\)</span>.<br>
+Descriptivos: mediterránea: <span class="math inline">\(\bar x_1=5.43\)</span> %, <span class="math inline">\(s_1=3.14\)</span>; baja en grasa: <span class="math inline">\(\bar x_2=3.79\)</span> %, <span class="math inline">\(s_2=3.50\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valores <span class="math inline">\(0.52\)</span> y <span class="math inline">\(0.67\)</span>. Se acepta la normalidad. Test de Levene: <span class="math inline">\(p=0.47\)</span>. Se acepta la igualdad de varianzas.<br>
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1\neq\mu_2\)</span>.<br>
+Estadístico: <span class="math inline">\(t=2.21\)</span> con 78 grados de libertad. p-valor: <span class="math inline">\(p=0.030\)</span>. Intervalo de confianza del 95 % para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((0.16, 3.12)\)</span>. <span class="math inline">\(d=0.49\)</span>.<br>
+Se rechaza la hipótesis nula: la dieta mediterránea produce una pérdida de peso algo mayor, de magnitud moderada y estimada con poca precisión. Ojo: R ordena los grupos alfabéticamente (BajaGrasa primero), así que puede devolver la diferencia con el signo cambiado.</p></li>
+<li><p>Contrastes de comparación de medias de poblaciones pareadas dentro de cada dieta, con <span class="math inline">\(D=\)</span> glucosa a 6 meses <span class="math inline">\(-\)</span> glucosa basal y <span class="math inline">\(H_0:\mu_d=0\)</span>, <span class="math inline">\(H_1:\mu_d\neq 0\)</span>.<br>
+Mediterránea: <span class="math inline">\(\bar d=-2.93\)</span> mg/dL, <span class="math inline">\(s_d=7.97\)</span>, <span class="math inline">\(t=-2.32\)</span> con 39 grados de libertad, <span class="math inline">\(p=0.026\)</span>, intervalo <span class="math inline">\((-5.47, -0.38)\)</span>.<br>
+Baja en grasa: <span class="math inline">\(\bar d=-0.23\)</span> mg/dL, <span class="math inline">\(s_d=7.97\)</span>, <span class="math inline">\(t=-0.18\)</span> con 39 grados de libertad, <span class="math inline">\(p=0.86\)</span>, intervalo <span class="math inline">\((-2.77, 2.32)\)</span>.<br>
+Que un cambio sea significativo y el otro no, no demuestra que las dietas difieran. Para eso hay que comparar los cambios entre grupos con un contraste de muestras independientes: diferencia <span class="math inline">\(=-2.70\)</span> mg/dL, <span class="math inline">\(t=-1.52\)</span> con 78 grados de libertad, <span class="math inline">\(p=0.13\)</span>, intervalo <span class="math inline">\((-6.25, 0.85)\)</span>. No hay evidencia suficiente de que la dieta mediterránea reduzca la glucosa más que la baja en grasa, y una bajada de 3 mg/dL tiene poca relevancia clínica.</p></li>
+<li><p>Contraste para la comparación de proporciones: <span class="math inline">\(H_0:p_1=p_2\)</span>, <span class="math inline">\(H_1:p_1\neq p_2\)</span>.<br>
+Proporciones muestrales: mediterránea <span class="math inline">\(24/40=0.60\)</span>, baja en grasa <span class="math inline">\(14/40=0.35\)</span>.<br>
+Estadístico: <span class="math inline">\(z=2.24\)</span>. p-valor: <span class="math inline">\(p=0.025\)</span> (Fisher: <span class="math inline">\(p=0.043\)</span>). Intervalo de confianza del 95 % para <span class="math inline">\(p_1-p_2\)</span>: <span class="math inline">\((0.04, 0.46)\)</span>.<br>
+Se rechaza la hipótesis nula, de forma coherente con el apartado a, aunque al dicotomizar la pérdida de peso se pierde información.</p></li>
+<li><p>Número de poblaciones: 2 poblaciones independientes (población 1: AA, población 2: AT o TT). Contraste de Welch, <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, <span class="math inline">\(H_1:\mu_1&lt;\mu_2\)</span>: AA: <span class="math inline">\(n=18\)</span>, <span class="math inline">\(\bar x=4.13\)</span> %, <span class="math inline">\(s=2.53\)</span>; no AA: <span class="math inline">\(n=62\)</span>, <span class="math inline">\(\bar x=4.75\)</span> %, <span class="math inline">\(s=3.62\)</span>. <span class="math inline">\(t=-0.83\)</span> con 39.4 grados de libertad, <span class="math inline">\(p=0.21\)</span>, intervalo del 95 % para <span class="math inline">\(\mu_1-\mu_2\)</span>: <span class="math inline">\((-2.15, 0.90)\)</span>. No hay evidencia de diferencia, pero el intervalo es compatible con un efecto clínicamente relevante. Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en mediterránea y 7 en baja en grasa), lo que puede confundir la comparación. Con cuatro o más contrastes sobre los mismos datos, la probabilidad de algún falso positivo crece (con 4 contrastes independientes a <span class="math inline">\(\alpha=0.05\)</span>, cerca del 19 %). Lo adecuado sería fijar la hipótesis de antemano, ajustar los p-valores (Bonferroni, Holm) o modelizar la interacción dieta × genotipo.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="más-de-dos-poblaciones" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="más-de-dos-poblaciones"><span class="header-section-number">1.3</span> Más de dos poblaciones</h2>
+<div id="exr-contraste-anova-suplementacion" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.19</strong></span> En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero <a href="datos/expresion-genica-suplementacion.csv">expresion-genica-suplementacion.csv</a>. Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 3 poblaciones independientes (población 1: carbohidratos, población 2: proteínas, población 3: grasas).<br>
+Variable dependiente: Expresión génica (cuantitativa).<br>
+Tamaños muestrales: <span class="math inline">\(n_1=25\)</span>, <span class="math inline">\(n_2=25\)</span> y <span class="math inline">\(n_3=25\)</span>.<br>
+Descriptivos: carbohidratos: <span class="math inline">\(\bar x_1=1.167\)</span>, <span class="math inline">\(s_1=0.191\)</span>; proteínas: <span class="math inline">\(\bar x_2=1.414\)</span>, <span class="math inline">\(s_2=0.278\)</span>; grasas: <span class="math inline">\(\bar x_3=1.427\)</span>, <span class="math inline">\(s_3=0.247\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.64\)</span>, p-valor segunda muestra: <span class="math inline">\(0.96\)</span>, p-valor tercera muestra: <span class="math inline">\(0.32\)</span>. Se acepta la normalidad en los tres grupos.<br>
+Contraste de homocedasticidad de Levene: <span class="math inline">\(F=1.58\)</span> con 2 y 72 grados de libertad, p-valor: <span class="math inline">\(p=0.2126\)</span>. Se acepta la igualdad de varianzas.<br>
+Contraste de ANOVA: <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3\)</span>, <span class="math inline">\(H_1:\)</span> al menos dos medias son diferentes.<br>
+Estadístico del contraste: <span class="math inline">\(F=9.17\)</span> con 2 y 72 grados de libertad.<br>
+p-valor: <span class="math inline">\(p=0.00028\)</span>.<br>
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre las medias de la expresión génica de los grupos de suplementación.<br>
+Contraste post hoc de Tukey:</p>
+<ul>
+<li>Proteínas <span class="math inline">\(-\)</span> Carbohidratos: diferencia <span class="math inline">\(=0.247\)</span>, IC 95 % <span class="math inline">\((0.083, 0.410)\)</span>, <span class="math inline">\(p=0.0016\)</span>. Hay diferencias significativas.<br>
+</li>
+<li>Grasas <span class="math inline">\(-\)</span> Carbohidratos: diferencia <span class="math inline">\(=0.259\)</span>, IC 95 % <span class="math inline">\((0.096, 0.423)\)</span>, <span class="math inline">\(p=0.0009\)</span>. Hay diferencias significativas.<br>
+</li>
+<li>Proteínas <span class="math inline">\(-\)</span> Grasas: diferencia <span class="math inline">\(=-0.013\)</span>, IC 95 % <span class="math inline">\((-0.176, 0.151)\)</span>, <span class="math inline">\(p=0.9809\)</span>. No hay diferencias significativas.</li>
+</ul>
+<p>La suplementación con carbohidratos produce una expresión menor que la de proteínas o grasas, que no difieren entre sí.</p>
+</div>
+</div>
+</div>
+<div id="exr-contraste-anova-interaccion-dieta-farmaco" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 1.20</strong></span> En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero <a href="datos/interaccion-dieta-farmaco.csv">interaccion-dieta-farmaco.csv</a>. Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Número de poblaciones: 4 poblaciones independientes (población 1: Dieta No + Fármaco No, población 2: Dieta No + Fármaco Sí, población 3: Dieta Sí + Fármaco No, población 4: Dieta Sí + Fármaco Sí).<br>
 Variable dependiente: Peso perdido (cuantitativa).<br>
 Tamaños muestrales: <span class="math inline">\(n_1=5\)</span>, <span class="math inline">\(n_2=6\)</span>, <span class="math inline">\(n_3=5\)</span> y <span class="math inline">\(n_4=6\)</span>.<br>
-Contraste de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.4677\)</span>, p-valor segunda muestra: <span class="math inline">\(0.9672\)</span>, p-valor tercera muestra: <span class="math inline">\(0.741\)</span>, p-valor cuarta muestra: <span class="math inline">\(0.719\)</span>. Se acepta la normalidad en los cuatro grupos.<br>
-Contraste de homocedasticidad de Levene: p-valor: <span class="math inline">\(0.845\)</span>. Se acepta la hipótesis de igualdad de varianzas.<br>
-Contraste de ANOVA de dos factores con interacción: <span class="math inline">\(H_0:\)</span> No hay interacción entre la dieta y el fármaco, <span class="math inline">\(H_1:\)</span> Hay interacción entre la dieta y el fármaco.<br>
-- p-valor dieta: <span class="math inline">\(p=0.0000\)</span>.<br>
-- p-valor fármaco: <span class="math inline">\(p=0.0000\)</span>.<br>
-- p-valor interacción: <span class="math inline">\(p=0.0012\)</span>.<br>
-Como el p-valor es menor que el nivel de significación en los tres casos, se rechaza la hipótesis nula y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos.</p>
+Descriptivos (kg perdidos): <span class="math inline">\(\bar x_1=0.00\)</span>, <span class="math inline">\(s_1=1.06\)</span>; <span class="math inline">\(\bar x_2=5.17\)</span>, <span class="math inline">\(s_2=1.44\)</span>; <span class="math inline">\(\bar x_3=3.00\)</span>, <span class="math inline">\(s_3=0.79\)</span>; <span class="math inline">\(\bar x_4=12.00\)</span>, <span class="math inline">\(s_4=1.18\)</span>.<br>
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: <span class="math inline">\(0.468\)</span>, p-valor segunda muestra: <span class="math inline">\(0.741\)</span>, p-valor tercera muestra: <span class="math inline">\(0.967\)</span>, p-valor cuarta muestra: <span class="math inline">\(0.719\)</span>. Se acepta la normalidad en los cuatro grupos.<br>
+Contraste de homocedasticidad de Levene: <span class="math inline">\(F=0.27\)</span> con 3 y 18 grados de libertad, p-valor: <span class="math inline">\(p=0.845\)</span>. Se acepta la igualdad de varianzas.<br>
+Contraste de ANOVA de dos factores con interacción:</p>
+<ul>
+<li>Dieta: <span class="math inline">\(H_0:\)</span> la dieta no influye en el peso perdido. <span class="math inline">\(F=105.4\)</span> con 1 y 18 grados de libertad, <span class="math inline">\(p&lt;0.0001\)</span>.<br>
+</li>
+<li>Fármaco: <span class="math inline">\(H_0:\)</span> el fármaco no influye en el peso perdido. <span class="math inline">\(F=202.4\)</span> con 1 y 18 grados de libertad, <span class="math inline">\(p&lt;0.0001\)</span>.<br>
+</li>
+<li>Interacción: <span class="math inline">\(H_0:\)</span> no hay interacción entre la dieta y el fármaco. <span class="math inline">\(F=14.8\)</span> con 1 y 18 grados de libertad, <span class="math inline">\(p=0.0012\)</span>.</li>
+</ul>
+<p>Como el p-valor es menor que el nivel de significación en los tres casos, se rechazan las hipótesis nulas y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos. La interacción es sinérgica: la dieta sola hace perder 3 kg y el fármaco solo 5.2 kg, pero juntos 12 kg, más que la suma de ambos efectos.</p>
 </div>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

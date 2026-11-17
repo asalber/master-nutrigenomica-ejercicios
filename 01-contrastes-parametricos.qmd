@@ -3,7 +3,7 @@ title: Contrastes de hipótesis paramétricos
 lang: es
 ---
 
-Los ejercicios de este capítulo pueden resolverse con ayuda de un asistente de IA. Para ello, el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
+Los ejercicios de este capítulo están pensados para resolverse con ayuda de un asistente de IA. En ellos el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
 
 :::{.callout-note}
 ## Pautas para trabajar con la IA
@@ -18,34 +18,22 @@ Los ejercicios de este capítulo pueden resolverse con ayuda de un asistente de 
 
 **Cómo preguntar a la IA**
 
-Una buena petición incluye el contexto, los datos, el contraste elegido por el alumno y el formato de salida. No hay que pedirle a la IA que elija el contraste; si se quiere contrastar la elección, se le puede preguntar después y discutir su respuesta. Ejemplo:
+-  Una buena petición incluye el contexto, los datos, el contraste elegido por el alumno y el formato de salida. No hay que pedirle a la IA que elija el contraste; si se quiere contrastar la elección, se le puede preguntar después y discutir su respuesta. Ejemplo:
 
-```
-Tengo estos datos (CSV adjunto). Quiero contrastar H0: μ = 5 frente a H1: μ > 5
-con una t de Student para una muestra, α = 0.05.
-1. Calcula n, media, desviación típica, mínimo y máximo.
-2. Comprueba la normalidad con Shapiro-Wilk.
-3. Haz el contraste: estadístico, grados de libertad, p-valor e IC del 95 %.
-4. Muestra el código R que has ejecutado para obtenerlo.
-No interpretes el resultado; solo dame los números.
-```
+    ```
+    Tengo estos datos (CSV adjunto). Quiero contrastar H0: μ = 5 frente a H1: μ > 5
+    con una t de Student para una muestra, α = 0.05.
+    1. Calcula n, media, desviación típica, mínimo y máximo.
+    2. Comprueba la normalidad con Shapiro-Wilk.
+    3. Haz el contraste: estadístico, grados de libertad, p-valor e IC del 95 %.
+    4. Muestra el código R que has ejecutado para obtenerlo.
+    ```
 
-- Pedir siempre el código y, si el asistente puede, que lo ejecute. Un número sin código no es verificable.
+- Pedir siempre el código y, si el asistente puede, que lo ejecute. Un número sin código no es verificable. La IA puede inventar números con total seguridad, sobre todo si no ejecuta código. Si dos respuestas no coinciden, la que vale es la que se puede reproducir.
 - Indicar la dirección de la hipótesis alternativa y el orden de los grupos (por ejemplo, «diferencia = AA − TT»).
 - En datos pareados, indicar explícitamente que cada fila corresponde al mismo individuo.
 - Pedir el p-valor exacto, no «p < 0.05».
 
-**Lista de comprobación de la respuesta de la IA**
-
-- ¿Ha leído bien los datos? Comprobar que $n$ y alguna media coinciden con un cálculo propio.
-- ¿Ha usado el contraste pedido, con la cola correcta (bilateral o unilateral)?
-- ¿Los grados de libertad son coherentes ($n-1$, $n_1+n_2-2$, o no enteros en el contraste de Welch)?
-- ¿El intervalo de confianza y el p-valor son coherentes entre sí?
-- ¿El signo de la diferencia corresponde al orden de los grupos pedido?
-- ¿Los valores son plausibles (medias dentro del rango de los datos, p-valores entre 0 y 1)?
-- ¿Se ha repetido al menos un cálculo con otra herramienta o en una conversación nueva?
-
-La IA puede inventar números con total seguridad, sobre todo si no ejecuta código. Si dos respuestas no coinciden, la que vale es la que se puede reproducir.
 :::
 
 ## Una población

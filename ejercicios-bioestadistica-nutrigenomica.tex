@@ -107,6 +107,7 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -135,13 +136,13 @@
 
 
 \ifLuaTeX
-\usepackage[bidi=basic]{babel}
+\usepackage[bidi=basic,shorthands=off]{babel}
 \else
-\usepackage[bidi=default]{babel}
+\usepackage[bidi=default,shorthands=off]{babel}
 \fi
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
 
 
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -309,7 +310,6 @@ Alberca}\\ \textsf{asalber@ceu.es} \\ \textsf{https://aprendeconalf.es}}
 \end{titlepage}
 \renewcommand*\contentsname{Tabla de contenidos}
 {
-\hypersetup{linkcolor=}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
@@ -329,6 +329,78 @@ Nutrigenómica.
 \chapter{Contrastes de hipótesis
 paramétricos}\label{contrastes-de-hipuxf3tesis-paramuxe9tricos}
 
+Los ejercicios de este capítulo están pensados para resolverse con ayuda
+de un asistente de IA. En ellos el alumno debe decidir qué contraste
+aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT,
+Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los
+resultados. Se valora el razonamiento y la interpretación, no el número
+que devuelva la IA. Salvo que se indique otra cosa, se utilizará un
+nivel de significación \(\alpha=0.05\).
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pautas para trabajar con la IA}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+\textbf{Los cinco pasos de cada ejercicio}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Plantear} (sin IA): variable dependiente y su tipo, número de
+  poblaciones, si las muestras son independientes o pareadas, parámetro
+  de interés (\(\mu\), \(p\), \(\sigma^2\)) e hipótesis \(H_0\) y
+  \(H_1\), justificando si el contraste es bilateral o unilateral.
+\item
+  \textbf{Elegir el contraste y listar sus supuestos} (sin IA):
+  normalidad, independencia, igualdad de varianzas, tamaño muestral
+  suficiente, etc.
+\item
+  \textbf{Pedir los cálculos a la IA}: estadísticos descriptivos,
+  comprobación de los supuestos y el contraste, junto con el código (R o
+  Python) utilizado.
+\item
+  \textbf{Verificar} la respuesta (ver la lista de comprobación).
+\item
+  \textbf{Interpretar}: decisión sobre \(H_0\), estimación con intervalo
+  de confianza, tamaño del efecto y significado práctico en el contexto
+  nutricional, además de alguna limitación del estudio.
+\end{enumerate}
+
+\textbf{Cómo preguntar a la IA}
+
+\begin{itemize}
+\item
+  Una buena petición incluye el contexto, los datos, el contraste
+  elegido por el alumno y el formato de salida. No hay que pedirle a la
+  IA que elija el contraste; si se quiere contrastar la elección, se le
+  puede preguntar después y discutir su respuesta. Ejemplo:
+
+\begin{verbatim}
+Tengo estos datos (CSV adjunto). Quiero contrastar H0: μ = 5 frente a H1: μ > 5
+con una t de Student para una muestra, α = 0.05.
+1. Calcula n, media, desviación típica, mínimo y máximo.
+2. Comprueba la normalidad con Shapiro-Wilk.
+3. Haz el contraste: estadístico, grados de libertad, p-valor e IC del 95 %.
+4. Muestra el código R que has ejecutado para obtenerlo.
+\end{verbatim}
+\item
+  Pedir siempre el código y, si el asistente puede, que lo ejecute. Un
+  número sin código no es verificable. La IA puede inventar números con
+  total seguridad, sobre todo si no ejecuta código. Si dos respuestas no
+  coinciden, la que vale es la que se puede reproducir.
+\item
+  Indicar la dirección de la hipótesis alternativa y el orden de los
+  grupos (por ejemplo, «diferencia = AA − TT»).
+\item
+  En datos pareados, indicar explícitamente que cada fila corresponde al
+  mismo individuo.
+\item
+  Pedir el p-valor exacto, no «p \textless{} 0.05».
+\end{itemize}
+
+\end{tcolorbox}
+
+\section{Una población}\label{una-poblaciuxf3n}
+
 \begin{exercise}[]\protect\hypertarget{exr-contraste-media-consumo-azucar}{}\label{exr-contraste-media-consumo-azucar}
 
 Sabiendo que el año pasado el consumo per cápita de azúcar en España fue
@@ -341,47 +413,25 @@ del \(10\)\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
-
-Sea \(X\sim N(\mu,\sigma)\) la variable aleatoria que mide el consumo
-per cápita de azúcar en España.\\
-Número de poblaciones: 1 población. Variable dependiente: Consumo de
-azúcar (cuantitativa).\\
-Tamaño muestral: \(n=20\).\\
-Contraste de la media de una población normal (prueba t):
-\(H_0:\mu=4.8\), \(H_1:\mu\neq 4.8\).\\
-Estadístico del contraste: \(t=2.24\)\\
-p-valor: \(p =2 P(t(19)>2.24) = 0.037\).\\
-Como el p-valor es menor que el nivel de significación \(\alpha = 0.1\),
-se rechaza la hipótesis nula y se concluye que el consumo de azúcar per
-cápita de este año en España ha variado.
-
-\end{tcolorbox}
-
-\begin{exercise}[]\protect\hypertarget{exr-contraste-proporcion-bolleria-industrial}{}\label{exr-contraste-proporcion-bolleria-industrial}
-
-En una clase de alumnos de primaria se ha comprobado que el \(20\)\% del
-alumnado consume bollería industrial. Para disminuir esta preocupante
-cifra, el colegio ha implantado un programa de educación nutricional.
-Después del programa se tomó una muestra aleatoria de \(50\) alumnos de
-primaria y se observó que 8 seguían consumiendo bollería industrial.
-Contrastar con un nivel de significación del \(5\)\% si el programa es
-efectivo.
-
-\end{exercise}
-
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 1 población.\\
-Variable dependiente: Consumo de bollería industrial (cualitativa
-binaria).\\
-Tamaño muestral: \(n=50\).\\
-Contraste para la proporción de una población: \(H_0:p=0.2\),
-\(H_1:p< 0.2\).\\
-p-valor: \(p=0.2979\).\\
-Como el p-valor es mayor que el nivel de significación
-\(\alpha = 0.05\), no se rechaza la hipótesis nula y se concluye que no
-hay evidencias significativas de que el programa sea efectivo.
+Variable dependiente: Consumo de azúcar per cápita (cuantitativa),
+\(X\sim N(\mu,\sigma)\).\\
+Tamaño muestral: \(n=20\).\\
+Descriptivos: \(\bar x=5\) kg, \(s=0.4\) kg.\\
+Normalidad: se asume por el enunciado.\\
+Contraste de la media de una población normal (prueba t):
+\(H_0:\mu=4.8\), \(H_1:\mu\neq 4.8\).\\
+Estadístico del contraste: \(t=\dfrac{5-4.8}{0.4/\sqrt{20}}=2.24\) con
+19 grados de libertad.\\
+p-valor: \(p=2P(t(19)>2.24)=0.0375\).\\
+Intervalo de confianza del 90 \% para \(\mu\): \((4.85, 5.15)\) kg.\\
+Tamaño del efecto: \(d=(5-4.8)/0.4=0.5\) (moderado).\\
+Como el p-valor es menor que el nivel de significación \(\alpha=0.1\),
+se rechaza la hipótesis nula y se concluye que el consumo de azúcar per
+cápita de este año en España ha variado. El intervalo no contiene 4.8 kg
+y sugiere un aumento de entre 0.05 y 0.35 kg por persona.
 
 \end{tcolorbox}
 
@@ -397,47 +447,234 @@ Realizar el contraste con un nivel de significación de \(0.10\).
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 1 población.\\
 Variable dependiente: Consumo de helado (cuantitativa).\\
 Tamaño muestral: \(n=22\).\\
-Prueba de normalidad de Kolmogorov-Smirnov. p-valor: \(p=0.632\). Se
-acepta la normalidad.\\
+Descriptivos: \(\bar x=19.5\) kg, \(s=9.30\) kg.\\
+Prueba de normalidad de Shapiro-Wilk: \(p=0.76\). Se acepta la
+normalidad.\\
 Contraste de la media de una población normal (prueba t):
 \(H_0:\mu=20\), \(H_1:\mu\neq 20\).\\
-p-valor: \(p = 0.8033\).\\
-Como el p-valor es mayor que el nivel de significación
-\(\alpha = 0.10\), no se rechaza la hipótesis nula y se concluye que el
-consumo medio de helado de este año en España se va a mantener.
+Estadístico del contraste: \(t=-0.25\) con 21 grados de libertad.\\
+p-valor: \(p=0.8033\).\\
+Intervalo de confianza del 90 \% para \(\mu\): \((16.09, 22.91)\) kg.\\
+Tamaño del efecto: \(d=(19.5-20)/9.30=-0.05\) (despreciable).\\
+Como el p-valor es mayor que el nivel de significación \(\alpha=0.10\),
+no se rechaza la hipótesis nula y se concluye que no hay evidencias de
+que el consumo medio de helado de este año sea distinto del del año
+pasado. El intervalo es ancho, por lo que la muestra no permite
+descartar cambios de unos 3 kg en cualquier sentido.
 
 \end{tcolorbox}
 
-\begin{exercise}[]\protect\hypertarget{exr-contraste-comparacion-medias-pareadas-hierro}{}\label{exr-contraste-comparacion-medias-pareadas-hierro}
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-media-homocisteina-mthfr}{}\label{exr-contraste-ia-media-homocisteina-mthfr}
 
-Se ha realizado un estudio para comparar los niveles de hierro en sangre
-antes y después de un programa de ejercicios. Los datos del estudio
-están en el fichero
-\href{datos/niveles-hierro-ejercicio.csv}{niveles-hierro-ejercicio.csv}.
-Realizar el contraste de hipótesis adecuado para ver si el ejercicio
-aumenta el nivel de hierro con un nivel de significación del 1\%.
+El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la
+enzima y tiende a elevar la homocisteína plasmática. Un grupo de
+investigación considera que una homocisteína media de 12 µmol/L es el
+límite a partir del cual merece la pena suplementar con folato. Se ha
+medido la homocisteína en ayunas de 18 adultos TT sin suplementación y
+los resultados están en el fichero
+\href{datos/homocisteina-mthfr.csv}{homocisteina-mthfr.csv}. ¿Se puede
+afirmar con un nivel de significación del 5\% que la homocisteína media
+de los portadores TT supera el umbral a partir del cual se recomienda
+suplementar? ¿Cambia la conclusión si se excluye el valor de 8.3 µmol/L?
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
-Número de poblaciones: 2 poblaciones pareadas (población 1: antes de
-hacer ejercicio, población 2: después de hacer ejercicio).\\
-Variable dependiente: Nivel de hierro (cuantitativa).\\
-Tamaño muestral: \(n=20\).\\
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor de la diferencia:
-\(0.804\). Se acepta la normalidad.\\
-Contraste para la comparación de medias de poblaciones pareadas:
-\(H_0:\mu_d=0\), \(H_1:\mu_d< 0\).\\
-p-valor: \(p=0.0011\).\\
-Como el p-valor es menor que el nivel de significación se rechaza la
-hipótesis nula y se concluye que el programa de ejercicios ha aumentado
-significativamente el nivel de hierro en sangre.
+Número de poblaciones: 1 población.\\
+Variable dependiente: Homocisteína plasmática (cuantitativa).\\
+Tamaño muestral: \(n=18\).\\
+Descriptivos: \(\bar x=14.37\) µmol/L, \(s=2.48\) µmol/L.\\
+Prueba de normalidad de Shapiro-Wilk: \(p=0.439\). Se acepta la
+normalidad (el gráfico Q-Q muestra un valor bajo, 8.3, algo separado del
+resto).\\
+Contraste de la media de una población normal (prueba t):
+\(H_0:\mu=12\), \(H_1:\mu>12\). El contraste unilateral se justifica
+porque la decisión (suplementar) solo depende de superar el umbral, y
+debe fijarse antes de ver los datos.\\
+Estadístico del contraste: \(t=4.06\) con 17 grados de libertad.\\
+p-valor: \(p=0.0004\).\\
+Intervalo de confianza del 95 \% bilateral para \(\mu\):
+\((13.14, 15.60)\) µmol/L; cota inferior unilateral: \(13.36\) µmol/L.\\
+Tamaño del efecto: \(d=(14.37-12)/2.48=0.96\) (grande).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que la homocisteína media de los portadores
+TT supera los 12 µmol/L. Con un 95 \% de confianza la media es al menos
+13.4 µmol/L, lo que respaldaría la suplementación, aunque la decisión
+clínica también depende del estado de folato y vitamina B12, que no se
+ha medido.\\
+Sin el valor 8.3: \(n=17\), \(\bar x=14.73\), \(s=2.02\), \(t=5.57\),
+\(p<0.0001\). La conclusión no cambia: el valor atípico va en contra de
+\(H_1\) y hace el contraste más conservador. Un dato no debe eliminarse
+solo porque moleste.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-proporcion-bolleria-industrial}{}\label{exr-contraste-proporcion-bolleria-industrial}
+
+En una clase de alumnos de primaria se ha comprobado que el \(20\)\% del
+alumnado consume bollería industrial. Para disminuir esta preocupante
+cifra, el colegio ha implantado un programa de educación nutricional.
+Después del programa se tomó una muestra aleatoria de \(50\) alumnos de
+primaria y se observó que 8 seguían consumiendo bollería industrial.
+Contrastar con un nivel de significación del \(5\)\% si el programa es
+efectivo.
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 1 población.\\
+Variable dependiente: Consumo de bollería industrial (cualitativa
+binaria).\\
+Tamaño muestral: \(n=50\).\\
+Proporción muestral: \(\hat p=8/50=0.16\).\\
+Condiciones: \(np_0=10\) y \(n(1-p_0)=40\), ambas mayores o iguales que
+5, por lo que la aproximación normal es válida.\\
+Contraste para la proporción de una población: \(H_0:p=0.2\),
+\(H_1:p<0.2\).\\
+Estadístico del contraste:
+\(z=\dfrac{0.16-0.2}{\sqrt{0.2\cdot 0.8/50}}=-0.71\) (con corrección de
+continuidad, \(\chi^2=0.28\) con 1 grado de libertad).\\
+p-valor: \(p=0.2979\) con corrección de continuidad (\(0.2398\) sin
+ella; test binomial exacto: \(0.3073\)).\\
+Intervalo de confianza del 95 \% unilateral para \(p\):
+\((0, 0.274)\).\\
+Como el p-valor es mayor que el nivel de significación \(\alpha=0.05\),
+no se rechaza la hipótesis nula y se concluye que no hay evidencias
+significativas de que el programa sea efectivo. El intervalo admite
+proporciones de hasta el 27 \%, mayores incluso que la inicial, de modo
+que con 50 alumnos el estudio tiene poca potencia para detectar una
+reducción moderada.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-proporcion-fto-obesidad}{}\label{exr-contraste-ia-proporcion-fto-obesidad}
+
+En población europea, alrededor del 16 \% de los adultos son homocigotos
+AA para el alelo de riesgo del polimorfismo FTO rs9939609. En una
+consulta de obesidad (IMC \(\geq 30\)) se genotipan 220 pacientes no
+emparentados y 49 resultan ser AA. ¿Es la frecuencia del genotipo AA
+entre los pacientes con obesidad distinta de la de la población general?
+¿Permite este resultado afirmar que el genotipo AA causa obesidad?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 1 población.\\
+Variable dependiente: Genotipo FTO AA (cualitativa binaria).\\
+Tamaño muestral: \(n=220\).\\
+Proporción muestral: \(\hat p=49/220=0.223\).\\
+Condiciones: \(np_0=35.2\) y \(n(1-p_0)=184.8\), ambas mayores que 5,
+por lo que la aproximación normal es válida.\\
+Contraste para la proporción de una población: \(H_0:p=0.16\),
+\(H_1:p\neq 0.16\) (un contraste unilateral \(H_1:p>0.16\) es defendible
+si se fijó a priori; en ese caso \(p=0.0056\)).\\
+Estadístico del contraste: \(z=2.54\).\\
+p-valor: \(p=0.011\) (test binomial exacto: \(p=0.016\)).\\
+Intervalo de confianza del 95 \% de Wilson: \((0.173, 0.282)\).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que la frecuencia del genotipo AA en la
+consulta de obesidad (22 \%) es mayor que la de referencia (16 \%), lo
+que es compatible con la asociación conocida entre FTO y adiposidad. El
+diseño no permite hablar de causalidad: se compara con una cifra
+externa, la ascendencia de la muestra puede diferir de la población de
+referencia (estratificación) y la consulta no es una muestra aleatoria
+de personas con obesidad.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-varianza-hba1c}{}\label{exr-contraste-ia-varianza-hba1c}
+
+El fabricante de un analizador de hemoglobina glicada (HbA1c) para la
+consulta de nutrición afirma que su desviación típica de repetibilidad
+no supera 0.15 puntos porcentuales. Para comprobarlo, se mide 15 veces
+la misma muestra de control. Los resultados están en el fichero
+\href{datos/hba1c-analizador.csv}{hba1c-analizador.csv}. ¿Hay
+evidencias, con un nivel de significación del 5\%, de que la imprecisión
+del analizador es mayor que la que anuncia el fabricante? ¿Cambia la
+conclusión si se excluye la medición 10?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 1 población.\\
+Variable dependiente: HbA1c de la muestra de control (cuantitativa).\\
+Tamaño muestral: \(n=15\).\\
+Descriptivos: \(\bar x=6.47\) \%, \(s=0.201\) (\(s^2=0.0404\)).\\
+Prueba de normalidad de Shapiro-Wilk: \(p=0.070\) (en el límite, con la
+medición 10, 6.97, claramente alejada). El contraste \(\chi^2\) no es
+robusto: la distribución de \(s^2\) depende de la curtosis y unas colas
+pesadas inflan la varianza muestral sin que el teorema central del
+límite lo corrija.\\
+Contraste para la varianza de una población normal:
+\(H_0:\sigma\leq 0.15\), \(H_1:\sigma>0.15\).\\
+Estadístico del contraste: \(\chi^2=14\cdot 0.0404/0.0225=25.13\) con 14
+grados de libertad.\\
+p-valor: \(p=0.033\).\\
+Intervalo de confianza del 95 \% para \(\sigma\): \((0.147, 0.317)\).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que hay evidencia (moderada) de que la
+imprecisión del analizador supera la anunciada por el fabricante.\\
+Sin la medición 10: \(s=0.151\), \(\chi^2=13.3\) con 13 grados de
+libertad, \(p=0.43\), y la conclusión se invierte. Solo estaría
+justificado eliminarla si hubiese una causa técnica documentada. Lo
+correcto es informar de ambos análisis y repetir la prueba con más
+mediciones.
+
+\end{tcolorbox}
+
+\section{Dos poblaciones}\label{dos-poblaciones}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-comparacion-medias-imc-fto}{}\label{exr-contraste-ia-comparacion-medias-imc-fto}
+
+En un estudio transversal con adultos sanos de 30 a 50 años se compara
+el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609.
+Ambos grupos se reclutaron de forma independiente en la misma cohorte.
+Los datos están en el fichero \href{datos/imc-fto.csv}{imc-fto.csv}.
+¿Hay diferencias significativas en el IMC medio de ambos genotipos con
+un nivel de significación del 5\%? ¿Qué variables podrían confundir esta
+comparación?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones independientes (población 1:
+genotipo AA, población 2: genotipo TT).\\
+Variable dependiente: IMC (cuantitativa).\\
+Tamaños muestrales: \(n_1=22\), \(n_2=25\).\\
+Descriptivos: AA: \(\bar x_1=31.23\), \(s_1=4.68\); TT:
+\(\bar x_2=28.25\), \(s_2=3.65\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.71\),
+p-valor segunda muestra: \(0.71\). Se acepta la normalidad en ambos
+grupos.\\
+Contraste de comparación de varianzas: \(H_0:\sigma_1^2=\sigma_2^2\),
+\(H_1:\sigma_1^2\neq \sigma_2^2\). \(F=1.65\), p-valor: \(p=0.24\)
+(Levene: \(p=0.30\)). Se acepta la igualdad de varianzas.\\
+Contraste para la comparación de medias de poblaciones independientes
+con varianzas iguales: \(H_0:\mu_1=\mu_2\), \(H_1:\mu_1\neq\mu_2\).\\
+Estadístico del contraste: \(t=2.44\) con 45 grados de libertad.
+p-valor: \(p=0.018\). Intervalo de confianza del 95 \% para
+\(\mu_1-\mu_2\): \((0.52, 5.43)\) kg/m².\\
+Contraste de Welch: \(t=2.41\) con 39.5 grados de libertad, \(p=0.021\),
+intervalo \((0.48, 5.48)\). Ambas versiones coinciden.\\
+Tamaño del efecto: \(d=0.71\).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que los portadores AA tienen de media unos
+3 kg/m² más de IMC que los TT. El intervalo es ancho, así que la
+magnitud está poco precisada; en población general el efecto de FTO es
+menor (en torno a 0.4 kg/m² por alelo), lo que sugiere que una muestra
+pequeña puede sobrestimarlo. Posibles variables de confusión: sexo,
+edad, actividad física, ingesta energética, nivel socioeconómico y
+ascendencia (estratificación poblacional).
 
 \end{tcolorbox}
 
@@ -452,21 +689,31 @@ los dos grupos con un nivel de significación del 5\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 2 poblaciones independientes (población 1: dieta
 baja en carbohidratos, población 2: dieta estándar).\\
 Variable dependiente: Nivel de glucosa (cuantitativa).\\
 Tamaños muestrales: \(n_1=30\), \(n_2=30\).\\
+Descriptivos: baja en carbohidratos: \(\bar x_1=83.13\), \(s_1=8.99\);
+estándar: \(\bar x_2=93.55\), \(s_2=11.17\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.68\),
+p-valor segunda muestra: \(0.91\). Se acepta la normalidad en ambos
+grupos.\\
 Contraste de comparación de varianzas: \(H_0:\sigma_1^2=\sigma_2^2\),
-\(H_1:\sigma_1^2\neq \sigma_2^2\). p-valor: \(p=0.25\). Se acepta la
-hipótesis nula de igualdad de varianzas.\\
+\(H_1:\sigma_1^2\neq \sigma_2^2\). \(F=0.65\) con 29 y 29 grados de
+libertad, p-valor: \(p=0.248\). Se acepta la igualdad de varianzas.\\
 Contraste para la comparación de medias de poblaciones independientes
 con varianzas iguales: \(H_0:\mu_1=\mu_2\), \(H_1:\mu_1<\mu_2\).\\
-p-valor: \(p=0.00009\). Como el p-valor es menor que el nivel de
-significación se rechaza la hipótesis nula y se concluye que el nivel de
-glucosa en sangre es significativamente menor en el grupo que sigue una
-dieta baja en carbohidratos.
+Estadístico del contraste: \(t=-3.98\) con 58 grados de libertad.\\
+p-valor: \(p=0.00009\).\\
+Intervalo de confianza del 95 \% para \(\mu_1-\mu_2\):
+\((-15.67, -5.18)\).\\
+Tamaño del efecto: \(d=-1.03\) (grande).\\
+Como el p-valor es menor que el nivel de significación \(\alpha=0.05\),
+se rechaza la hipótesis nula y se concluye que el nivel de glucosa en
+sangre es significativamente menor en el grupo que sigue una dieta baja
+en carbohidratos, en unos 10 puntos de media.
 
 \end{tcolorbox}
 
@@ -481,25 +728,248 @@ los dos grupos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 2 poblaciones independientes (población 1: dieta
 vegetariana, población 2: dieta omnívora).\\
 Variable dependiente: Expresión génica (cuantitativa).\\
 Tamaños muestrales: \(n_1=20\), \(n_2=25\).\\
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor primera muestra:
-\(0.4164\), p-valor segunda muestra: \(0.2767\). Se acepta la normalidad
-en ambos grupos.\\
+Descriptivos: vegetariana: \(\bar x_1=1.147\), \(s_1=0.292\); omnívora:
+\(\bar x_2=1.627\), \(s_2=0.409\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.21\),
+p-valor segunda muestra: \(0.37\). Se acepta la normalidad en ambos
+grupos.\\
 Contraste de comparación de varianzas: \(H_0:\sigma_1^2=\sigma_2^2\),
-\(H_1:\sigma_1^2\neq \sigma_2^2\). p-valor: \(p=0.1373\). Se acepta la
-hipótesis nula de igualdad de varianzas.\\
+\(H_1:\sigma_1^2\neq \sigma_2^2\). \(F=0.51\) con 19 y 24 grados de
+libertad, p-valor: \(p=0.1373\). Se acepta la igualdad de varianzas.\\
 Contraste para la comparación de medias de poblaciones independientes
-con varianzas iguales: \(H_0:\mu_1=\mu_2\), \(H_1:\mu_1<\mu_2\).\\
-p-valor: \(p=0.00006\).\\
+con varianzas iguales: \(H_0:\mu_1=\mu_2\), \(H_1:\mu_1\neq\mu_2\).\\
+Estadístico del contraste: \(t=-4.42\) con 43 grados de libertad.\\
+p-valor: \(p=0.00007\).\\
+Intervalo de confianza del 95 \% para \(\mu_1-\mu_2\):
+\((-0.70, -0.26)\).\\
+Tamaño del efecto: \(d=-1.33\) (grande).\\
+Como el p-valor es menor que el nivel de significación \(\alpha=0.05\),
+se rechaza la hipótesis nula y se concluye que existen diferencias
+estadísticamente significativas en los niveles de expresión génica en
+función de la dieta: la expresión es menor en el grupo vegetariano.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-comparacion-medias-omega3}{}\label{exr-contraste-ia-comparacion-medias-omega3}
+
+En un ensayo con 42 adultos, 14 reciben 1 g/día de EPA+DHA durante 12
+semanas y 28 un placebo de aceite de oliva. Al final se mide el índice
+omega-3 eritrocitario (\% de EPA+DHA sobre los ácidos grasos totales).
+Los datos están en el fichero
+\href{datos/indice-omega3.csv}{indice-omega3.csv}. ¿Aumenta el
+suplemento el índice omega-3 con un nivel de significación del 5\%? ¿Qué
+proporción de los participantes de cada grupo alcanza el 8 \%, valor que
+suele considerarse cardioprotector?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones independientes (población 1:
+suplemento, población 2: placebo).\\
+Variable dependiente: Índice omega-3 (cuantitativa).\\
+Tamaños muestrales: \(n_1=14\), \(n_2=28\).\\
+Descriptivos: suplemento: \(\bar x_1=6.81\) \%, \(s_1=1.71\); placebo:
+\(\bar x_2=5.29\) \%, \(s_2=0.61\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.41\),
+p-valor segunda muestra: \(0.83\). Se acepta la normalidad en ambos
+grupos.\\
+Contraste de comparación de varianzas: \(H_0:\sigma_1^2=\sigma_2^2\),
+\(H_1:\sigma_1^2\neq \sigma_2^2\). \(F=7.90\), p-valor: \(p<0.0001\). Se
+rechaza la igualdad de varianzas.\\
+Con varianzas y tamaños distintos la t clásica no es válida: si el grupo
+pequeño tiene la varianza mayor, como aquí, la varianza combinada la
+infraestima y el contraste se vuelve anticonservador.\\
+Contraste de Welch para la comparación de medias de poblaciones
+independientes con varianzas distintas: \(H_0:\mu_1=\mu_2\),
+\(H_1:\mu_1>\mu_2\). El contraste unilateral es razonable porque la
+hipótesis es direccional, pero debe fijarse en el protocolo antes del
+análisis.\\
+Estadístico del contraste: \(t=3.23\) con 14.7 grados de libertad.\\
+p-valor: \(p=0.003\). Intervalo de confianza del 95 \% bilateral para
+\(\mu_1-\mu_2\): \((0.51, 2.53)\).\\
+Con la t de varianzas iguales (incorrecta) se obtiene \(t=4.24\) con 40
+grados de libertad y \(p<0.0001\), un p-valor unas 40 veces menor y un
+intervalo demasiado estrecho \((0.80, 2.25)\).\\
 Como el p-valor es menor que el nivel de significación, se rechaza la
-hipótesis nula y se concluye que existen diferencias estadísticamente
-significativas en los niveles de expresión génica en función de la
-dieta.
+hipótesis nula y se concluye que el suplemento aumenta el índice omega-3
+en 1.5 puntos de media. La mayor dispersión en el grupo suplementado
+indica una respuesta heterogénea (adherencia, absorción, índice basal,
+peso corporal o variantes genéticas, por ejemplo en FADS1/FADS2). Solo 4
+de 14 suplementados (29 \%) alcanzan el 8 \% que suele considerarse
+cardioprotector.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-comparacion-varianzas-tcf7l2}{}\label{exr-contraste-ia-comparacion-varianzas-tcf7l2}
+
+La nutrición personalizada parte de que la respuesta glucémica a una
+misma comida varía mucho entre personas. Se quiere saber si esa
+variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2
+rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2
+horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el
+fichero \href{datos/auc-glucosa-tcf7l2.csv}{auc-glucosa-tcf7l2.csv}. ¿Es
+más variable la respuesta glucémica de los TT que la de los CC con un
+nivel de significación del 5\%? ¿Difieren también las respuestas medias
+de ambos genotipos?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones independientes (población 1:
+genotipo TT, población 2: genotipo CC).\\
+Variable dependiente: AUC de glucosa (cuantitativa).\\
+Tamaños muestrales: \(n_1=16\), \(n_2=20\).\\
+Descriptivos: TT: \(\bar x_1=204.1\), \(s_1=56.5\); CC:
+\(\bar x_2=192.9\), \(s_2=28.0\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.41\),
+p-valor segunda muestra: \(0.22\). Se acepta la normalidad en ambos
+grupos. Como el contraste \(\chi^2\) de una varianza, el contraste F no
+es robusto a la falta de normalidad; la alternativa robusta es el test
+de Levene (o Brown-Forsythe).\\
+Contraste de comparación de varianzas: \(H_0:\sigma_1^2=\sigma_2^2\),
+\(H_1:\sigma_1^2>\sigma_2^2\).\\
+Estadístico del contraste: \(F=56.5^2/28.0^2=4.09\) con 15 y 19 grados
+de libertad.\\
+p-valor: \(p=0.002\) (bilateral: \(0.005\)). Intervalo de confianza del
+95 \% para \(\sigma_1^2/\sigma_2^2\): \((1.56, 11.34)\). Test de Levene:
+\(p=0.002\).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que la respuesta glucémica de los TT es
+unas 4 veces más variable (la desviación típica, el doble).\\
+Comparación de medias (Welch): \(t=0.73\) con 20.8 grados de libertad,
+\(p=0.47\). Las medias no difieren, pero la dispersión sí. Una
+recomendación basada en la media del genotipo sería poco informativa
+para los TT, en quienes tendría más sentido medir la respuesta
+individual (por ejemplo, con monitorización continua de glucosa). Que no
+difieran las medias no significa que los grupos sean iguales.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-comparacion-medias-pareadas-hierro}{}\label{exr-contraste-comparacion-medias-pareadas-hierro}
+
+Se ha realizado un estudio para comparar los niveles de hierro en sangre
+antes y después de un programa de ejercicios. Los datos del estudio
+están en el fichero
+\href{datos/niveles-hierro-ejercicio.csv}{niveles-hierro-ejercicio.csv}.
+Realizar el contraste de hipótesis adecuado para ver si el ejercicio
+aumenta el nivel de hierro con un nivel de significación del 1\%.
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones pareadas (población 1: antes del
+ejercicio, población 2: después del ejercicio).\\
+Variable dependiente: Nivel de hierro (cuantitativa).\\
+Tamaño muestral: \(n=20\).\\
+Descriptivos: antes \(\bar x_1=12.08\), después \(\bar x_2=12.75\).\\
+Variable diferencia: \(D=\) antes \(-\) después. \(\bar d=-0.67\),
+\(s_d=0.84\).\\
+Prueba de normalidad de Shapiro-Wilk de la diferencia: \(p=0.861\). Se
+acepta la normalidad.\\
+Contraste para la comparación de medias de poblaciones pareadas:
+\(H_0:\mu_d=0\), \(H_1:\mu_d<0\).\\
+Estadístico del contraste: \(t=-3.53\) con 19 grados de libertad.\\
+p-valor: \(p=0.0011\).\\
+Intervalo de confianza del 95 \% para el aumento medio (después \(-\)
+antes): \((0.27, 1.06)\).\\
+Tamaño del efecto: \(d_z=0.79\).\\
+Como el p-valor es menor que el nivel de significación \(\alpha=0.01\),
+se rechaza la hipótesis nula y se concluye que el programa de ejercicios
+aumenta significativamente el nivel de hierro en sangre, en unas 0.67
+unidades de media. Al no haber grupo control, el aumento no puede
+atribuirse con seguridad solo al ejercicio.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-comparacion-medias-pareadas-ldl}{}\label{exr-contraste-ia-comparacion-medias-pareadas-ldl}
+
+Catorce voluntarios con hipercolesterolemia leve toman a diario durante
+8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el
+colesterol LDL (mg/dL) al inicio y al final. Los datos están en el
+fichero \href{datos/ldl-fitoesteroles.csv}{ldl-fitoesteroles.csv}. ¿Se
+reduce significativamente el colesterol LDL tras las 8 semanas con un
+nivel de significación del 5\%? ¿A cuánto asciende la reducción media en
+mg/dL y en porcentaje? ¿Puede atribuirse la reducción al yogur?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones pareadas (población 1: después de 8
+semanas, población 2: al inicio).\\
+Variable dependiente: Colesterol LDL (cuantitativa).\\
+Tamaño muestral: \(n=14\).\\
+Variable diferencia: \(D=\) LDL a 8 semanas \(-\) LDL inicial.
+\(\bar d=-9.93\) mg/dL, \(s_d=13.46\).\\
+Prueba de normalidad de Shapiro-Wilk de la diferencia: \(p=0.49\). Se
+acepta la normalidad. La normalidad se comprueba en las diferencias; que
+los valores finales den \(p=0.034\) es irrelevante para la t pareada.\\
+Contraste para la comparación de medias de poblaciones pareadas:
+\(H_0:\mu_d=0\), \(H_1:\mu_d< 0\).\\
+Estadístico del contraste: \(t=-2.76\) con 13 grados de libertad.\\
+p-valor: \(p=0.008\) (bilateral: \(0.016\)). Intervalo de confianza del
+95 \% para \(\mu_d\): \((-17.7, -2.2)\) mg/dL. Tamaño del efecto:
+\(d_z=0.74\).\\
+Con la t para muestras independientes (incorrecta) se obtiene
+\(t=-1.13\) con 26 grados de libertad y \(p=0.27\). La correlación entre
+LDL inicial y final es \(r=0.85\): la mayor parte de la variabilidad es
+entre personas y el diseño pareado la elimina.\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que el LDL baja una media de unos 10 mg/dL
+(6.3 \%), coherente con la reducción que se atribuye habitualmente a 2
+g/día de fitoesteroles. Sin grupo control no puede atribuirse al yogur:
+regresión a la media (se seleccionó a personas con LDL alto), cambios de
+dieta por sentirse observados, estacionalidad o variabilidad analítica.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-verificacion-folato}{}\label{exr-contraste-ia-verificacion-folato}
+
+Diez mujeres en edad fértil toman 400 µg/día de ácido fólico durante 8
+semanas. Se mide el folato sérico (ng/mL) antes y después de la
+suplementación. Los datos están en el fichero
+\href{datos/folato-suplementacion.csv}{folato-suplementacion.csv}. Un
+investigador ha comparado las medias de folato antes (\(13.28\) ng/mL) y
+después (\(17.21\) ng/mL) con un contraste t de Welch, obteniendo un
+p-valor \(p=0.102\), y ha concluido que la suplementación no aumenta el
+folato sérico. ¿Es correcto el análisis? ¿Aumenta realmente la
+suplementación el folato sérico con un nivel de significación del 5\%?
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+El análisis no es correcto. Las medias y el p-valor del contraste de
+Welch están bien calculados, pero el contraste no es el adecuado: son
+las mismas 10 mujeres medidas dos veces, así que las muestras son
+pareadas y no independientes. Además, un p-valor no significativo no
+demuestra la ausencia de efecto.\\
+Número de poblaciones: 2 poblaciones pareadas (población 1: después,
+población 2: antes).\\
+Variable dependiente: Folato sérico (cuantitativa).\\
+Tamaño muestral: \(n=10\).\\
+Variable diferencia: \(D=\) después \(-\) antes. \(\bar d=3.93\) ng/mL,
+\(s_d=2.67\).\\
+Prueba de normalidad de Shapiro-Wilk de la diferencia: \(p=0.93\). Se
+acepta la normalidad.\\
+Contraste para la comparación de medias de poblaciones pareadas:
+\(H_0:\mu_d=0\), \(H_1:\mu_d> 0\).\\
+Estadístico del contraste: \(t=4.66\) con 9 grados de libertad.\\
+p-valor: \(p=0.0006\) (bilateral: \(0.001\)). Intervalo de confianza del
+95 \% para \(\mu_d\): \((2.02, 5.84)\) ng/mL.\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula y se concluye que la suplementación aumenta el folato
+sérico unos 4 ng/mL. La correlación antes-después es \(r=0.91\), por eso
+el diseño pareado gana tanta potencia.
 
 \end{tcolorbox}
 
@@ -517,19 +987,29 @@ cáncer con un nivel de significación del 5\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 2 poblaciones independientes (población 1:
 vitamina C, población 2: placebo).\\
 Variable dependiente: Mejoría en el tratamiento del cáncer (cualitativa
 binaria).\\
 Tamaños muestrales: \(n_1=75\), \(n_2=75\).\\
+Proporciones muestrales: \(\hat p_1=47/75=0.627\),
+\(\hat p_2=43/75=0.573\).\\
+Frecuencias esperadas: 45, 30, 45 y 30, todas mayores que 5.\\
 Contraste para la comparación de proporciones: \(H_0:p_1=p_2\),
 \(H_1:p_1\neq p_2\).\\
-p-valor: \(p=0.6824\).\\
-Como el p-valor es mayor que el nivel de significación, no se rechaza la
-hipótesis nula y se concluye que no hay evidencias significativas de que
-la vitamina C tenga influencia en el tratamiento del cáncer.
+Estadístico del contraste: \(z=0.67\) (\(\chi^2=0.44\) con 1 grado de
+libertad; con corrección de Yates \(\chi^2=0.25\)).\\
+p-valor: \(p=0.505\) (con corrección de Yates: \(0.617\)).\\
+Intervalo de confianza del 95 \% para \(p_1-p_2\):
+\((-0.103, 0.210)\).\\
+Como el p-valor es mayor que el nivel de significación \(\alpha=0.05\),
+no se rechaza la hipótesis nula y se concluye que no hay evidencias
+significativas de que la vitamina C tenga influencia en el tratamiento
+del cáncer. El intervalo incluye tanto pequeños perjuicios como
+beneficios de hasta 21 puntos porcentuales, así que el estudio no
+permite descartar un efecto relevante.
 
 \end{tcolorbox}
 
@@ -543,20 +1023,166 @@ y chicas que consumen alcohol los fines de semana?
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 2 poblaciones independientes (población 1:
 chicos, población 2: chicas).\\
 Variable dependiente: Consumo de alcohol (cualitativa binaria).\\
 Tamaños muestrales: \(n_1=100\), \(n_2=125\).\\
+Proporciones muestrales: \(\hat p_1=63/100=0.630\),
+\(\hat p_2=59/125=0.472\).\\
 Contraste para la comparación de proporciones: \(H_0:p_1=p_2\),
 \(H_1:p_1\neq p_2\).\\
-p-valor: \(p=0.0163\).\\
-Como el p-valor es menor que el nivel de significación, se rechaza la
-hipótesis nula y se concluye que hay diferencias significativas entre el
-consumo de alcohol de chicos y chicas.
+Estadístico del contraste: \(z=2.36\) (\(\chi^2=5.59\) con 1 grado de
+libertad; con corrección de Yates \(\chi^2=4.97\)).\\
+p-valor: \(p=0.0181\) (con corrección de Yates: \(0.0258\)).\\
+Intervalo de confianza del 95 \% para \(p_1-p_2\): \((0.029, 0.287)\).\\
+Como el p-valor es menor que el nivel de significación \(\alpha=0.05\),
+se rechaza la hipótesis nula y se concluye que hay diferencias
+significativas entre el consumo de alcohol de chicos y chicas: la
+proporción de chicos que consumen es unos 16 puntos porcentuales mayor.
 
 \end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-comparacion-proporciones-fto-respuesta}{}\label{exr-contraste-ia-comparacion-proporciones-fto-respuesta}
+
+En un programa de 6 meses de dieta hipocalórica se considera
+«respondedor» a quien pierde al menos el 5 \% de su peso inicial. De los
+96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38
+fueron respondedores, mientras que de los 54 no portadores (TT), 31
+fueron respondedores. ¿Influye el genotipo FTO en la probabilidad de
+responder a la dieta con un nivel de significación del 5\%? Calcular e
+interpretar el riesgo relativo de responder de los portadores frente a
+los no portadores.
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+Número de poblaciones: 2 poblaciones independientes (población 1:
+portadores del alelo A, población 2: no portadores TT).\\
+Variable dependiente: Respuesta a la dieta (cualitativa binaria).\\
+Tamaños muestrales: \(n_1=96\), \(n_2=54\).\\
+Proporciones muestrales: \(\hat p_1=0.396\), \(\hat p_2=0.574\).\\
+Frecuencias esperadas: 44.2, 51.8, 24.8 y 29.2, todas mayores que 5.\\
+Contraste para la comparación de proporciones: \(H_0:p_1=p_2\),
+\(H_1:p_1\neq p_2\).\\
+Estadístico del contraste: \(z=-2.10\) (\(z^2=4.42=\chi^2\) sin
+corrección: son el mismo contraste).\\
+p-valor: \(p=0.036\). Con corrección de Yates: \(\chi^2=3.73\),
+\(p=0.053\). Test exacto de Fisher: \(p=0.041\).\\
+Intervalo de confianza del 95 \% para \(p_1-p_2\):
+\((-0.342, -0.014)\).\\
+Riesgo relativo: \(RR=0.69\); odds ratio: \(OR=0.49\).\\
+Como el p-valor es menor que el nivel de significación, se rechaza la
+hipótesis nula: los portadores del alelo A tienen una probabilidad de
+responder un 31 \% menor. Sin embargo, la evidencia es débil: el
+intervalo llega casi a 0 y con la corrección de Yates (conservadora) el
+p-valor es 0.053. No deben extraerse dos conclusiones opuestas de 0.036
+y 0.053; hay que informar del intervalo y pedir replicación. Un
+metaanálisis de datos individuales (Livingstone et al., BMJ 2016) no
+encontró diferencias en la pérdida de peso por genotipo FTO.
+
+\end{tcolorbox}
+
+\begin{exercise}[]\protect\hypertarget{exr-contraste-ia-caso-integrador-dieta-fto}{}\label{exr-contraste-ia-caso-integrador-dieta-fto}
+
+En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan
+al azar a una dieta mediterránea hipocalórica o a una dieta baja en
+grasa hipocalórica (40 por grupo). El fichero
+\href{datos/dieta-fto-ensayo.csv}{dieta-fto-ensayo.csv} contiene el
+identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses
+(kg) y glucosa basal y a 6 meses (mg/dL). La pérdida de peso en
+porcentaje se calcula como
+\(100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}\) y
+se considera respondedor a quien pierde al menos el 5 \% de su peso.
+Utilizar un nivel de significación del 5\%.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  ¿Difiere el porcentaje medio de pérdida de peso entre las dos dietas?
+\item
+  ¿Disminuye la glucosa en ayunas con la dieta mediterránea? ¿Y con la
+  baja en grasa? ¿Es una dieta mejor que la otra para reducir la
+  glucosa?
+\item
+  ¿Difiere la proporción de respondedores entre las dos dietas?
+\item
+  ¿Pierden menos peso los homocigotos AA para el polimorfismo FTO que el
+  resto de participantes?
+\end{enumerate}
+
+\end{exercise}
+
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  Número de poblaciones: 2 poblaciones independientes (población 1:
+  dieta mediterránea, población 2: dieta baja en grasa).\\
+  Variable dependiente: Pérdida de peso en \% (cuantitativa).\\
+  Tamaños muestrales: \(n_1=40\), \(n_2=40\).\\
+  Descriptivos: mediterránea: \(\bar x_1=5.43\) \%, \(s_1=3.14\); baja
+  en grasa: \(\bar x_2=3.79\) \%, \(s_2=3.50\).\\
+  Prueba de normalidad de Shapiro-Wilk: p-valores \(0.52\) y \(0.67\).
+  Se acepta la normalidad. Test de Levene: \(p=0.47\). Se acepta la
+  igualdad de varianzas.\\
+  Contraste para la comparación de medias de poblaciones independientes
+  con varianzas iguales: \(H_0:\mu_1=\mu_2\), \(H_1:\mu_1\neq\mu_2\).\\
+  Estadístico: \(t=2.21\) con 78 grados de libertad. p-valor:
+  \(p=0.030\). Intervalo de confianza del 95 \% para \(\mu_1-\mu_2\):
+  \((0.16, 3.12)\). \(d=0.49\).\\
+  Se rechaza la hipótesis nula: la dieta mediterránea produce una
+  pérdida de peso algo mayor, de magnitud moderada y estimada con poca
+  precisión. Ojo: R ordena los grupos alfabéticamente (BajaGrasa
+  primero), así que puede devolver la diferencia con el signo cambiado.
+\item
+  Contrastes de comparación de medias de poblaciones pareadas dentro de
+  cada dieta, con \(D=\) glucosa a 6 meses \(-\) glucosa basal y
+  \(H_0:\mu_d=0\), \(H_1:\mu_d\neq 0\).\\
+  Mediterránea: \(\bar d=-2.93\) mg/dL, \(s_d=7.97\), \(t=-2.32\) con 39
+  grados de libertad, \(p=0.026\), intervalo \((-5.47, -0.38)\).\\
+  Baja en grasa: \(\bar d=-0.23\) mg/dL, \(s_d=7.97\), \(t=-0.18\) con
+  39 grados de libertad, \(p=0.86\), intervalo \((-2.77, 2.32)\).\\
+  Que un cambio sea significativo y el otro no, no demuestra que las
+  dietas difieran. Para eso hay que comparar los cambios entre grupos
+  con un contraste de muestras independientes: diferencia \(=-2.70\)
+  mg/dL, \(t=-1.52\) con 78 grados de libertad, \(p=0.13\), intervalo
+  \((-6.25, 0.85)\). No hay evidencia suficiente de que la dieta
+  mediterránea reduzca la glucosa más que la baja en grasa, y una bajada
+  de 3 mg/dL tiene poca relevancia clínica.
+\item
+  Contraste para la comparación de proporciones: \(H_0:p_1=p_2\),
+  \(H_1:p_1\neq p_2\).\\
+  Proporciones muestrales: mediterránea \(24/40=0.60\), baja en grasa
+  \(14/40=0.35\).\\
+  Estadístico: \(z=2.24\). p-valor: \(p=0.025\) (Fisher: \(p=0.043\)).
+  Intervalo de confianza del 95 \% para \(p_1-p_2\): \((0.04, 0.46)\).\\
+  Se rechaza la hipótesis nula, de forma coherente con el apartado a,
+  aunque al dicotomizar la pérdida de peso se pierde información.
+\item
+  Número de poblaciones: 2 poblaciones independientes (población 1: AA,
+  población 2: AT o TT). Contraste de Welch, \(H_0:\mu_1=\mu_2\),
+  \(H_1:\mu_1<\mu_2\): AA: \(n=18\), \(\bar x=4.13\) \%, \(s=2.53\); no
+  AA: \(n=62\), \(\bar x=4.75\) \%, \(s=3.62\). \(t=-0.83\) con 39.4
+  grados de libertad, \(p=0.21\), intervalo del 95 \% para
+  \(\mu_1-\mu_2\): \((-2.15, 0.90)\). No hay evidencia de diferencia,
+  pero el intervalo es compatible con un efecto clínicamente relevante.
+  Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en
+  mediterránea y 7 en baja en grasa), lo que puede confundir la
+  comparación. Con cuatro o más contrastes sobre los mismos datos, la
+  probabilidad de algún falso positivo crece (con 4 contrastes
+  independientes a \(\alpha=0.05\), cerca del 19 \%). Lo adecuado sería
+  fijar la hipótesis de antemano, ajustar los p-valores (Bonferroni,
+  Holm) o modelizar la interacción dieta × genotipo.
+\end{enumerate}
+
+\end{tcolorbox}
+
+\section{Más de dos poblaciones}\label{muxe1s-de-dos-poblaciones}
 
 \begin{exercise}[]\protect\hypertarget{exr-contraste-anova-suplementacion}{}\label{exr-contraste-anova-suplementacion}
 
@@ -574,29 +1200,44 @@ génicas de los tres grupos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 3 poblaciones independientes (población 1:
-Carbohidratos, población 2: Proteínas, población 3: Grasas).\\
+carbohidratos, población 2: proteínas, población 3: grasas).\\
 Variable dependiente: Expresión génica (cuantitativa).\\
-Tamaños muestrales: \(n_1=75\), \(n_2=75\) y \(n_3=75\).\\
-Contraste de normalidad de Kolmogorov-Smirnov: p-valor primera muestra:
-\(0.7571\), p-valor segunda muestra: \(0.6459\), p-valor tercera
-muestra: \(0.9643\). Se acepta la normalidad en los tres grupos.\\
-Contraste de homocedasticidad de Levene: p-valor: \(0.2126\). Se acepta
-la hipótesis de igualdad de varianzas.\\
-Contraste de ANOVA: \(H_0:\mu_1=\mu_2=\mu_3\), \(H_1:\) Al menos dos
+Tamaños muestrales: \(n_1=25\), \(n_2=25\) y \(n_3=25\).\\
+Descriptivos: carbohidratos: \(\bar x_1=1.167\), \(s_1=0.191\);
+proteínas: \(\bar x_2=1.414\), \(s_2=0.278\); grasas:
+\(\bar x_3=1.427\), \(s_3=0.247\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: \(0.64\),
+p-valor segunda muestra: \(0.96\), p-valor tercera muestra: \(0.32\). Se
+acepta la normalidad en los tres grupos.\\
+Contraste de homocedasticidad de Levene: \(F=1.58\) con 2 y 72 grados de
+libertad, p-valor: \(p=0.2126\). Se acepta la igualdad de varianzas.\\
+Contraste de ANOVA: \(H_0:\mu_1=\mu_2=\mu_3\), \(H_1:\) al menos dos
 medias son diferentes.\\
-p-valor: \(p=0.000283\).\\
+Estadístico del contraste: \(F=9.17\) con 2 y 72 grados de libertad.\\
+p-valor: \(p=0.00028\).\\
 Como el p-valor es menor que el nivel de significación, se rechaza la
 hipótesis nula y se concluye que hay diferencias significativas entre
 las medias de la expresión génica de los grupos de suplementación.\\
-Contraste post hoc de Tukey:\\
-- Carbohidratos vs Proteínas: \(p=0.0016\). Hay diferencias
-significativas.\\
-- Carbohidratos vs Grasas: \(p=0.0009\). Hay diferencias
-significativas.\\
-- Proteínas vs Grasas: \(p=0.9809\). No hay diferencias significativas.
+Contraste post hoc de Tukey:
+
+\begin{itemize}
+\tightlist
+\item
+  Proteínas \(-\) Carbohidratos: diferencia \(=0.247\), IC 95 \%
+  \((0.083, 0.410)\), \(p=0.0016\). Hay diferencias significativas.\\
+\item
+  Grasas \(-\) Carbohidratos: diferencia \(=0.259\), IC 95 \%
+  \((0.096, 0.423)\), \(p=0.0009\). Hay diferencias significativas.\\
+\item
+  Proteínas \(-\) Grasas: diferencia \(=-0.013\), IC 95 \%
+  \((-0.176, 0.151)\), \(p=0.9809\). No hay diferencias significativas.
+\end{itemize}
+
+La suplementación con carbohidratos produce una expresión menor que la
+de proteínas o grasas, que no difieren entre sí.
 
 \end{tcolorbox}
 
@@ -612,28 +1253,42 @@ depende de la dieta, del fármaco y de la interacción entre ambos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Número de poblaciones: 4 poblaciones independientes (población 1: Dieta
-No + Fármaco No, población 2: Dieta No + Fármaco Si, población 3: Dieta
-Si + Fármaco No, población 4: Dieta Si + Fármaco Si).\\
+No + Fármaco No, población 2: Dieta No + Fármaco Sí, población 3: Dieta
+Sí + Fármaco No, población 4: Dieta Sí + Fármaco Sí).\\
 Variable dependiente: Peso perdido (cuantitativa).\\
 Tamaños muestrales: \(n_1=5\), \(n_2=6\), \(n_3=5\) y \(n_4=6\).\\
-Contraste de normalidad de Shapiro-Wilk: p-valor primera muestra:
-\(0.4677\), p-valor segunda muestra: \(0.9672\), p-valor tercera
-muestra: \(0.741\), p-valor cuarta muestra: \(0.719\). Se acepta la
-normalidad en los cuatro grupos.\\
-Contraste de homocedasticidad de Levene: p-valor: \(0.845\). Se acepta
-la hipótesis de igualdad de varianzas.\\
-Contraste de ANOVA de dos factores con interacción: \(H_0:\) No hay
-interacción entre la dieta y el fármaco, \(H_1:\) Hay interacción entre
-la dieta y el fármaco.\\
-- p-valor dieta: \(p=0.0000\).\\
-- p-valor fármaco: \(p=0.0000\).\\
-- p-valor interacción: \(p=0.0012\).\\
+Descriptivos (kg perdidos): \(\bar x_1=0.00\), \(s_1=1.06\);
+\(\bar x_2=5.17\), \(s_2=1.44\); \(\bar x_3=3.00\), \(s_3=0.79\);
+\(\bar x_4=12.00\), \(s_4=1.18\).\\
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra:
+\(0.468\), p-valor segunda muestra: \(0.741\), p-valor tercera muestra:
+\(0.967\), p-valor cuarta muestra: \(0.719\). Se acepta la normalidad en
+los cuatro grupos.\\
+Contraste de homocedasticidad de Levene: \(F=0.27\) con 3 y 18 grados de
+libertad, p-valor: \(p=0.845\). Se acepta la igualdad de varianzas.\\
+Contraste de ANOVA de dos factores con interacción:
+
+\begin{itemize}
+\tightlist
+\item
+  Dieta: \(H_0:\) la dieta no influye en el peso perdido. \(F=105.4\)
+  con 1 y 18 grados de libertad, \(p<0.0001\).\\
+\item
+  Fármaco: \(H_0:\) el fármaco no influye en el peso perdido.
+  \(F=202.4\) con 1 y 18 grados de libertad, \(p<0.0001\).\\
+\item
+  Interacción: \(H_0:\) no hay interacción entre la dieta y el fármaco.
+  \(F=14.8\) con 1 y 18 grados de libertad, \(p=0.0012\).
+\end{itemize}
+
 Como el p-valor es menor que el nivel de significación en los tres
-casos, se rechaza la hipótesis nula y se concluye que la pérdida de peso
-depende de la dieta, del fármaco y de la interacción entre ambos.
+casos, se rechazan las hipótesis nulas y se concluye que la pérdida de
+peso depende de la dieta, del fármaco y de la interacción entre ambos.
+La interacción es sinérgica: la dieta sola hace perder 3 kg y el fármaco
+solo 5.2 kg, pero juntos 12 kg, más que la suma de ambos efectos.
 
 \end{tcolorbox}
 
@@ -655,7 +1310,7 @@ Realizar el contraste con un nivel de significación de 0.10.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos las
 primeras filas.
@@ -712,6 +1367,7 @@ Hacemos un análisis descriptivo básico.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}rrr@{}}
 \toprule\noalign{}
 n & media & desviación\_típica \\
@@ -721,6 +1377,7 @@ n & media & desviación\_típica \\
 \endlastfoot
 22 & 19.5 & 9.297977 \\
 \end{longtable}
+}
 
 Comprobamos la normalidad de los datos.
 
@@ -731,6 +1388,7 @@ Comprobamos la normalidad de los datos.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}rrl@{}}
 \toprule\noalign{}
 statistic & p.value & method \\
@@ -740,6 +1398,7 @@ statistic & p.value & method \\
 \endlastfoot
 0.9721157 & 0.7595164 & Shapiro-Wilk normality test \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación 0.05, aceptamos
 la hipótesis de normalidad.
@@ -753,6 +1412,7 @@ Aplicamos el contraste t para la media de una población normal.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1011}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1236}}
@@ -787,6 +1447,7 @@ alternative
 19.5 & -0.2522277 & 0.8033173 & 21 & 15.37751 & 23.62249 & One Sample
 t-test & two.sided \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación \(0.10\)
 aceptamos la hipótesis nula y concluimos que no hay evidencias
@@ -807,7 +1468,7 @@ efectivo.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -816,6 +1477,7 @@ efectivo.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0732}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.0813}}
@@ -850,6 +1512,7 @@ alternative
 0.16 & 0.28125 & 0.2979415 & 1 & 0 & 0.273716 & 1-sample proportions
 test with continuity correction & less \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación \(0.05\),
 concluimos que no hay evidencias significativas para afirmar que el
@@ -868,7 +1531,7 @@ aumenta el nivel de hierro con un nivel de significación del 1\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos la
 primeras filas.
@@ -901,6 +1564,7 @@ Comprobamos la normalidad de la variable \texttt{incremento}.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}rrl@{}}
 \toprule\noalign{}
 statistic & p.value & method \\
@@ -910,6 +1574,7 @@ statistic & p.value & method \\
 \endlastfoot
 0.9753185 & 0.860638 & Shapiro-Wilk normality test \\
 \end{longtable}
+}
 
 Aplicamos el contraste t para la comparación de medias de dos
 poblaciones pareadas.
@@ -921,6 +1586,7 @@ poblaciones pareadas.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1059}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1176}}
@@ -955,6 +1621,7 @@ alternative
 0.6669 & 3.533911 & 0.0011089 & 19 & 0.3405877 & Inf & Paired t-test &
 greater \\
 \end{longtable}
+}
 
 Como el p-valor es menor que el nivel de significación \(0.01\)
 aceptamos la hipótesis nula y concluimos que hay evidencias
@@ -975,7 +1642,7 @@ los dos grupos con un nivel de significación del 5\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos las
 primeras filas.
@@ -1015,6 +1682,7 @@ Hacemos un análisis descriptivo básico.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrr@{}}
 \toprule\noalign{}
 Grupo & n & media & desviación\_típica \\
@@ -1025,6 +1693,7 @@ Grupo & n & media & desviación\_típica \\
 BajaCarbohidratos & 30 & 83.13000 & 8.992992 \\
 Estandar & 30 & 93.55333 & 11.174223 \\
 \end{longtable}
+}
 
 Comprobamos la normalidad de los datos.
 
@@ -1038,6 +1707,7 @@ Comprobamos la normalidad de los datos.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrl@{}}
 \toprule\noalign{}
 Grupo & statistic & p.value & method \\
@@ -1049,6 +1719,7 @@ BajaCarbohidratos & 0.9749854 & 0.6822997 & Shapiro-Wilk normality
 test \\
 Estandar & 0.9835426 & 0.9098542 & Shapiro-Wilk normality test \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación 0.05 en ambos
 grupos aceptamos la hipótesis de normalidad.
@@ -1067,6 +1738,7 @@ poblaciones normales.
 Multiple parameters; naming those columns num.df and den.df.
 \end{verbatim}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0926}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0648}}
@@ -1104,6 +1776,7 @@ alternative
 0.6476997 & 29 & 29 & 0.6476997 & 0.2481074 & 0.3082822 & 1.360814 & F
 test to compare two variances & two.sided \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación \(0.05\) asumimos
 varianzas iguales.
@@ -1118,6 +1791,7 @@ poblaciones independientes con varianzas iguales.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0917}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0917}}
@@ -1158,6 +1832,7 @@ alternative
 -10.42333 & 83.13 & 93.55333 & -3.980255 & 0.000194 & 58 & -15.66535 &
 -5.181315 & Two Sample t-test & two.sided \\
 \end{longtable}
+}
 
 Como el p-valor es menor que el nivel de significación \(0.05\)
 rechazamos la hipótesis nula y concluimos que existen diferencias
@@ -1175,12 +1850,6 @@ intervalos de confianza.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Warning: Computation failed in `stat_summary()`.
-Caused by error in `mean_cl_normal()`:
-! The package "Hmisc" is required.
-\end{verbatim}
-
 \pandocbounded{\includegraphics[keepaspectratio]{01-contrastes-parametricos-practicas_files/figure-pdf/unnamed-chunk-15-1.pdf}}
 
 \end{tcolorbox}
@@ -1196,7 +1865,7 @@ los dos grupos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos las
 primeras filas.
@@ -1236,6 +1905,7 @@ Hacemos un análisis descriptivo básico.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrr@{}}
 \toprule\noalign{}
 Grupo & n & media & desviación\_típica \\
@@ -1246,6 +1916,7 @@ Grupo & n & media & desviación\_típica \\
 Omnivora & 25 & 1.62672 & 0.4087498 \\
 Vegetariana & 20 & 1.14680 & 0.2917002 \\
 \end{longtable}
+}
 
 Comprobamos la normalidad de los datos.
 
@@ -1259,6 +1930,7 @@ Comprobamos la normalidad de los datos.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrl@{}}
 \toprule\noalign{}
 Grupo & statistic & p.value & method \\
@@ -1269,6 +1941,7 @@ Grupo & statistic & p.value & method \\
 Omnivora & 0.9578432 & 0.3731950 & Shapiro-Wilk normality test \\
 Vegetariana & 0.9372700 & 0.2128177 & Shapiro-Wilk normality test \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación 0.05 en ambos
 grupos aceptamos la hipótesis de normalidad.
@@ -1287,6 +1960,7 @@ poblaciones normales.
 Multiple parameters; naming those columns num.df and den.df.
 \end{verbatim}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0841}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0654}}
@@ -1324,6 +1998,7 @@ alternative
 1.963548 & 24 & 19 & 1.963548 & 0.1373252 & 0.8006898 & 4.604823 & F
 test to compare two variances & two.sided \\
 \end{longtable}
+}
 
 Como el p-valor es mayor que el nivel de significación \(0.05\) asumimos
 varianzas iguales.
@@ -1338,6 +2013,7 @@ poblaciones independientes con varianzas iguales.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0833}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 18\tabcolsep) * \real{0.0926}}
@@ -1378,6 +2054,7 @@ alternative
 0.47992 & 1.62672 & 1.1468 & 4.422438 & 6.54e-05 & 43 & 0.2610699 &
 0.6987701 & Two Sample t-test & two.sided \\
 \end{longtable}
+}
 
 Como el p-valor es menor que el nivel de significación \(0.05\)
 rechazamos la hipótesis nula y concluimos que existen diferencias
@@ -1402,7 +2079,7 @@ cáncer con un nivel de significación del 5\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1411,6 +2088,7 @@ cáncer con un nivel de significación del 5\%.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0658}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0658}}
@@ -1449,6 +2127,7 @@ alternative
 2-sample test for equality of proportions with continuity correction &
 two.sided \\
 \end{longtable}
+}
 
 Como el p-valor del contraste es mayor que el nivel de significación
 \(0.05\), se acepta la hipótesis nula y se concluye que no hay
@@ -1467,7 +2146,7 @@ y chicas que consumen alcohol los fines de semana?
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1476,6 +2155,7 @@ y chicas que consumen alcohol los fines de semana?
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0662}}
   >{\raggedleft\arraybackslash}p{(\linewidth - 16\tabcolsep) * \real{0.0662}}
@@ -1514,6 +2194,7 @@ alternative
 2-sample test for equality of proportions with continuity correction &
 two.sided \\
 \end{longtable}
+}
 
 Como el p-valor del contraste es menor que el nivel de significación
 \(0.05\), se rechaza la hipótesis nula y se concluye que hay diferencias
@@ -1540,7 +2221,7 @@ génicas de los tres grupos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos las
 primeras filas.
@@ -1580,6 +2261,7 @@ Hacemos un análisis descriptivo básico.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrr@{}}
 \toprule\noalign{}
 Suplementacion & n & media & desviación\_típica \\
@@ -1591,6 +2273,7 @@ Carbohidratos & 25 & 1.16728 & 0.1913774 \\
 Grasas & 25 & 1.42656 & 0.2468005 \\
 Proteinas & 25 & 1.41380 & 0.2777301 \\
 \end{longtable}
+}
 
 Aplicamos el contraste de ANOVA para la comparación de medias de más de
 dos poblaciones independientes.
@@ -1603,6 +2286,7 @@ dos poblaciones independientes.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrrrr@{}}
 \toprule\noalign{}
 term & df & sumsq & meansq & statistic & p.value \\
@@ -1613,6 +2297,7 @@ term & df & sumsq & meansq & statistic & p.value \\
 Suplementacion & 2 & 1.068009 & 0.5340044 & 9.171666 & 0.000283 \\
 Residuals & 72 & 4.192075 & 0.0582233 & NA & NA \\
 \end{longtable}
+}
 
 Como el p-valor es menor que el nivel de significación \(0.05\),
 rechazamos la hipótesis nula y concluimos que existen pruebas
@@ -1646,6 +2331,7 @@ ANOVA.
 \end{Highlighting}
 \end{Shaded}
 
+  {\def\LTcaptype{none} % do not increment counter
   \begin{longtable}[]{@{}rrl@{}}
   \toprule\noalign{}
   statistic & p.value & method \\
@@ -1655,6 +2341,7 @@ ANOVA.
   \endlastfoot
   0.9926311 & 0.9455761 & Shapiro-Wilk normality test \\
   \end{longtable}
+  }
 
   Tanto el histograma como el gráfico de cuantiles no muestran una
   desviación significativa de una distribución normal, y como el p-valor
@@ -1703,6 +2390,7 @@ Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 factor.
 \end{verbatim}
 
+  {\def\LTcaptype{none} % do not increment counter
   \begin{longtable}[]{@{}rrrr@{}}
   \toprule\noalign{}
   statistic & p.value & df & df.residual \\
@@ -1712,6 +2400,7 @@ factor.
   \endlastfoot
   1.582187 & 0.2125867 & 2 & 72 \\
   \end{longtable}
+  }
 
   Como el p-valor es mayor que el nivel de significación \(0.05\) se
   acepta la hipótesis nula y se asume homogeneidad de varianzas.
@@ -1729,6 +2418,7 @@ qué grupos hay diferencias estadísticamente significativas.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1630}}
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2609}}
@@ -1764,6 +2454,7 @@ Suplementacion & Proteinas-Carbohidratos & 0 & 0.24652 & 0.0831928 &
 Suplementacion & Proteinas-Grasas & 0 & -0.01276 & -0.1760872 &
 0.1505672 & 0.9809191 \\
 \end{longtable}
+}
 
 Se observan diferencias estadísticamente significativas entre las medias
 de la dieta basada en grasas y la basada en carbohidratos (p-valor
@@ -1798,7 +2489,7 @@ depende de la dieta, del fármaco y de la interacción entre ambos.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 En primer lugar cargamos los datos en un data frame y mostramos las
 primeras filas.
@@ -1843,6 +2534,7 @@ Hacemos un análisis descriptivo básico.
 `.groups` argument.
 \end{verbatim}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}llrrr@{}}
 \toprule\noalign{}
 Dieta & Farmaco & n & media & desviación\_típica \\
@@ -1855,6 +2547,7 @@ No & Si & 6 & 5.166667 & 1.4375906 \\
 Si & No & 5 & 3.000000 & 0.7905694 \\
 Si & Si & 6 & 12.000000 & 1.1832160 \\
 \end{longtable}
+}
 
 Aplicamos el contraste de ANOVA de dos factores para la comparación de
 medias de más de dos poblaciones independientes.
@@ -1867,6 +2560,7 @@ medias de más de dos poblaciones independientes.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrrrr@{}}
 \toprule\noalign{}
 term & df & sumsq & meansq & statistic & p.value \\
@@ -1879,6 +2573,7 @@ Farmaco & 1 & 273.67424 & 273.674242 & 202.44396 & 0.0000000 \\
 Dieta:Farmaco & 1 & 20.03788 & 20.037879 & 14.82254 & 0.0011731 \\
 Residuals & 18 & 24.33333 & 1.351852 & NA & NA \\
 \end{longtable}
+}
 
 Se observa que la dieta es significativa (p-valor \(5.93e-9 < 0.05\)),
 el fármaco es significativo (p-valor \(3.11e-11 < 0.05\)) y también la
@@ -1912,6 +2607,7 @@ ANOVA.
 \end{Highlighting}
 \end{Shaded}
 
+  {\def\LTcaptype{none} % do not increment counter
   \begin{longtable}[]{@{}rrl@{}}
   \toprule\noalign{}
   statistic & p.value & method \\
@@ -1921,6 +2617,7 @@ ANOVA.
   \endlastfoot
   0.967452 & 0.6521599 & Shapiro-Wilk normality test \\
   \end{longtable}
+  }
 
   Tanto el histograma como el gráfico de cuantiles no muestran una
   desviación significativa de una distribución normal, y como el p-valor
@@ -1938,6 +2635,7 @@ ANOVA.
 \end{Highlighting}
 \end{Shaded}
 
+  {\def\LTcaptype{none} % do not increment counter
   \begin{longtable}[]{@{}rrrr@{}}
   \toprule\noalign{}
   statistic & p.value & df & df.residual \\
@@ -1947,6 +2645,7 @@ ANOVA.
   \endlastfoot
   0.2715568 & 0.845079 & 3 & 18 \\
   \end{longtable}
+  }
 
   Como el p-valor es mayor que el nivel de significación \(0.05\) se
   acepta la hipótesis nula y se asume homogeneidad de varianzas.
@@ -1964,6 +2663,7 @@ qué grupos hay diferencias estadísticamente significativas.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1750}}
   >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1500}}
@@ -2007,6 +2707,7 @@ Dieta:Farmaco & Si:Si-Si:No & 0 & 9.000000 & 7.0101653 & 10.989835 &
 Dieta:Farmaco & Si:Si-No:Si & 0 & 6.833333 & 4.9361004 & 8.730566 &
 0.0000000 \\
 \end{longtable}
+}
 
 Se observan diferencias estadísticamente significativas entre todos los
 grupos de comparación.
@@ -2046,7 +2747,7 @@ datos
   Crear un data frame con los datos del tiempo y la concentración de
   alcohol.
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2074,7 +2775,7 @@ datos
   Calcular el coeficiente de correlación lineal. ¿Existe relación lineal
   entre la concentración de alcohol y el tiempo que pasa?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
   Para calcular el coeficiente de correlación lineal de Pearson se puede
   utilar la función
@@ -2101,7 +2802,7 @@ datos
   regresión de la concentración de alcohol sobre el tiempo. ¿Por qué el
   ajuste es tan malo?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2127,7 +2828,7 @@ datos
   Eliminar el dato atípico y calcular la recta de la concentración de
   alcohol sobre el tiempo. ¿Ha mejorado el modelo?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2171,7 +2872,7 @@ F-statistic: 32.84 on 1 and 4 DF,  p-value: 0.004591
   Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta
   persona el alcohol?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2193,7 +2894,7 @@ Coeficiente de regresión de la concentración de alchol sobre el tiempo: -0.009
   después de tomarse un litro de vino para poder conducir sin infringir
   la ley? ¿Es fiable esta predicción?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
   Como ahora queremos predecir el tiempo, necesitamos calcular la recta
   de regresión del tiempo sobre la concentración de alcohol.
@@ -2230,7 +2931,7 @@ información sobre el los kilos perdidos con una dieta de adelgazamiento.
   Crear un data frame con los datos de la dieta a partir del fichero
   \href{https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv}{\texttt{dieta.csv}}.
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2279,7 +2980,7 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
   número de días con la dieta. ¿Qué tipo de modelo de regresión se
   ajusta mejor a la nube de puntos?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2303,7 +3004,7 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
   de días de dieta? ¿Qué porcentaje de la variabilidad de peso perdido
   explica el mejor modelo de regresión?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2379,7 +3080,7 @@ The following object is masked from 'package:dplyr':
   número de días con la dieta según si la persona hace ejercicio o no.
   ¿Qué conclusiones se pueden sacar?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2404,7 +3105,7 @@ The following object is masked from 'package:dplyr':
   en el grupo de las que no hacen ejercicio? ¿Han mejorado los modelos
   con respecto al modelo anterior?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2473,7 +3174,7 @@ The following object is masked from 'package:dplyr':
   de dieta para el grupo de las personas que hacen ejercicio y para el
   grupo de las que no.
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
   Construimos el modelo inverso para el grupo de las personas que hacen
   ejercicio.
@@ -2545,7 +3246,7 @@ F-statistic: 51.26 on 1 and 18 DF,  p-value: 1.146e-06
   perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una
   que no hace ejercicio?
 
-  \begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+  \begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
   Hacemos primero la predicción del peso perdido para la persona que
   hace ejercicio usando el modelo inverso.
@@ -2595,6 +3296,7 @@ fichero
 \href{datos/genotipo-respuesta-dieta.csv}{genotipo-respuesta-dieta.csv}
 y se corresponden con la siguiente tabla de contingencia:
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrrr@{}}
 \toprule\noalign{}
 Genotipo FTO & No Respondedor & Respondedor & Total \\
@@ -2607,13 +3309,14 @@ AT & 40 & 50 & 90 \\
 TT & 25 & 35 & 60 \\
 \textbf{Total} & 125 & 125 & 250 \\
 \end{longtable}
+}
 
 Contrastar si la respuesta a la dieta depende del genotipo FTO con un
 nivel de significación del 5\%.
 
 \end{exercise}
 
-\begin{tcolorbox}[enhanced jigsaw, breakable, toprule=.15mm, opacitybacktitle=0.6, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, left=2mm, leftrule=.75mm, opacityback=0, colback=white, coltitle=black, arc=.35mm, toptitle=1mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white]
+\begin{tcolorbox}[enhanced jigsaw, arc=.35mm, bottomrule=.15mm, bottomtitle=1mm, breakable, colback=white, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, coltitle=black, left=2mm, leftrule=.75mm, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, titlerule=0mm, toprule=.15mm, toptitle=1mm]
 
 Primero creamos la tabla de contingencia a partir del fichero de datos.
 
@@ -2630,6 +3333,7 @@ Primero creamos la tabla de contingencia a partir del fichero de datos.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}lrr@{}}
 \toprule\noalign{}
 & No & Si \\
@@ -2641,6 +3345,7 @@ AA & 60 & 40 \\
 AT & 40 & 50 \\
 TT & 25 & 35 \\
 \end{longtable}
+}
 
 Si no disponemos del fichero de datos, podemos crear directamente la
 tabla de contingencia con los datos proporcionados.
@@ -2662,6 +3367,7 @@ Finalmente aplicamos el contraste de independencia de chi-cuadrado.
 \end{Highlighting}
 \end{Shaded}
 
+{\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}rrrl@{}}
 \toprule\noalign{}
 statistic & p.value & parameter & method \\
@@ -2671,6 +3377,7 @@ statistic & p.value & parameter & method \\
 \endlastfoot
 6.777778 & 0.0337462 & 2 & Pearson's Chi-squared test \\
 \end{longtable}
+}
 
 \end{tcolorbox}
 
