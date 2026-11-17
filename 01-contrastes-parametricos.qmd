@@ -3,173 +3,7 @@ title: Contrastes de hipótesis paramétricos
 lang: es
 ---
 
-:::{#exr-contraste-media-consumo-azucar}
-Sabiendo que el año pasado el consumo per cápita de azúcar en España fue de $4.8$ kg y que este consumo sigue una distribución normal, hemos seleccionado aleatoriamente a $20$ españoles obteniendo una media muestral de $5$ kg y una cuasidesviación típica muestral de $0.4$ kg. Contrastar la hipótesis de que el consumo de azúcar per cápita de este año en España no ha variado utilizando un nivel de significación del $10$%.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Sea $X\sim N(\mu,\sigma)$ la variable aleatoria que mide el consumo per cápita de azúcar en España.  
-Número de poblaciones: 1 población.
-Variable dependiente: Consumo de azúcar (cuantitativa).  
-Tamaño muestral: $n=20$.  
-Contraste de la media de una población normal (prueba t): $H_0:\mu=4.8$, $H_1:\mu\neq 4.8$.   
-Estadístico del contraste: $t=2.24$  
-p-valor: $p =2 P(t(19)>2.24) = 0.037$.  
-Como el p-valor es menor que el nivel de significación $\alpha = 0.1$, se rechaza la hipótesis nula y se concluye que el consumo de azúcar per cápita de este año en España ha variado.
-:::
-
-
-:::{#exr-contraste-proporcion-bolleria-industrial}
-En una clase de alumnos de primaria se ha comprobado que el $20$% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de $50$ alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del $5$% si el programa es efectivo.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 1 población.  
-Variable dependiente: Consumo de bollería industrial (cualitativa binaria).  
-Tamaño muestral: $n=50$.  
-Contraste para la proporción de una población: $H_0:p=0.2$, $H_1:p< 0.2$.  
-p-valor: $p=0.2979$.  
-Como el p-valor es mayor que el nivel de significación $\alpha = 0.05$, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que el programa sea efectivo.
-:::
-
-:::{#exr-contraste-media-consumo}
-Se sabe que el consumo anual de helado correspondiente a cada español sigue una distribución normal y que el año pasado el consumo medio fue de 20 kg.  Queremos contrastar si este año se va a mantener el consumo medio de helado que el año pasado, y para comprobarlo se efectúa una muestra aleatoria de 22 españoles, obteniéndose los resultados recogidos en el fichero [consumo-helado.csv](datos/consumo-helado.csv). Realizar el contraste con un nivel de significación de $0.10$.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 1 población.  
-Variable dependiente: Consumo de helado (cuantitativa).  
-Tamaño muestral: $n=22$.  
-Prueba de normalidad de Kolmogorov-Smirnov. p-valor: $p=0.632$. Se acepta la normalidad.  
-Contraste de la media de una población normal (prueba t): $H_0:\mu=20$, $H_1:\mu\neq 20$.   
-p-valor: $p = 0.8033$.  
-Como el p-valor es mayor que el nivel de significación $\alpha = 0.10$, no se rechaza la hipótesis nula y se concluye que el consumo medio de helado de este año en España se va a mantener.
-:::
-
-:::{#exr-contraste-comparacion-medias-pareadas-hierro}
-Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero [niveles-hierro-ejercicio.csv](datos/niveles-hierro-ejercicio.csv). Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones pareadas (población 1: antes de hacer ejercicio, población 2: después de hacer ejercicio).  
-Variable dependiente: Nivel de hierro  (cuantitativa).  
-Tamaño muestral: $n=20$.  
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor de la diferencia: $0.804$. Se acepta la normalidad.  
-Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d< 0$.  
-p-valor: $p=0.0011$.  
-Como el p-valor es menor que el nivel de significación se rechaza la hipótesis nula y se concluye que el programa de ejercicios ha aumentado significativamente el nivel de hierro en sangre.
-:::
-
-:::{#exr-contraste-comparacion-medias-glucosa}
-Se ha realizado un estudio para comparar los niveles de glucosa en sangre de dos grupos: uno sigue una dieta baja en carbohidratos y otro una dieta estándar. Los datos del estudio están en el fichero [niveles-glucosa-dietas.csv](datos/niveles-glucosa-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos con un nivel de significación del 5%.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones independientes (población 1: dieta baja en carbohidratos, población 2: dieta estándar).  
-Variable dependiente: Nivel de glucosa (cuantitativa).  
-Tamaños muestrales: $n_1=30$, $n_2=30$.  
-Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$.
-p-valor: $p=0.25$. Se acepta la hipótesis nula de igualdad de varianzas.  
-Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1<\mu_2$.  
-p-valor: $p=0.00009$. 
-Como el p-valor es menor que el nivel de significación se rechaza la hipótesis nula y se concluye que el nivel de glucosa en sangre es significativamente menor en el grupo que sigue una dieta baja en carbohidratos.
-:::
-
-:::{#exr-contraste-comparacion-medias-expresion-genica}
-Se ha realizado un estudio para comparar los niveles de expresión de un gen en función de la dieta (vegetariana u omnívora). Los datos del estudio están en el fichero [expresion-genica-dietas.csv](datos/expresion-genica-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos.
-
-:::
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones independientes (población 1: dieta vegetariana, población 2: dieta omnívora).  
-Variable dependiente: Expresión génica (cuantitativa).  
-Tamaños muestrales: $n_1=20$, $n_2=25$.  
-Prueba de normalidad de Kolmogorov-Smirnov: p-valor primera muestra: $0.4164$, p-valor segunda muestra: $0.2767$. Se acepta la normalidad en ambos grupos.  
-Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$.
-p-valor: $p=0.1373$. Se acepta la hipótesis nula de igualdad de varianzas.  
-Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1<\mu_2$.  
-p-valor: $p=0.00006$.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que existen diferencias estadísticamente significativas en los niveles de expresión génica en función de la dieta.
-:::
-
-:::{#exr-contraste-comparacion-proporciones-vitamina-c}
-Se utiliza un grupo de 150 pacientes para comprobar la teoría de que la vitamina C tiene alguna influencia en el tratamiento del cáncer. Los 150 pacientes fueron divididos en dos grupos de 75. Un grupo recibió 10 gramos de vitamina C y el otro un placebo cada día, además de la medicación habitual. De los que recibieron la vitamina C, 47 presentaban alguna mejoría al cabo de cuatro semanas, mientras que de los que
-recibieron el placebo, 43 experimentaron mejoría.
-Contrastar la hipótesis de que la vitamina C tiene influencia en el tratamiento del cáncer con un nivel de significación del 5%.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones independientes (población 1: vitamina C, población 2: placebo).  
-Variable dependiente: Mejoría en el tratamiento del cáncer (cualitativa binaria).  
-Tamaños muestrales: $n_1=75$, $n_2=75$.  
-Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
-p-valor: $p=0.6824$.  
-Como el p-valor es mayor que el nivel de significación, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que la vitamina C tenga influencia en el tratamiento del cáncer.
-:::
-
-:::{#exr-contraste-proporcion-consumo-alcohol}
-En un estudio sobre el consumo de alcohol entre los jóvenes durante los fines de semana, se preguntó a 100 chicos y a
-125 chicas, de los que 63 chicos y 59 chicas contestaron que consumían.
-En vista de estos datos, ¿existe alguna diferencia significativa entre las proporciones de chicos y chicas que consumen alcohol los fines de semana?
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones independientes (población 1: chicos, población 2: chicas).  
-Variable dependiente: Consumo de alcohol (cualitativa binaria).  
-Tamaños muestrales: $n_1=100$, $n_2=125$.  
-Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
-p-valor: $p=0.0163$.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre el consumo de alcohol de chicos y chicas.
-:::
-
-:::{#exr-contraste-anova-suplementacion}
-En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero [expresion-genica-suplementacion.csv](datos/expresion-genica-suplementacion.csv). Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 3 poblaciones independientes (población 1: Carbohidratos, población 2: Proteínas, población 3: Grasas).  
-Variable dependiente: Expresión génica (cuantitativa).  
-Tamaños muestrales: $n_1=75$, $n_2=75$ y $n_3=75$.  
-Contraste de normalidad de Kolmogorov-Smirnov: p-valor primera muestra: $0.7571$, p-valor segunda muestra: $0.6459$, p-valor tercera muestra: $0.9643$. Se acepta la normalidad en los tres grupos.  
-Contraste de homocedasticidad de Levene: p-valor: $0.2126$. Se acepta la hipótesis de igualdad de varianzas.  
-Contraste de ANOVA: $H_0:\mu_1=\mu_2=\mu_3$, $H_1:$ Al menos dos medias son diferentes.  
-p-valor: $p=0.000283$.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre las medias de la expresión génica de los grupos de suplementación.  
-Contraste post hoc de Tukey:  
-- Carbohidratos vs Proteínas: $p=0.0016$. Hay diferencias significativas.  
-- Carbohidratos vs Grasas: $p=0.0009$. Hay diferencias significativas.  
-- Proteínas vs Grasas: $p=0.9809$. No hay diferencias significativas.
-:::
-
-:::{#exr-contraste-anova-interaccion-dieta-farmaco}
-En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero [interaccion-dieta-farmaco.csv](datos/interaccion-dieta-farmaco.csv). Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 4 poblaciones independientes (población 1: Dieta No + Fármaco No, población 2: Dieta No + Fármaco Si, población 3: Dieta Si + Fármaco No, población 4: Dieta Si + Fármaco Si).  
-Variable dependiente: Peso perdido (cuantitativa).  
-Tamaños muestrales: $n_1=5$, $n_2=6$, $n_3=5$ y $n_4=6$.  
-Contraste de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.4677$, p-valor segunda muestra: $0.9672$, p-valor tercera muestra: $0.741$, p-valor cuarta muestra: $0.719$. Se acepta la normalidad en los cuatro grupos.  
-Contraste de homocedasticidad de Levene: p-valor: $0.845$. Se acepta la hipótesis de igualdad de varianzas.   
-Contraste de ANOVA de dos factores con interacción: $H_0:$ No hay interacción entre la dieta y el fármaco, $H_1:$ Hay interacción entre la dieta y el fármaco.  
-- p-valor dieta: $p=0.0000$.  
-- p-valor fármaco: $p=0.0000$.  
-- p-valor interacción: $p=0.0012$.  
-Como el p-valor es menor que el nivel de significación en los tres casos, se rechaza la hipótesis nula y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos.
-:::
-
-## Ejercicios para resolver con ayuda de un asistente de IA
-
-En los siguientes ejercicios el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
+Varios ejercicios de este capítulo están pensados para resolverse con ayuda de un asistente de IA. En ellos el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
 
 :::{.callout-note}
 ## Pautas para trabajar con la IA
@@ -214,6 +48,46 @@ No interpretes el resultado; solo dame los números.
 La IA puede inventar números con total seguridad, sobre todo si no ejecuta código. Si dos respuestas no coinciden, la que vale es la que se puede reproducir.
 :::
 
+## Una población
+
+:::{#exr-contraste-media-consumo-azucar}
+Sabiendo que el año pasado el consumo per cápita de azúcar en España fue de $4.8$ kg y que este consumo sigue una distribución normal, hemos seleccionado aleatoriamente a $20$ españoles obteniendo una media muestral de $5$ kg y una cuasidesviación típica muestral de $0.4$ kg. Contrastar la hipótesis de que el consumo de azúcar per cápita de este año en España no ha variado utilizando un nivel de significación del $10$%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: Consumo de azúcar per cápita (cuantitativa), $X\sim N(\mu,\sigma)$.  
+Tamaño muestral: $n=20$.  
+Descriptivos: $\bar x=5$ kg, $s=0.4$ kg.  
+Normalidad: se asume por el enunciado.  
+Contraste de la media de una población normal (prueba t): $H_0:\mu=4.8$, $H_1:\mu\neq 4.8$.  
+Estadístico del contraste: $t=\dfrac{5-4.8}{0.4/\sqrt{20}}=2.24$ con 19 grados de libertad.  
+p-valor: $p=2P(t(19)>2.24)=0.0375$.  
+Intervalo de confianza del 90 % para $\mu$: $(4.85, 5.15)$ kg.  
+Tamaño del efecto: $d=(5-4.8)/0.4=0.5$ (moderado).  
+Como el p-valor es menor que el nivel de significación $\alpha=0.1$, se rechaza la hipótesis nula y se concluye que el consumo de azúcar per cápita de este año en España ha variado. El intervalo no contiene 4.8 kg y sugiere un aumento de entre 0.05 y 0.35 kg por persona.
+:::
+
+:::{#exr-contraste-media-consumo}
+Se sabe que el consumo anual de helado correspondiente a cada español sigue una distribución normal y que el año pasado el consumo medio fue de 20 kg.  Queremos contrastar si este año se va a mantener el consumo medio de helado que el año pasado, y para comprobarlo se efectúa una muestra aleatoria de 22 españoles, obteniéndose los resultados recogidos en el fichero [consumo-helado.csv](datos/consumo-helado.csv). Realizar el contraste con un nivel de significación de $0.10$.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: Consumo de helado (cuantitativa).  
+Tamaño muestral: $n=22$.  
+Descriptivos: $\bar x=19.5$ kg, $s=9.30$ kg.  
+Prueba de normalidad de Shapiro-Wilk: $p=0.76$. Se acepta la normalidad.  
+Contraste de la media de una población normal (prueba t): $H_0:\mu=20$, $H_1:\mu\neq 20$.  
+Estadístico del contraste: $t=-0.25$ con 21 grados de libertad.  
+p-valor: $p=0.8033$.  
+Intervalo de confianza del 90 % para $\mu$: $(16.09, 22.91)$ kg.  
+Tamaño del efecto: $d=(19.5-20)/9.30=-0.05$ (despreciable).  
+Como el p-valor es mayor que el nivel de significación $\alpha=0.10$, no se rechaza la hipótesis nula y se concluye que no hay evidencias de que el consumo medio de helado de este año sea distinto del del año pasado. El intervalo es ancho, por lo que la muestra no permite descartar cambios de unos 3 kg en cualquier sentido.
+:::
+
 :::{#exr-contraste-ia-media-homocisteina-mthfr}
 El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la enzima y tiende a elevar la homocisteína plasmática. Un grupo de investigación considera que una homocisteína media de 12 µmol/L es el límite a partir del cual merece la pena suplementar con folato. Se ha medido la homocisteína en ayunas de 18 adultos TT sin suplementación y los resultados están en el fichero [homocisteina-mthfr.csv](datos/homocisteina-mthfr.csv).
 
@@ -239,6 +113,24 @@ Tamaño del efecto: $d=(14.37-12)/2.48=0.96$ (grande).
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la homocisteína media de los portadores TT supera los 12 µmol/L. Con un 95 % de confianza la media es al menos 13.4 µmol/L, lo que respaldaría la suplementación, aunque la decisión clínica también depende del estado de folato y vitamina B12, que no se ha medido.  
 Sin el valor 8.3: $n=17$, $\bar x=14.73$, $s=2.02$, $t=5.57$, $p<0.0001$. La conclusión no cambia: el valor atípico va en contra de $H_1$ y hace el contraste más conservador. Un dato no debe eliminarse solo porque moleste.  
 Errores frecuentes de la IA: dar el p-valor bilateral ($0.0008$) cuando se pidió unilateral o presentar el intervalo unilateral como bilateral.
+:::
+
+:::{#exr-contraste-proporcion-bolleria-industrial}
+En una clase de alumnos de primaria se ha comprobado que el $20$% del alumnado consume bollería industrial. Para disminuir esta preocupante cifra, el colegio ha implantado un programa de educación nutricional. Después del programa se tomó una muestra aleatoria de $50$ alumnos de primaria y se observó que 8 seguían consumiendo bollería industrial. Contrastar con un nivel de significación del $5$% si el programa es efectivo.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: Consumo de bollería industrial (cualitativa binaria).  
+Tamaño muestral: $n=50$.  
+Proporción muestral: $\hat p=8/50=0.16$.  
+Condiciones: $np_0=10$ y $n(1-p_0)=40$, ambas mayores o iguales que 5, por lo que la aproximación normal es válida.  
+Contraste para la proporción de una población: $H_0:p=0.2$, $H_1:p<0.2$.  
+Estadístico del contraste: $z=\dfrac{0.16-0.2}{\sqrt{0.2\cdot 0.8/50}}=-0.71$ (con corrección de continuidad, $\chi^2=0.28$ con 1 grado de libertad).  
+p-valor: $p=0.2979$ con corrección de continuidad ($0.2398$ sin ella; test binomial exacto: $0.3073$).  
+Intervalo de confianza del 95 % unilateral para $p$: $(0, 0.274)$.  
+Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que el programa sea efectivo. El intervalo admite proporciones de hasta el 27 %, mayores incluso que la inicial, de modo que con 50 alumnos el estudio tiene poca potencia para detectar una reducción moderada.
 :::
 
 :::{#exr-contraste-ia-proporcion-fto-obesidad}
@@ -290,6 +182,8 @@ Sin la medición 10: $s=0.151$, $\chi^2=13.3$ con 13 grados de libertad, $p=0.43
 Errores frecuentes de la IA: dar el intervalo para la varianza en lugar de para la desviación típica o usar $\sigma_0=0.15$ en lugar de $\sigma_0^2=0.0225$ en el denominador ($\chi^2\approx 3.8$).
 :::
 
+## Dos poblaciones
+
 :::{#exr-contraste-ia-comparacion-medias-imc-fto}
 En un estudio transversal con adultos sanos de 30 a 50 años se compara el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609. Ambos grupos se reclutaron de forma independiente en la misma cohorte. Los datos están en el fichero [imc-fto.csv](datos/imc-fto.csv).
 
@@ -313,6 +207,46 @@ Estadístico del contraste: $t=2.44$ con 45 grados de libertad. p-valor: $p=0.01
 Contraste de Welch: $t=2.41$ con 39.5 grados de libertad, $p=0.021$, intervalo $(0.48, 5.48)$. Ambas versiones coinciden.  
 Tamaño del efecto: $d=0.71$.  
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que los portadores AA tienen de media unos 3 kg/m² más de IMC que los TT. El intervalo es ancho, así que la magnitud está poco precisada; en población general el efecto de FTO es menor (en torno a 0.4 kg/m² por alelo), lo que sugiere que una muestra pequeña puede sobrestimarlo. Posibles variables de confusión: sexo, edad, actividad física, ingesta energética, nivel socioeconómico y ascendencia (estratificación poblacional).
+:::
+
+:::{#exr-contraste-comparacion-medias-glucosa}
+Se ha realizado un estudio para comparar los niveles de glucosa en sangre de dos grupos: uno sigue una dieta baja en carbohidratos y otro una dieta estándar. Los datos del estudio están en el fichero [niveles-glucosa-dietas.csv](datos/niveles-glucosa-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos con un nivel de significación del 5%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: dieta baja en carbohidratos, población 2: dieta estándar).  
+Variable dependiente: Nivel de glucosa (cuantitativa).  
+Tamaños muestrales: $n_1=30$, $n_2=30$.  
+Descriptivos: baja en carbohidratos: $\bar x_1=83.13$, $s_1=8.99$; estándar: $\bar x_2=93.55$, $s_2=11.17$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.68$, p-valor segunda muestra: $0.91$. Se acepta la normalidad en ambos grupos.  
+Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$. $F=0.65$ con 29 y 29 grados de libertad, p-valor: $p=0.248$. Se acepta la igualdad de varianzas.  
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1<\mu_2$.  
+Estadístico del contraste: $t=-3.98$ con 58 grados de libertad.  
+p-valor: $p=0.00009$.  
+Intervalo de confianza del 95 % para $\mu_1-\mu_2$: $(-15.67, -5.18)$.  
+Tamaño del efecto: $d=-1.03$ (grande).  
+Como el p-valor es menor que el nivel de significación $\alpha=0.05$, se rechaza la hipótesis nula y se concluye que el nivel de glucosa en sangre es significativamente menor en el grupo que sigue una dieta baja en carbohidratos, en unos 10 puntos de media.
+:::
+
+:::{#exr-contraste-comparacion-medias-expresion-genica}
+Se ha realizado un estudio para comparar los niveles de expresión de un gen en función de la dieta (vegetariana u omnívora). Los datos del estudio están en el fichero [expresion-genica-dietas.csv](datos/expresion-genica-dietas.csv). Realizar el contraste de hipótesis adecuado para comparar las medias de los dos grupos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: dieta vegetariana, población 2: dieta omnívora).  
+Variable dependiente: Expresión génica (cuantitativa).  
+Tamaños muestrales: $n_1=20$, $n_2=25$.  
+Descriptivos: vegetariana: $\bar x_1=1.147$, $s_1=0.292$; omnívora: $\bar x_2=1.627$, $s_2=0.409$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.21$, p-valor segunda muestra: $0.37$. Se acepta la normalidad en ambos grupos.  
+Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$. $F=0.51$ con 19 y 24 grados de libertad, p-valor: $p=0.1373$. Se acepta la igualdad de varianzas.  
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1\neq\mu_2$.  
+Estadístico del contraste: $t=-4.42$ con 43 grados de libertad.  
+p-valor: $p=0.00007$.  
+Intervalo de confianza del 95 % para $\mu_1-\mu_2$: $(-0.70, -0.26)$.  
+Tamaño del efecto: $d=-1.33$ (grande).  
+Como el p-valor es menor que el nivel de significación $\alpha=0.05$, se rechaza la hipótesis nula y se concluye que existen diferencias estadísticamente significativas en los niveles de expresión génica en función de la dieta: la expresión es menor en el grupo vegetariano.
 :::
 
 :::{#exr-contraste-ia-comparacion-medias-omega3}
@@ -340,55 +274,6 @@ Con la t de varianzas iguales (incorrecta) se obtiene $t=4.24$ con 40 grados de 
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el suplemento aumenta el índice omega-3 en 1.5 puntos de media. La mayor dispersión en el grupo suplementado indica una respuesta heterogénea (adherencia, absorción, índice basal, peso corporal o variantes genéticas, por ejemplo en FADS1/FADS2). Solo 4 de 14 suplementados (29 %) alcanzan el 8 % que suele considerarse cardioprotector.
 :::
 
-:::{#exr-contraste-ia-comparacion-medias-pareadas-ldl}
-Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero [ldl-fitoesteroles.csv](datos/ldl-fitoesteroles.csv).
-
-a. ¿Por qué estas muestras son pareadas? Definir la variable diferencia (indicando el orden de la resta) y plantear las hipótesis.
-a. ¿Sobre qué variable hay que comprobar la normalidad: los valores iniciales, los finales o las diferencias?
-a. Pedir a la IA la t para datos pareados con su intervalo de confianza del 95 %. Después pedirle, a propósito, una t para muestras independientes con los mismos datos.
-a. Comparar ambos resultados y explicar por qué son tan distintos. Pista: pedir la correlación entre el LDL inicial y el final.
-a. Interpretar la reducción media en mg/dL y en %. Sin grupo control, ¿se puede atribuir al yogur? ¿Qué otros fenómenos podrían explicarla?
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones pareadas (población 1: después de 8 semanas, población 2: al inicio).  
-Variable dependiente: Colesterol LDL (cuantitativa).  
-Tamaño muestral: $n=14$.  
-Variable diferencia: $D=$ LDL a 8 semanas $-$ LDL inicial. $\bar d=-9.93$ mg/dL, $s_d=13.46$.  
-Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.49$. Se acepta la normalidad. La normalidad se comprueba en las diferencias; que los valores finales den $p=0.034$ es irrelevante para la t pareada.  
-Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d< 0$.  
-Estadístico del contraste: $t=-2.76$ con 13 grados de libertad.  
-p-valor: $p=0.008$ (bilateral: $0.016$). Intervalo de confianza del 95 % para $\mu_d$: $(-17.7, -2.2)$ mg/dL. Tamaño del efecto: $d_z=0.74$.  
-Con la t para muestras independientes (incorrecta) se obtiene $t=-1.13$ con 26 grados de libertad y $p=0.27$. La correlación entre LDL inicial y final es $r=0.85$: la mayor parte de la variabilidad es entre personas y el diseño pareado la elimina.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el LDL baja una media de unos 10 mg/dL (6.3 %), coherente con la reducción que se atribuye habitualmente a 2 g/día de fitoesteroles. Sin grupo control no puede atribuirse al yogur: regresión a la media (se seleccionó a personas con LDL alto), cambios de dieta por sentirse observados, estacionalidad o variabilidad analítica.
-:::
-
-:::{#exr-contraste-ia-comparacion-proporciones-fto-respuesta}
-En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores.
-
-a. Plantear las hipótesis sobre las proporciones de respondedores.
-a. ¿Qué contraste se debe aplicar? Comprobar las condiciones de validez (frecuencias esperadas).
-a. Pedir a la IA el test z para dos proporciones, el test $\chi^2$ con y sin corrección de Yates y el test exacto de Fisher, además del intervalo de confianza del 95 % para la diferencia de proporciones. ¿Qué relación hay entre el estadístico $z$ y el $\chi^2$ sin corrección?
-a. Las conclusiones pueden no coincidir entre métodos. ¿Qué se debe hacer si el p-valor está cerca de 0.05?
-a. Pedir también el riesgo relativo y la odds ratio, e interpretar uno de ellos para un profesional de la nutrición.
-:::
-
-:::{.callout-tip collapse="true"}
-## Solución
-Número de poblaciones: 2 poblaciones independientes (población 1: portadores del alelo A, población 2: no portadores TT).  
-Variable dependiente: Respuesta a la dieta (cualitativa binaria).  
-Tamaños muestrales: $n_1=96$, $n_2=54$.  
-Proporciones muestrales: $\hat p_1=0.396$, $\hat p_2=0.574$.  
-Frecuencias esperadas: 44.2, 51.8, 24.8 y 29.2, todas mayores que 5.  
-Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
-Estadístico del contraste: $z=-2.10$ ($z^2=4.42=\chi^2$ sin corrección: son el mismo contraste).  
-p-valor: $p=0.036$. Con corrección de Yates: $\chi^2=3.73$, $p=0.053$. Test exacto de Fisher: $p=0.041$.  
-Intervalo de confianza del 95 % para $p_1-p_2$: $(-0.342, -0.014)$.  
-Riesgo relativo: $RR=0.69$; odds ratio: $OR=0.49$.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula: los portadores del alelo A tienen una probabilidad de responder un 31 % menor. Sin embargo, la evidencia es débil: el intervalo llega casi a 0 y con la corrección de Yates (conservadora) el p-valor es 0.053. No deben extraerse dos conclusiones opuestas de 0.036 y 0.053; hay que informar del intervalo y pedir replicación. Un metaanálisis de datos individuales (Livingstone et al., BMJ 2016) no encontró diferencias en la pérdida de peso por genotipo FTO.
-:::
-
 :::{#exr-contraste-ia-comparacion-varianzas-tcf7l2}
 La nutrición personalizada parte de que la respuesta glucémica a una misma comida varía mucho entre personas. Se quiere saber si esa variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2 rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2 horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el fichero [auc-glucosa-tcf7l2.csv](datos/auc-glucosa-tcf7l2.csv).
 
@@ -411,6 +296,50 @@ p-valor: $p=0.002$ (bilateral: $0.005$). Intervalo de confianza del 95 % para $\
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la respuesta glucémica de los TT es unas 4 veces más variable (la desviación típica, el doble).  
 Comparación de medias (Welch): $t=0.73$ con 20.8 grados de libertad, $p=0.47$. Las medias no difieren, pero la dispersión sí. Una recomendación basada en la media del genotipo sería poco informativa para los TT, en quienes tendría más sentido medir la respuesta individual (por ejemplo, con monitorización continua de glucosa). Que no difieran las medias no significa que los grupos sean iguales.  
 Errores frecuentes de la IA: poner en el numerador el grupo de menor varianza ($F=0.24$) y calcular el p-valor en la cola equivocada.
+:::
+
+:::{#exr-contraste-comparacion-medias-pareadas-hierro}
+Se ha realizado un estudio para comparar los niveles de hierro en sangre antes y después de un programa de ejercicios. Los datos del estudio están en el fichero [niveles-hierro-ejercicio.csv](datos/niveles-hierro-ejercicio.csv). Realizar el contraste de hipótesis adecuado para ver si el ejercicio aumenta el nivel de hierro con un nivel de significación del 1%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones pareadas (población 1: antes del ejercicio, población 2: después del ejercicio).  
+Variable dependiente: Nivel de hierro (cuantitativa).  
+Tamaño muestral: $n=20$.  
+Descriptivos: antes $\bar x_1=12.08$, después $\bar x_2=12.75$.  
+Variable diferencia: $D=$ antes $-$ después. $\bar d=-0.67$, $s_d=0.84$.  
+Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.861$. Se acepta la normalidad.  
+Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d<0$.  
+Estadístico del contraste: $t=-3.53$ con 19 grados de libertad.  
+p-valor: $p=0.0011$.  
+Intervalo de confianza del 95 % para el aumento medio (después $-$ antes): $(0.27, 1.06)$.  
+Tamaño del efecto: $d_z=0.79$.  
+Como el p-valor es menor que el nivel de significación $\alpha=0.01$, se rechaza la hipótesis nula y se concluye que el programa de ejercicios aumenta significativamente el nivel de hierro en sangre, en unas 0.67 unidades de media. Al no haber grupo control, el aumento no puede atribuirse con seguridad solo al ejercicio.
+:::
+
+:::{#exr-contraste-ia-comparacion-medias-pareadas-ldl}
+Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero [ldl-fitoesteroles.csv](datos/ldl-fitoesteroles.csv).
+
+a. ¿Por qué estas muestras son pareadas? Definir la variable diferencia (indicando el orden de la resta) y plantear las hipótesis.
+a. ¿Sobre qué variable hay que comprobar la normalidad: los valores iniciales, los finales o las diferencias?
+a. Pedir a la IA la t para datos pareados con su intervalo de confianza del 95 %. Después pedirle, a propósito, una t para muestras independientes con los mismos datos.
+a. Comparar ambos resultados y explicar por qué son tan distintos. Pista: pedir la correlación entre el LDL inicial y el final.
+a. Interpretar la reducción media en mg/dL y en %. Sin grupo control, ¿se puede atribuir al yogur? ¿Qué otros fenómenos podrían explicarla?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones pareadas (población 1: después de 8 semanas, población 2: al inicio).  
+Variable dependiente: Colesterol LDL (cuantitativa).  
+Tamaño muestral: $n=14$.  
+Variable diferencia: $D=$ LDL a 8 semanas $-$ LDL inicial. $\bar d=-9.93$ mg/dL, $s_d=13.46$.  
+Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.49$. Se acepta la normalidad. La normalidad se comprueba en las diferencias; que los valores finales den $p=0.034$ es irrelevante para la t pareada.  
+Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d< 0$.  
+Estadístico del contraste: $t=-2.76$ con 13 grados de libertad.  
+p-valor: $p=0.008$ (bilateral: $0.016$). Intervalo de confianza del 95 % para $\mu_d$: $(-17.7, -2.2)$ mg/dL. Tamaño del efecto: $d_z=0.74$.  
+Con la t para muestras independientes (incorrecta) se obtiene $t=-1.13$ con 26 grados de libertad y $p=0.27$. La correlación entre LDL inicial y final es $r=0.85$: la mayor parte de la variabilidad es entre personas y el diseño pareado la elimina.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el LDL baja una media de unos 10 mg/dL (6.3 %), coherente con la reducción que se atribuye habitualmente a 2 g/día de fitoesteroles. Sin grupo control no puede atribuirse al yogur: regresión a la media (se seleccionó a personas con LDL alto), cambios de dieta por sentirse observados, estacionalidad o variabilidad analítica.
 :::
 
 :::{#exr-contraste-ia-verificacion-folato}
@@ -453,6 +382,70 @@ y el código R que has usado.
 ```
 :::
 
+:::{#exr-contraste-comparacion-proporciones-vitamina-c}
+Se utiliza un grupo de 150 pacientes para comprobar la teoría de que la vitamina C tiene alguna influencia en el tratamiento del cáncer. Los 150 pacientes fueron divididos en dos grupos de 75. Un grupo recibió 10 gramos de vitamina C y el otro un placebo cada día, además de la medicación habitual. De los que recibieron la vitamina C, 47 presentaban alguna mejoría al cabo de cuatro semanas, mientras que de los que
+recibieron el placebo, 43 experimentaron mejoría.
+Contrastar la hipótesis de que la vitamina C tiene influencia en el tratamiento del cáncer con un nivel de significación del 5%.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: vitamina C, población 2: placebo).  
+Variable dependiente: Mejoría en el tratamiento del cáncer (cualitativa binaria).  
+Tamaños muestrales: $n_1=75$, $n_2=75$.  
+Proporciones muestrales: $\hat p_1=47/75=0.627$, $\hat p_2=43/75=0.573$.  
+Frecuencias esperadas: 45, 30, 45 y 30, todas mayores que 5.  
+Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
+Estadístico del contraste: $z=0.67$ ($\chi^2=0.44$ con 1 grado de libertad; con corrección de Yates $\chi^2=0.25$).  
+p-valor: $p=0.505$ (con corrección de Yates: $0.617$).  
+Intervalo de confianza del 95 % para $p_1-p_2$: $(-0.103, 0.210)$.  
+Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no se rechaza la hipótesis nula y se concluye que no hay evidencias significativas de que la vitamina C tenga influencia en el tratamiento del cáncer. El intervalo incluye tanto pequeños perjuicios como beneficios de hasta 21 puntos porcentuales, así que el estudio no permite descartar un efecto relevante.
+:::
+
+:::{#exr-contraste-proporcion-consumo-alcohol}
+En un estudio sobre el consumo de alcohol entre los jóvenes durante los fines de semana, se preguntó a 100 chicos y a
+125 chicas, de los que 63 chicos y 59 chicas contestaron que consumían.
+En vista de estos datos, ¿existe alguna diferencia significativa entre las proporciones de chicos y chicas que consumen alcohol los fines de semana?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: chicos, población 2: chicas).  
+Variable dependiente: Consumo de alcohol (cualitativa binaria).  
+Tamaños muestrales: $n_1=100$, $n_2=125$.  
+Proporciones muestrales: $\hat p_1=63/100=0.630$, $\hat p_2=59/125=0.472$.  
+Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
+Estadístico del contraste: $z=2.36$ ($\chi^2=5.59$ con 1 grado de libertad; con corrección de Yates $\chi^2=4.97$).  
+p-valor: $p=0.0181$ (con corrección de Yates: $0.0258$).  
+Intervalo de confianza del 95 % para $p_1-p_2$: $(0.029, 0.287)$.  
+Como el p-valor es menor que el nivel de significación $\alpha=0.05$, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre el consumo de alcohol de chicos y chicas: la proporción de chicos que consumen es unos 16 puntos porcentuales mayor.
+:::
+
+:::{#exr-contraste-ia-comparacion-proporciones-fto-respuesta}
+En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores.
+
+a. Plantear las hipótesis sobre las proporciones de respondedores.
+a. ¿Qué contraste se debe aplicar? Comprobar las condiciones de validez (frecuencias esperadas).
+a. Pedir a la IA el test z para dos proporciones, el test $\chi^2$ con y sin corrección de Yates y el test exacto de Fisher, además del intervalo de confianza del 95 % para la diferencia de proporciones. ¿Qué relación hay entre el estadístico $z$ y el $\chi^2$ sin corrección?
+a. Las conclusiones pueden no coincidir entre métodos. ¿Qué se debe hacer si el p-valor está cerca de 0.05?
+a. Pedir también el riesgo relativo y la odds ratio, e interpretar uno de ellos para un profesional de la nutrición.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: portadores del alelo A, población 2: no portadores TT).  
+Variable dependiente: Respuesta a la dieta (cualitativa binaria).  
+Tamaños muestrales: $n_1=96$, $n_2=54$.  
+Proporciones muestrales: $\hat p_1=0.396$, $\hat p_2=0.574$.  
+Frecuencias esperadas: 44.2, 51.8, 24.8 y 29.2, todas mayores que 5.  
+Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
+Estadístico del contraste: $z=-2.10$ ($z^2=4.42=\chi^2$ sin corrección: son el mismo contraste).  
+p-valor: $p=0.036$. Con corrección de Yates: $\chi^2=3.73$, $p=0.053$. Test exacto de Fisher: $p=0.041$.  
+Intervalo de confianza del 95 % para $p_1-p_2$: $(-0.342, -0.014)$.  
+Riesgo relativo: $RR=0.69$; odds ratio: $OR=0.49$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula: los portadores del alelo A tienen una probabilidad de responder un 31 % menor. Sin embargo, la evidencia es débil: el intervalo llega casi a 0 y con la corrección de Yates (conservadora) el p-valor es 0.053. No deben extraerse dos conclusiones opuestas de 0.036 y 0.053; hay que informar del intervalo y pedir replicación. Un metaanálisis de datos individuales (Livingstone et al., BMJ 2016) no encontró diferencias en la pérdida de peso por genotipo FTO.
+:::
+
 :::{#exr-contraste-ia-caso-integrador-dieta-fto}
 En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan al azar a una dieta mediterránea hipocalórica o a una dieta baja en grasa hipocalórica (40 por grupo). El fichero [dieta-fto-ensayo.csv](datos/dieta-fto-ensayo.csv) contiene el identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses (kg) y glucosa basal y a 6 meses (mg/dL). Pedir a la IA que calcule primero la pérdida de peso en % como $100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}$ y comprobar a mano el valor de dos participantes. Para cada pregunta, seguir los cinco pasos.
 
@@ -486,4 +479,52 @@ Estadístico: $z=2.24$. p-valor: $p=0.025$ (Fisher: $p=0.043$). Intervalo de con
 Se rechaza la hipótesis nula, de forma coherente con el apartado a, aunque al dicotomizar la pérdida de peso se pierde información.
 
 a. Ejemplo: ¿pierden menos peso los AA? Contraste de Welch: AA: $n=18$, $\bar x=4.13$ %, $s=2.53$; no AA: $n=62$, $\bar x=4.75$ %, $s=3.62$. $t=-0.83$ con 39.4 grados de libertad, $p=0.41$, intervalo $(-2.15, 0.90)$. No hay evidencia de diferencia, pero el intervalo es compatible con un efecto clínicamente relevante. Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en mediterránea y 7 en baja en grasa), lo que puede confundir la comparación. Con cuatro o más contrastes sobre los mismos datos, la probabilidad de algún falso positivo crece (con 4 contrastes independientes a $\alpha=0.05$, cerca del 19 %). Lo adecuado sería declarar la hipótesis de antemano, ajustar los p-valores (Bonferroni, Holm) o modelizar la interacción dieta × genotipo.
+:::
+
+## Más de dos poblaciones
+
+:::{#exr-contraste-anova-suplementacion}
+En un estudio de genómica nutricional, se evalúa cómo afecta la suplementación con diferentes tipos de macronutrientes a la expresión de un gen relacionado con el metabolismo energético. Los investigadores dividen a los participantes en tres grupos, cada uno recibiendo una dieta suplementada (1 carbohidratos, 2 proteínas y 3 grasas).Se mide el nivel de expresión génica (ΔCt, relativo a un gen de referencia) en 25 individuos por grupo. Los resultados se recogen en el fichero [expresion-genica-suplementacion.csv](datos/expresion-genica-suplementacion.csv). Realizar el contraste de hipótesis adecuado para comparar ver si hay diferencias estadísticamente significativas entre las expresiones génicas de los tres grupos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 3 poblaciones independientes (población 1: carbohidratos, población 2: proteínas, población 3: grasas).  
+Variable dependiente: Expresión génica (cuantitativa).  
+Tamaños muestrales: $n_1=25$, $n_2=25$ y $n_3=25$.  
+Descriptivos: carbohidratos: $\bar x_1=1.167$, $s_1=0.191$; proteínas: $\bar x_2=1.414$, $s_2=0.278$; grasas: $\bar x_3=1.427$, $s_3=0.247$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.64$, p-valor segunda muestra: $0.96$, p-valor tercera muestra: $0.32$. Se acepta la normalidad en los tres grupos.  
+Contraste de homocedasticidad de Levene: $F=1.58$ con 2 y 72 grados de libertad, p-valor: $p=0.2126$. Se acepta la igualdad de varianzas.  
+Contraste de ANOVA: $H_0:\mu_1=\mu_2=\mu_3$, $H_1:$ al menos dos medias son diferentes.  
+Estadístico del contraste: $F=9.17$ con 2 y 72 grados de libertad.  
+p-valor: $p=0.00028$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay diferencias significativas entre las medias de la expresión génica de los grupos de suplementación.  
+Contraste post hoc de Tukey:  
+
+- Proteínas $-$ Carbohidratos: diferencia $=0.247$, IC 95 % $(0.083, 0.410)$, $p=0.0016$. Hay diferencias significativas.  
+- Grasas $-$ Carbohidratos: diferencia $=0.259$, IC 95 % $(0.096, 0.423)$, $p=0.0009$. Hay diferencias significativas.  
+- Proteínas $-$ Grasas: diferencia $=-0.013$, IC 95 % $(-0.176, 0.151)$, $p=0.9809$. No hay diferencias significativas.
+
+La suplementación con carbohidratos produce una expresión menor que la de proteínas o grasas, que no difieren entre sí.
+:::
+
+:::{#exr-contraste-anova-interaccion-dieta-farmaco}
+En un estudio diseñado para analizar la influencia de un tipo de dieta y de un fármaco en el peso corporal perdido, se ha anotado el número de Kg perdidos en un grupo de personas al cabo de 3 meses de dieta y de tomar el fármaco en el fichero [interaccion-dieta-farmaco.csv](datos/interaccion-dieta-farmaco.csv). Realizar el contraste de hipótesis adecuado para ver si el peso perdido depende de la dieta, del fármaco y de la interacción entre ambos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 4 poblaciones independientes (población 1: Dieta No + Fármaco No, población 2: Dieta No + Fármaco Sí, población 3: Dieta Sí + Fármaco No, población 4: Dieta Sí + Fármaco Sí).  
+Variable dependiente: Peso perdido (cuantitativa).  
+Tamaños muestrales: $n_1=5$, $n_2=6$, $n_3=5$ y $n_4=6$.  
+Descriptivos (kg perdidos): $\bar x_1=0.00$, $s_1=1.06$; $\bar x_2=5.17$, $s_2=1.44$; $\bar x_3=3.00$, $s_3=0.79$; $\bar x_4=12.00$, $s_4=1.18$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.468$, p-valor segunda muestra: $0.741$, p-valor tercera muestra: $0.967$, p-valor cuarta muestra: $0.719$. Se acepta la normalidad en los cuatro grupos.  
+Contraste de homocedasticidad de Levene: $F=0.27$ con 3 y 18 grados de libertad, p-valor: $p=0.845$. Se acepta la igualdad de varianzas.  
+Contraste de ANOVA de dos factores con interacción:  
+
+- Dieta: $H_0:$ la dieta no influye en el peso perdido. $F=105.4$ con 1 y 18 grados de libertad, $p<0.0001$.  
+- Fármaco: $H_0:$ el fármaco no influye en el peso perdido. $F=202.4$ con 1 y 18 grados de libertad, $p<0.0001$.  
+- Interacción: $H_0:$ no hay interacción entre la dieta y el fármaco. $F=14.8$ con 1 y 18 grados de libertad, $p=0.0012$.
+
+Como el p-valor es menor que el nivel de significación en los tres casos, se rechazan las hipótesis nulas y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos. La interacción es sinérgica: la dieta sola hace perder 3 kg y el fármaco solo 5.2 kg, pero juntos 12 kg, más que la suma de ambos efectos.
 :::
