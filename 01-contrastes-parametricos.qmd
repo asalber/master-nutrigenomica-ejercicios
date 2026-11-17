@@ -3,7 +3,7 @@ title: Contrastes de hipótesis paramétricos
 lang: es
 ---
 
-Varios ejercicios de este capítulo están pensados para resolverse con ayuda de un asistente de IA. En ellos el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
+Los ejercicios de este capítulo pueden resolverse con ayuda de un asistente de IA. Para ello, el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
 
 :::{.callout-note}
 ## Pautas para trabajar con la IA
@@ -89,13 +89,7 @@ Como el p-valor es mayor que el nivel de significación $\alpha=0.10$, no se rec
 :::
 
 :::{#exr-contraste-ia-media-homocisteina-mthfr}
-El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la enzima y tiende a elevar la homocisteína plasmática. Un grupo de investigación considera que una homocisteína media de 12 µmol/L es el límite a partir del cual merece la pena suplementar con folato. Se ha medido la homocisteína en ayunas de 18 adultos TT sin suplementación y los resultados están en el fichero [homocisteina-mthfr.csv](datos/homocisteina-mthfr.csv).
-
-a. ¿Qué parámetro poblacional interesa? Plantear las hipótesis y justificar si el contraste debe ser unilateral o bilateral.
-a. ¿Qué contraste se debe aplicar? ¿Qué supuestos necesita y cómo se comprueban con $n=18$?
-a. Redactar la petición para la IA, incluyendo el intervalo de confianza y el tamaño del efecto (d de Cohen).
-a. Interpretar el resultado. ¿Se recomendaría suplementar a los portadores TT?
-a. ¿Qué papel tiene el valor 8.3 µmol/L? Pedir a la IA que repita el análisis sin él y comentar si cambia la conclusión.
+El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la enzima y tiende a elevar la homocisteína plasmática. Un grupo de investigación considera que una homocisteína media de 12 µmol/L es el límite a partir del cual merece la pena suplementar con folato. Se ha medido la homocisteína en ayunas de 18 adultos TT sin suplementación y los resultados están en el fichero [homocisteina-mthfr.csv](datos/homocisteina-mthfr.csv). ¿Se puede afirmar con un nivel de significación del 5% que la homocisteína media de los portadores TT supera el umbral a partir del cual se recomienda suplementar? ¿Cambia la conclusión si se excluye el valor de 8.3 µmol/L?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -111,8 +105,7 @@ p-valor: $p=0.0004$.
 Intervalo de confianza del 95 % bilateral para $\mu$: $(13.14, 15.60)$ µmol/L; cota inferior unilateral: $13.36$ µmol/L.  
 Tamaño del efecto: $d=(14.37-12)/2.48=0.96$ (grande).  
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la homocisteína media de los portadores TT supera los 12 µmol/L. Con un 95 % de confianza la media es al menos 13.4 µmol/L, lo que respaldaría la suplementación, aunque la decisión clínica también depende del estado de folato y vitamina B12, que no se ha medido.  
-Sin el valor 8.3: $n=17$, $\bar x=14.73$, $s=2.02$, $t=5.57$, $p<0.0001$. La conclusión no cambia: el valor atípico va en contra de $H_1$ y hace el contraste más conservador. Un dato no debe eliminarse solo porque moleste.  
-Errores frecuentes de la IA: dar el p-valor bilateral ($0.0008$) cuando se pidió unilateral o presentar el intervalo unilateral como bilateral.
+Sin el valor 8.3: $n=17$, $\bar x=14.73$, $s=2.02$, $t=5.57$, $p<0.0001$. La conclusión no cambia: el valor atípico va en contra de $H_1$ y hace el contraste más conservador. Un dato no debe eliminarse solo porque moleste.
 :::
 
 :::{#exr-contraste-proporcion-bolleria-industrial}
@@ -134,12 +127,7 @@ Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no se rec
 :::
 
 :::{#exr-contraste-ia-proporcion-fto-obesidad}
-En población europea, alrededor del 16 % de los adultos son homocigotos AA para el alelo de riesgo del polimorfismo FTO rs9939609. En una consulta de obesidad (IMC $\geq 30$) se genotipan 220 pacientes no emparentados y 49 resultan ser AA.
-
-a. Plantear las hipótesis. ¿Qué cabría esperar biológicamente y cómo afecta eso a la elección de la cola?
-a. ¿Qué contraste se debe aplicar? Comprobar las condiciones para usar la aproximación normal ($np_0$ y $n(1-p_0)$).
-a. Pedir a la IA el contraste con la aproximación normal y también el test binomial exacto, con su intervalo de confianza del 95 %. ¿Coinciden las conclusiones?
-a. Interpretar el resultado en términos de asociación genética. ¿Permite este diseño afirmar que el genotipo AA causa obesidad?
+En población europea, alrededor del 16 % de los adultos son homocigotos AA para el alelo de riesgo del polimorfismo FTO rs9939609. En una consulta de obesidad (IMC $\geq 30$) se genotipan 220 pacientes no emparentados y 49 resultan ser AA. ¿Es la frecuencia del genotipo AA entre los pacientes con obesidad distinta de la de la población general? ¿Permite este resultado afirmar que el genotipo AA causa obesidad?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -153,17 +141,11 @@ Contraste para la proporción de una población: $H_0:p=0.16$, $H_1:p\neq 0.16$ 
 Estadístico del contraste: $z=2.54$.  
 p-valor: $p=0.011$ (test binomial exacto: $p=0.016$).  
 Intervalo de confianza del 95 % de Wilson: $(0.173, 0.282)$.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la frecuencia del genotipo AA en la consulta de obesidad (22 %) es mayor que la de referencia (16 %), lo que es compatible con la asociación conocida entre FTO y adiposidad. El diseño no permite hablar de causalidad: se compara con una cifra externa, la ascendencia de la muestra puede diferir de la población de referencia (estratificación) y la consulta no es una muestra aleatoria de personas con obesidad.  
-Errores frecuentes de la IA: usar $\hat p$ en lugar de $p_0$ en el error estándar del estadístico ($z\approx 2.23$).
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la frecuencia del genotipo AA en la consulta de obesidad (22 %) es mayor que la de referencia (16 %), lo que es compatible con la asociación conocida entre FTO y adiposidad. El diseño no permite hablar de causalidad: se compara con una cifra externa, la ascendencia de la muestra puede diferir de la población de referencia (estratificación) y la consulta no es una muestra aleatoria de personas con obesidad.
 :::
 
 :::{#exr-contraste-ia-varianza-hba1c}
-El fabricante de un analizador de hemoglobina glicada (HbA1c) para la consulta de nutrición afirma que su desviación típica de repetibilidad no supera 0.15 puntos porcentuales. Para comprobarlo, se mide 15 veces la misma muestra de control. Los resultados están en el fichero [hba1c-analizador.csv](datos/hba1c-analizador.csv).
-
-a. ¿Sobre qué parámetro es el contraste? Plantear las hipótesis desde el punto de vista del comprador que quiere comprobar la afirmación del fabricante.
-a. ¿Qué contraste se debe aplicar? Este contraste es mucho más sensible a la falta de normalidad que la t de Student: explicar por qué y cómo se comprueba.
-a. Pedir a la IA el contraste y el intervalo de confianza del 95 % para la desviación típica (no para la varianza). Verificar que el estadístico es $(n-1)s^2/\sigma_0^2$.
-a. Interpretar el resultado. ¿Qué ocurre si se elimina la medición 10? ¿Está justificado eliminarla?
+El fabricante de un analizador de hemoglobina glicada (HbA1c) para la consulta de nutrición afirma que su desviación típica de repetibilidad no supera 0.15 puntos porcentuales. Para comprobarlo, se mide 15 veces la misma muestra de control. Los resultados están en el fichero [hba1c-analizador.csv](datos/hba1c-analizador.csv). ¿Hay evidencias, con un nivel de significación del 5%, de que la imprecisión del analizador es mayor que la que anuncia el fabricante? ¿Cambia la conclusión si se excluye la medición 10?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -178,20 +160,13 @@ Estadístico del contraste: $\chi^2=14\cdot 0.0404/0.0225=25.13$ con 14 grados d
 p-valor: $p=0.033$.  
 Intervalo de confianza del 95 % para $\sigma$: $(0.147, 0.317)$.  
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay evidencia (moderada) de que la imprecisión del analizador supera la anunciada por el fabricante.  
-Sin la medición 10: $s=0.151$, $\chi^2=13.3$ con 13 grados de libertad, $p=0.43$, y la conclusión se invierte. Solo estaría justificado eliminarla si hubiese una causa técnica documentada. Lo correcto es informar de ambos análisis y repetir la prueba con más mediciones.  
-Errores frecuentes de la IA: dar el intervalo para la varianza en lugar de para la desviación típica o usar $\sigma_0=0.15$ en lugar de $\sigma_0^2=0.0225$ en el denominador ($\chi^2\approx 3.8$).
+Sin la medición 10: $s=0.151$, $\chi^2=13.3$ con 13 grados de libertad, $p=0.43$, y la conclusión se invierte. Solo estaría justificado eliminarla si hubiese una causa técnica documentada. Lo correcto es informar de ambos análisis y repetir la prueba con más mediciones.
 :::
 
 ## Dos poblaciones
 
 :::{#exr-contraste-ia-comparacion-medias-imc-fto}
-En un estudio transversal con adultos sanos de 30 a 50 años se compara el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609. Ambos grupos se reclutaron de forma independiente en la misma cohorte. Los datos están en el fichero [imc-fto.csv](datos/imc-fto.csv).
-
-a. ¿Las muestras son independientes o pareadas? Plantear las hipótesis sobre $\mu_{AA}-\mu_{TT}$.
-a. Enumerar los supuestos de la t de Student para dos muestras independientes. ¿Cómo se decide entre la versión con varianzas iguales y la de Welch?
-a. Pedir a la IA los descriptivos por grupo, la normalidad en cada grupo, un contraste de igualdad de varianzas y las dos versiones de la t con su intervalo de confianza del 95 %.
-a. ¿Cambia la conclusión entre la t clásica y la de Welch? Interpretar la diferencia en kg/m² y la d de Cohen.
-a. Al tratarse de un estudio transversal, ¿qué variables podrían confundir esta comparación?
+En un estudio transversal con adultos sanos de 30 a 50 años se compara el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609. Ambos grupos se reclutaron de forma independiente en la misma cohorte. Los datos están en el fichero [imc-fto.csv](datos/imc-fto.csv). ¿Hay diferencias significativas en el IMC medio de ambos genotipos con un nivel de significación del 5%? ¿Qué variables podrían confundir esta comparación?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -250,12 +225,7 @@ Como el p-valor es menor que el nivel de significación $\alpha=0.05$, se rechaz
 :::
 
 :::{#exr-contraste-ia-comparacion-medias-omega3}
-En un ensayo con 42 adultos, 14 reciben 1 g/día de EPA+DHA durante 12 semanas y 28 un placebo de aceite de oliva. Al final se mide el índice omega-3 eritrocitario (% de EPA+DHA sobre los ácidos grasos totales). La hipótesis de los investigadores es que el suplemento lo aumenta. Los datos están en el fichero [indice-omega3.csv](datos/indice-omega3.csv).
-
-a. Plantear las hipótesis. ¿Está justificado un contraste unilateral? ¿Quién y cuándo debe decidirlo?
-a. Antes de pedir nada a la IA, comparar la dispersión de los dos grupos. ¿Qué versión de la t se espera usar y por qué importa aquí que los tamaños muestrales sean distintos?
-a. Pedir a la IA la t de Welch y también la t con varianzas iguales. Comparar los grados de libertad y los p-valores y explicar por qué difieren.
-a. Interpretar el resultado. ¿Qué sugiere biológicamente que la variabilidad sea mucho mayor en el grupo suplementado?
+En un ensayo con 42 adultos, 14 reciben 1 g/día de EPA+DHA durante 12 semanas y 28 un placebo de aceite de oliva. Al final se mide el índice omega-3 eritrocitario (% de EPA+DHA sobre los ácidos grasos totales). Los datos están en el fichero [indice-omega3.csv](datos/indice-omega3.csv). ¿Aumenta el suplemento el índice omega-3 con un nivel de significación del 5%? ¿Qué proporción de los participantes de cada grupo alcanza el 8 %, valor que suele considerarse cardioprotector?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -275,12 +245,7 @@ Como el p-valor es menor que el nivel de significación, se rechaza la hipótesi
 :::
 
 :::{#exr-contraste-ia-comparacion-varianzas-tcf7l2}
-La nutrición personalizada parte de que la respuesta glucémica a una misma comida varía mucho entre personas. Se quiere saber si esa variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2 rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2 horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el fichero [auc-glucosa-tcf7l2.csv](datos/auc-glucosa-tcf7l2.csv).
-
-a. ¿Qué parámetro se compara? Plantear las hipótesis.
-a. ¿Qué contraste se debe aplicar? ¿Por qué la normalidad es aquí más crítica que en una comparación de medias? ¿Qué alternativa robusta existe?
-a. Pedir a la IA el contraste F, el intervalo de confianza del 95 % para el cociente de varianzas y el test de Levene. Verificar que el estadístico F es el cociente de las dos varianzas muestrales y que el grupo del numerador es el correcto.
-a. Interpretar el resultado. ¿Qué implicaciones tendría para diseñar recomendaciones dietéticas por genotipo? ¿Se diferencian también las medias?
+La nutrición personalizada parte de que la respuesta glucémica a una misma comida varía mucho entre personas. Se quiere saber si esa variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2 rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2 horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el fichero [auc-glucosa-tcf7l2.csv](datos/auc-glucosa-tcf7l2.csv). ¿Es más variable la respuesta glucémica de los TT que la de los CC con un nivel de significación del 5%? ¿Difieren también las respuestas medias de ambos genotipos?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -294,8 +259,7 @@ Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma
 Estadístico del contraste: $F=56.5^2/28.0^2=4.09$ con 15 y 19 grados de libertad.  
 p-valor: $p=0.002$ (bilateral: $0.005$). Intervalo de confianza del 95 % para $\sigma_1^2/\sigma_2^2$: $(1.56, 11.34)$. Test de Levene: $p=0.002$.  
 Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la respuesta glucémica de los TT es unas 4 veces más variable (la desviación típica, el doble).  
-Comparación de medias (Welch): $t=0.73$ con 20.8 grados de libertad, $p=0.47$. Las medias no difieren, pero la dispersión sí. Una recomendación basada en la media del genotipo sería poco informativa para los TT, en quienes tendría más sentido medir la respuesta individual (por ejemplo, con monitorización continua de glucosa). Que no difieran las medias no significa que los grupos sean iguales.  
-Errores frecuentes de la IA: poner en el numerador el grupo de menor varianza ($F=0.24$) y calcular el p-valor en la cola equivocada.
+Comparación de medias (Welch): $t=0.73$ con 20.8 grados de libertad, $p=0.47$. Las medias no difieren, pero la dispersión sí. Una recomendación basada en la media del genotipo sería poco informativa para los TT, en quienes tendría más sentido medir la respuesta individual (por ejemplo, con monitorización continua de glucosa). Que no difieran las medias no significa que los grupos sean iguales.
 :::
 
 :::{#exr-contraste-comparacion-medias-pareadas-hierro}
@@ -319,13 +283,7 @@ Como el p-valor es menor que el nivel de significación $\alpha=0.01$, se rechaz
 :::
 
 :::{#exr-contraste-ia-comparacion-medias-pareadas-ldl}
-Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero [ldl-fitoesteroles.csv](datos/ldl-fitoesteroles.csv).
-
-a. ¿Por qué estas muestras son pareadas? Definir la variable diferencia (indicando el orden de la resta) y plantear las hipótesis.
-a. ¿Sobre qué variable hay que comprobar la normalidad: los valores iniciales, los finales o las diferencias?
-a. Pedir a la IA la t para datos pareados con su intervalo de confianza del 95 %. Después pedirle, a propósito, una t para muestras independientes con los mismos datos.
-a. Comparar ambos resultados y explicar por qué son tan distintos. Pista: pedir la correlación entre el LDL inicial y el final.
-a. Interpretar la reducción media en mg/dL y en %. Sin grupo control, ¿se puede atribuir al yogur? ¿Qué otros fenómenos podrían explicarla?
+Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero [ldl-fitoesteroles.csv](datos/ldl-fitoesteroles.csv). ¿Se reduce significativamente el colesterol LDL tras las 8 semanas con un nivel de significación del 5%? ¿A cuánto asciende la reducción media en mg/dL y en porcentaje? ¿Puede atribuirse la reducción al yogur?
 :::
 
 :::{.callout-tip collapse="true"}
@@ -343,25 +301,12 @@ Como el p-valor es menor que el nivel de significación, se rechaza la hipótesi
 :::
 
 :::{#exr-contraste-ia-verificacion-folato}
-Diez mujeres en edad fértil toman 400 µg/día de ácido fólico durante 8 semanas. Se mide el folato sérico (ng/mL) antes y después. Los datos están en el fichero [folato-suplementacion.csv](datos/folato-suplementacion.csv). Un compañero ha pegado los datos en un asistente de IA y ha obtenido la siguiente respuesta:
-
-```
-He aplicado una prueba t de Welch para comparar las medias de los dos grupos.
-Media antes = 13.28 ng/mL (DE 4.20); media después = 17.21 ng/mL (DE 5.82).
-t = 1.730; gl = 16.37; p = 0.102. IC 95 % de la diferencia: (-0.88, 8.74).
-Conclusión: no hay evidencia de que la suplementación aumente el folato sérico.
-```
-
-a. Revisar la respuesta con la lista de comprobación. ¿Qué está bien y qué está mal?
-a. ¿Qué contraste debería haberse aplicado y por qué? ¿Cambiaría la conclusión?
-a. Repetir el análisis correcto con la IA y comparar los resultados.
-a. Reescribir la petición original para que este error no se pueda producir.
+Diez mujeres en edad fértil toman 400 µg/día de ácido fólico durante 8 semanas. Se mide el folato sérico (ng/mL) antes y después de la suplementación. Los datos están en el fichero [folato-suplementacion.csv](datos/folato-suplementacion.csv). Un investigador ha comparado las medias de folato antes ($13.28$ ng/mL) y después ($17.21$ ng/mL) con un contraste t de Welch, obteniendo un p-valor $p=0.102$, y ha concluido que la suplementación no aumenta el folato sérico. ¿Es correcto el análisis? ¿Aumenta realmente la suplementación el folato sérico con un nivel de significación del 5%?
 :::
 
 :::{.callout-tip collapse="true"}
 ## Solución
-Lo que está bien: las medias, las desviaciones típicas y los cálculos de la t de Welch son correctos.  
-Lo que está mal: el contraste. Son las mismas 10 mujeres medidas dos veces, así que las muestras son pareadas. Pistas: los grados de libertad no enteros (indican Welch), la expresión «dos grupos» y que 9 de las 10 participantes aumentan su folato. Además, la conclusión es incorrecta: un p-valor no significativo no demuestra la ausencia de efecto.  
+El análisis no es correcto. Las medias y el p-valor del contraste de Welch están bien calculados, pero el contraste no es el adecuado: son las mismas 10 mujeres medidas dos veces, así que las muestras son pareadas y no independientes. Además, un p-valor no significativo no demuestra la ausencia de efecto.  
 Número de poblaciones: 2 poblaciones pareadas (población 1: después, población 2: antes).  
 Variable dependiente: Folato sérico (cuantitativa).  
 Tamaño muestral: $n=10$.  
@@ -370,16 +315,7 @@ Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.93$. Se acepta la no
 Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d> 0$.  
 Estadístico del contraste: $t=4.66$ con 9 grados de libertad.  
 p-valor: $p=0.0006$ (bilateral: $0.001$). Intervalo de confianza del 95 % para $\mu_d$: $(2.02, 5.84)$ ng/mL.  
-Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la suplementación aumenta el folato sérico unos 4 ng/mL. La correlación antes-después es $r=0.91$, por eso el diseño pareado gana tanta potencia.  
-Petición reescrita:
-
-```
-Cada fila corresponde a la MISMA participante medida antes y después de 8 semanas
-de ácido fólico. Calcula D = folato_despues - folato_antes para cada fila,
-comprueba la normalidad de D (Shapiro-Wilk) y haz una t de Student para datos
-pareados, H1: μ_D > 0, α = 0.05. Dame t, gl, p-valor e IC 95 % de μ_D,
-y el código R que has usado.
-```
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la suplementación aumenta el folato sérico unos 4 ng/mL. La correlación antes-después es $r=0.91$, por eso el diseño pareado gana tanta potencia.
 :::
 
 :::{#exr-contraste-comparacion-proporciones-vitamina-c}
@@ -422,13 +358,7 @@ Como el p-valor es menor que el nivel de significación $\alpha=0.05$, se rechaz
 :::
 
 :::{#exr-contraste-ia-comparacion-proporciones-fto-respuesta}
-En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores.
-
-a. Plantear las hipótesis sobre las proporciones de respondedores.
-a. ¿Qué contraste se debe aplicar? Comprobar las condiciones de validez (frecuencias esperadas).
-a. Pedir a la IA el test z para dos proporciones, el test $\chi^2$ con y sin corrección de Yates y el test exacto de Fisher, además del intervalo de confianza del 95 % para la diferencia de proporciones. ¿Qué relación hay entre el estadístico $z$ y el $\chi^2$ sin corrección?
-a. Las conclusiones pueden no coincidir entre métodos. ¿Qué se debe hacer si el p-valor está cerca de 0.05?
-a. Pedir también el riesgo relativo y la odds ratio, e interpretar uno de ellos para un profesional de la nutrición.
+En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores. ¿Influye el genotipo FTO en la probabilidad de responder a la dieta con un nivel de significación del 5%? Calcular e interpretar el riesgo relativo de responder de los portadores frente a los no portadores.
 :::
 
 :::{.callout-tip collapse="true"}
@@ -447,18 +377,16 @@ Como el p-valor es menor que el nivel de significación, se rechaza la hipótesi
 :::
 
 :::{#exr-contraste-ia-caso-integrador-dieta-fto}
-En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan al azar a una dieta mediterránea hipocalórica o a una dieta baja en grasa hipocalórica (40 por grupo). El fichero [dieta-fto-ensayo.csv](datos/dieta-fto-ensayo.csv) contiene el identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses (kg) y glucosa basal y a 6 meses (mg/dL). Pedir a la IA que calcule primero la pérdida de peso en % como $100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}$ y comprobar a mano el valor de dos participantes. Para cada pregunta, seguir los cinco pasos.
+En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan al azar a una dieta mediterránea hipocalórica o a una dieta baja en grasa hipocalórica (40 por grupo). El fichero [dieta-fto-ensayo.csv](datos/dieta-fto-ensayo.csv) contiene el identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses (kg) y glucosa basal y a 6 meses (mg/dL). La pérdida de peso en porcentaje se calcula como $100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}$ y se considera respondedor a quien pierde al menos el 5 % de su peso. Utilizar un nivel de significación del 5%.
 
 a. ¿Difiere el porcentaje medio de pérdida de peso entre las dos dietas?
-a. ¿Disminuye la glucosa en ayunas con la dieta mediterránea? ¿Y con la baja en grasa? ¿Permiten estos dos contrastes concluir que una dieta es mejor que la otra para la glucosa?
-a. ¿Difiere la proporción de respondedores (pérdida $\geq 5$ %) entre las dos dietas?
-a. Formular una pregunta sobre el genotipo FTO con estos datos, elegir el contraste y analizarla. Comentar el tamaño de los grupos y el problema de hacer muchas comparaciones con los mismos datos.
+a. ¿Disminuye la glucosa en ayunas con la dieta mediterránea? ¿Y con la baja en grasa? ¿Es una dieta mejor que la otra para reducir la glucosa?
+a. ¿Difiere la proporción de respondedores entre las dos dietas?
+a. ¿Pierden menos peso los homocigotos AA para el polimorfismo FTO que el resto de participantes?
 :::
 
 :::{.callout-tip collapse="true"}
 ## Solución
-Comprobación: P001 pierde un 11.8 % y P002 un 1.5 %.
-
 a. Número de poblaciones: 2 poblaciones independientes (población 1: dieta mediterránea, población 2: dieta baja en grasa).  
 Variable dependiente: Pérdida de peso en % (cuantitativa).  
 Tamaños muestrales: $n_1=40$, $n_2=40$.  
@@ -478,7 +406,7 @@ Proporciones muestrales: mediterránea $24/40=0.60$, baja en grasa $14/40=0.35$.
 Estadístico: $z=2.24$. p-valor: $p=0.025$ (Fisher: $p=0.043$). Intervalo de confianza del 95 % para $p_1-p_2$: $(0.04, 0.46)$.  
 Se rechaza la hipótesis nula, de forma coherente con el apartado a, aunque al dicotomizar la pérdida de peso se pierde información.
 
-a. Ejemplo: ¿pierden menos peso los AA? Contraste de Welch: AA: $n=18$, $\bar x=4.13$ %, $s=2.53$; no AA: $n=62$, $\bar x=4.75$ %, $s=3.62$. $t=-0.83$ con 39.4 grados de libertad, $p=0.41$, intervalo $(-2.15, 0.90)$. No hay evidencia de diferencia, pero el intervalo es compatible con un efecto clínicamente relevante. Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en mediterránea y 7 en baja en grasa), lo que puede confundir la comparación. Con cuatro o más contrastes sobre los mismos datos, la probabilidad de algún falso positivo crece (con 4 contrastes independientes a $\alpha=0.05$, cerca del 19 %). Lo adecuado sería declarar la hipótesis de antemano, ajustar los p-valores (Bonferroni, Holm) o modelizar la interacción dieta × genotipo.
+a. Número de poblaciones: 2 poblaciones independientes (población 1: AA, población 2: AT o TT). Contraste de Welch, $H_0:\mu_1=\mu_2$, $H_1:\mu_1<\mu_2$: AA: $n=18$, $\bar x=4.13$ %, $s=2.53$; no AA: $n=62$, $\bar x=4.75$ %, $s=3.62$. $t=-0.83$ con 39.4 grados de libertad, $p=0.21$, intervalo del 95 % para $\mu_1-\mu_2$: $(-2.15, 0.90)$. No hay evidencia de diferencia, pero el intervalo es compatible con un efecto clínicamente relevante. Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en mediterránea y 7 en baja en grasa), lo que puede confundir la comparación. Con cuatro o más contrastes sobre los mismos datos, la probabilidad de algún falso positivo crece (con 4 contrastes independientes a $\alpha=0.05$, cerca del 19 %). Lo adecuado sería fijar la hipótesis de antemano, ajustar los p-valores (Bonferroni, Holm) o modelizar la interacción dieta × genotipo.
 :::
 
 ## Más de dos poblaciones
