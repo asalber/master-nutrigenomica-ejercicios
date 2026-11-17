@@ -166,3 +166,324 @@ Contraste de ANOVA de dos factores con interacción: $H_0:$ No hay interacción 
 - p-valor interacción: $p=0.0012$.  
 Como el p-valor es menor que el nivel de significación en los tres casos, se rechaza la hipótesis nula y se concluye que la pérdida de peso depende de la dieta, del fármaco y de la interacción entre ambos.
 :::
+
+## Ejercicios para resolver con ayuda de un asistente de IA
+
+En los siguientes ejercicios el alumno debe decidir qué contraste aplicar y por qué, pedir los cálculos a un asistente de IA (ChatGPT, Claude, Gemini, Copilot, etc.), verificar su respuesta e interpretar los resultados. Se valora el razonamiento y la interpretación, no el número que devuelva la IA. Salvo que se indique otra cosa, se utilizará un nivel de significación $\alpha=0.05$.
+
+:::{.callout-note}
+## Pautas para trabajar con la IA
+
+**Los cinco pasos de cada ejercicio**
+
+1. **Plantear** (sin IA): variable dependiente y su tipo, número de poblaciones, si las muestras son independientes o pareadas, parámetro de interés ($\mu$, $p$, $\sigma^2$) e hipótesis $H_0$ y $H_1$, justificando si el contraste es bilateral o unilateral.
+2. **Elegir el contraste y listar sus supuestos** (sin IA): normalidad, independencia, igualdad de varianzas, tamaño muestral suficiente, etc.
+3. **Pedir los cálculos a la IA**: estadísticos descriptivos, comprobación de los supuestos y el contraste, junto con el código (R o Python) utilizado.
+4. **Verificar** la respuesta (ver la lista de comprobación).
+5. **Interpretar**: decisión sobre $H_0$, estimación con intervalo de confianza, tamaño del efecto y significado práctico en el contexto nutricional, además de alguna limitación del estudio.
+
+**Cómo preguntar a la IA**
+
+Una buena petición incluye el contexto, los datos, el contraste elegido por el alumno y el formato de salida. No hay que pedirle a la IA que elija el contraste; si se quiere contrastar la elección, se le puede preguntar después y discutir su respuesta. Ejemplo:
+
+```
+Tengo estos datos (CSV adjunto). Quiero contrastar H0: μ = 5 frente a H1: μ > 5
+con una t de Student para una muestra, α = 0.05.
+1. Calcula n, media, desviación típica, mínimo y máximo.
+2. Comprueba la normalidad con Shapiro-Wilk.
+3. Haz el contraste: estadístico, grados de libertad, p-valor e IC del 95 %.
+4. Muestra el código R que has ejecutado para obtenerlo.
+No interpretes el resultado; solo dame los números.
+```
+
+- Pedir siempre el código y, si el asistente puede, que lo ejecute. Un número sin código no es verificable.
+- Indicar la dirección de la hipótesis alternativa y el orden de los grupos (por ejemplo, «diferencia = AA − TT»).
+- En datos pareados, indicar explícitamente que cada fila corresponde al mismo individuo.
+- Pedir el p-valor exacto, no «p < 0.05».
+
+**Lista de comprobación de la respuesta de la IA**
+
+- ¿Ha leído bien los datos? Comprobar que $n$ y alguna media coinciden con un cálculo propio.
+- ¿Ha usado el contraste pedido, con la cola correcta (bilateral o unilateral)?
+- ¿Los grados de libertad son coherentes ($n-1$, $n_1+n_2-2$, o no enteros en el contraste de Welch)?
+- ¿El intervalo de confianza y el p-valor son coherentes entre sí?
+- ¿El signo de la diferencia corresponde al orden de los grupos pedido?
+- ¿Los valores son plausibles (medias dentro del rango de los datos, p-valores entre 0 y 1)?
+- ¿Se ha repetido al menos un cálculo con otra herramienta o en una conversación nueva?
+
+La IA puede inventar números con total seguridad, sobre todo si no ejecuta código. Si dos respuestas no coinciden, la que vale es la que se puede reproducir.
+:::
+
+:::{#exr-contraste-ia-media-homocisteina-mthfr}
+El genotipo TT del polimorfismo MTHFR C677T reduce la actividad de la enzima y tiende a elevar la homocisteína plasmática. Un grupo de investigación considera que una homocisteína media de 12 µmol/L es el límite a partir del cual merece la pena suplementar con folato. Se ha medido la homocisteína en ayunas de 18 adultos TT sin suplementación y los resultados están en el fichero [homocisteina-mthfr.csv](datos/homocisteina-mthfr.csv).
+
+a. ¿Qué parámetro poblacional interesa? Plantear las hipótesis y justificar si el contraste debe ser unilateral o bilateral.
+a. ¿Qué contraste se debe aplicar? ¿Qué supuestos necesita y cómo se comprueban con $n=18$?
+a. Redactar la petición para la IA, incluyendo el intervalo de confianza y el tamaño del efecto (d de Cohen).
+a. Interpretar el resultado. ¿Se recomendaría suplementar a los portadores TT?
+a. ¿Qué papel tiene el valor 8.3 µmol/L? Pedir a la IA que repita el análisis sin él y comentar si cambia la conclusión.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: Homocisteína plasmática (cuantitativa).  
+Tamaño muestral: $n=18$.  
+Descriptivos: $\bar x=14.37$ µmol/L, $s=2.48$ µmol/L.  
+Prueba de normalidad de Shapiro-Wilk: $p=0.439$. Se acepta la normalidad (el gráfico Q-Q muestra un valor bajo, 8.3, algo separado del resto).  
+Contraste de la media de una población normal (prueba t): $H_0:\mu=12$, $H_1:\mu>12$. El contraste unilateral se justifica porque la decisión (suplementar) solo depende de superar el umbral, y debe fijarse antes de ver los datos.  
+Estadístico del contraste: $t=4.06$ con 17 grados de libertad.  
+p-valor: $p=0.0004$.  
+Intervalo de confianza del 95 % bilateral para $\mu$: $(13.14, 15.60)$ µmol/L; cota inferior unilateral: $13.36$ µmol/L.  
+Tamaño del efecto: $d=(14.37-12)/2.48=0.96$ (grande).  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la homocisteína media de los portadores TT supera los 12 µmol/L. Con un 95 % de confianza la media es al menos 13.4 µmol/L, lo que respaldaría la suplementación, aunque la decisión clínica también depende del estado de folato y vitamina B12, que no se ha medido.  
+Sin el valor 8.3: $n=17$, $\bar x=14.73$, $s=2.02$, $t=5.57$, $p<0.0001$. La conclusión no cambia: el valor atípico va en contra de $H_1$ y hace el contraste más conservador. Un dato no debe eliminarse solo porque moleste.  
+Errores frecuentes de la IA: dar el p-valor bilateral ($0.0008$) cuando se pidió unilateral o presentar el intervalo unilateral como bilateral.
+:::
+
+:::{#exr-contraste-ia-proporcion-fto-obesidad}
+En población europea, alrededor del 16 % de los adultos son homocigotos AA para el alelo de riesgo del polimorfismo FTO rs9939609. En una consulta de obesidad (IMC $\geq 30$) se genotipan 220 pacientes no emparentados y 49 resultan ser AA.
+
+a. Plantear las hipótesis. ¿Qué cabría esperar biológicamente y cómo afecta eso a la elección de la cola?
+a. ¿Qué contraste se debe aplicar? Comprobar las condiciones para usar la aproximación normal ($np_0$ y $n(1-p_0)$).
+a. Pedir a la IA el contraste con la aproximación normal y también el test binomial exacto, con su intervalo de confianza del 95 %. ¿Coinciden las conclusiones?
+a. Interpretar el resultado en términos de asociación genética. ¿Permite este diseño afirmar que el genotipo AA causa obesidad?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: Genotipo FTO AA (cualitativa binaria).  
+Tamaño muestral: $n=220$.  
+Proporción muestral: $\hat p=49/220=0.223$.  
+Condiciones: $np_0=35.2$ y $n(1-p_0)=184.8$, ambas mayores que 5, por lo que la aproximación normal es válida.  
+Contraste para la proporción de una población: $H_0:p=0.16$, $H_1:p\neq 0.16$ (un contraste unilateral $H_1:p>0.16$ es defendible si se fijó a priori; en ese caso $p=0.0056$).  
+Estadístico del contraste: $z=2.54$.  
+p-valor: $p=0.011$ (test binomial exacto: $p=0.016$).  
+Intervalo de confianza del 95 % de Wilson: $(0.173, 0.282)$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la frecuencia del genotipo AA en la consulta de obesidad (22 %) es mayor que la de referencia (16 %), lo que es compatible con la asociación conocida entre FTO y adiposidad. El diseño no permite hablar de causalidad: se compara con una cifra externa, la ascendencia de la muestra puede diferir de la población de referencia (estratificación) y la consulta no es una muestra aleatoria de personas con obesidad.  
+Errores frecuentes de la IA: usar $\hat p$ en lugar de $p_0$ en el error estándar del estadístico ($z\approx 2.23$).
+:::
+
+:::{#exr-contraste-ia-varianza-hba1c}
+El fabricante de un analizador de hemoglobina glicada (HbA1c) para la consulta de nutrición afirma que su desviación típica de repetibilidad no supera 0.15 puntos porcentuales. Para comprobarlo, se mide 15 veces la misma muestra de control. Los resultados están en el fichero [hba1c-analizador.csv](datos/hba1c-analizador.csv).
+
+a. ¿Sobre qué parámetro es el contraste? Plantear las hipótesis desde el punto de vista del comprador que quiere comprobar la afirmación del fabricante.
+a. ¿Qué contraste se debe aplicar? Este contraste es mucho más sensible a la falta de normalidad que la t de Student: explicar por qué y cómo se comprueba.
+a. Pedir a la IA el contraste y el intervalo de confianza del 95 % para la desviación típica (no para la varianza). Verificar que el estadístico es $(n-1)s^2/\sigma_0^2$.
+a. Interpretar el resultado. ¿Qué ocurre si se elimina la medición 10? ¿Está justificado eliminarla?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 1 población.  
+Variable dependiente: HbA1c de la muestra de control (cuantitativa).  
+Tamaño muestral: $n=15$.  
+Descriptivos: $\bar x=6.47$ %, $s=0.201$ ($s^2=0.0404$).  
+Prueba de normalidad de Shapiro-Wilk: $p=0.070$ (en el límite, con la medición 10, 6.97, claramente alejada). El contraste $\chi^2$ no es robusto: la distribución de $s^2$ depende de la curtosis y unas colas pesadas inflan la varianza muestral sin que el teorema central del límite lo corrija.  
+Contraste para la varianza de una población normal: $H_0:\sigma\leq 0.15$, $H_1:\sigma>0.15$.  
+Estadístico del contraste: $\chi^2=14\cdot 0.0404/0.0225=25.13$ con 14 grados de libertad.  
+p-valor: $p=0.033$.  
+Intervalo de confianza del 95 % para $\sigma$: $(0.147, 0.317)$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que hay evidencia (moderada) de que la imprecisión del analizador supera la anunciada por el fabricante.  
+Sin la medición 10: $s=0.151$, $\chi^2=13.3$ con 13 grados de libertad, $p=0.43$, y la conclusión se invierte. Solo estaría justificado eliminarla si hubiese una causa técnica documentada. Lo correcto es informar de ambos análisis y repetir la prueba con más mediciones.  
+Errores frecuentes de la IA: dar el intervalo para la varianza en lugar de para la desviación típica o usar $\sigma_0=0.15$ en lugar de $\sigma_0^2=0.0225$ en el denominador ($\chi^2\approx 3.8$).
+:::
+
+:::{#exr-contraste-ia-comparacion-medias-imc-fto}
+En un estudio transversal con adultos sanos de 30 a 50 años se compara el IMC de los homocigotos AA y TT para el polimorfismo FTO rs9939609. Ambos grupos se reclutaron de forma independiente en la misma cohorte. Los datos están en el fichero [imc-fto.csv](datos/imc-fto.csv).
+
+a. ¿Las muestras son independientes o pareadas? Plantear las hipótesis sobre $\mu_{AA}-\mu_{TT}$.
+a. Enumerar los supuestos de la t de Student para dos muestras independientes. ¿Cómo se decide entre la versión con varianzas iguales y la de Welch?
+a. Pedir a la IA los descriptivos por grupo, la normalidad en cada grupo, un contraste de igualdad de varianzas y las dos versiones de la t con su intervalo de confianza del 95 %.
+a. ¿Cambia la conclusión entre la t clásica y la de Welch? Interpretar la diferencia en kg/m² y la d de Cohen.
+a. Al tratarse de un estudio transversal, ¿qué variables podrían confundir esta comparación?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: genotipo AA, población 2: genotipo TT).  
+Variable dependiente: IMC (cuantitativa).  
+Tamaños muestrales: $n_1=22$, $n_2=25$.  
+Descriptivos: AA: $\bar x_1=31.23$, $s_1=4.68$; TT: $\bar x_2=28.25$, $s_2=3.65$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.71$, p-valor segunda muestra: $0.71$. Se acepta la normalidad en ambos grupos.  
+Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$. $F=1.65$, p-valor: $p=0.24$ (Levene: $p=0.30$). Se acepta la igualdad de varianzas.  
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1\neq\mu_2$.  
+Estadístico del contraste: $t=2.44$ con 45 grados de libertad. p-valor: $p=0.018$. Intervalo de confianza del 95 % para $\mu_1-\mu_2$: $(0.52, 5.43)$ kg/m².  
+Contraste de Welch: $t=2.41$ con 39.5 grados de libertad, $p=0.021$, intervalo $(0.48, 5.48)$. Ambas versiones coinciden.  
+Tamaño del efecto: $d=0.71$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que los portadores AA tienen de media unos 3 kg/m² más de IMC que los TT. El intervalo es ancho, así que la magnitud está poco precisada; en población general el efecto de FTO es menor (en torno a 0.4 kg/m² por alelo), lo que sugiere que una muestra pequeña puede sobrestimarlo. Posibles variables de confusión: sexo, edad, actividad física, ingesta energética, nivel socioeconómico y ascendencia (estratificación poblacional).
+:::
+
+:::{#exr-contraste-ia-comparacion-medias-omega3}
+En un ensayo con 42 adultos, 14 reciben 1 g/día de EPA+DHA durante 12 semanas y 28 un placebo de aceite de oliva. Al final se mide el índice omega-3 eritrocitario (% de EPA+DHA sobre los ácidos grasos totales). La hipótesis de los investigadores es que el suplemento lo aumenta. Los datos están en el fichero [indice-omega3.csv](datos/indice-omega3.csv).
+
+a. Plantear las hipótesis. ¿Está justificado un contraste unilateral? ¿Quién y cuándo debe decidirlo?
+a. Antes de pedir nada a la IA, comparar la dispersión de los dos grupos. ¿Qué versión de la t se espera usar y por qué importa aquí que los tamaños muestrales sean distintos?
+a. Pedir a la IA la t de Welch y también la t con varianzas iguales. Comparar los grados de libertad y los p-valores y explicar por qué difieren.
+a. Interpretar el resultado. ¿Qué sugiere biológicamente que la variabilidad sea mucho mayor en el grupo suplementado?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: suplemento, población 2: placebo).  
+Variable dependiente: Índice omega-3 (cuantitativa).  
+Tamaños muestrales: $n_1=14$, $n_2=28$.  
+Descriptivos: suplemento: $\bar x_1=6.81$ %, $s_1=1.71$; placebo: $\bar x_2=5.29$ %, $s_2=0.61$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.41$, p-valor segunda muestra: $0.83$. Se acepta la normalidad en ambos grupos.  
+Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2\neq \sigma_2^2$. $F=7.90$, p-valor: $p<0.0001$. Se rechaza la igualdad de varianzas.  
+Con varianzas y tamaños distintos la t clásica no es válida: si el grupo pequeño tiene la varianza mayor, como aquí, la varianza combinada la infraestima y el contraste se vuelve anticonservador.  
+Contraste de Welch para la comparación de medias de poblaciones independientes con varianzas distintas: $H_0:\mu_1=\mu_2$, $H_1:\mu_1>\mu_2$. El contraste unilateral es razonable porque la hipótesis es direccional, pero debe fijarse en el protocolo antes del análisis.  
+Estadístico del contraste: $t=3.23$ con 14.7 grados de libertad.  
+p-valor: $p=0.003$. Intervalo de confianza del 95 % bilateral para $\mu_1-\mu_2$: $(0.51, 2.53)$.  
+Con la t de varianzas iguales (incorrecta) se obtiene $t=4.24$ con 40 grados de libertad y $p<0.0001$, un p-valor unas 40 veces menor y un intervalo demasiado estrecho $(0.80, 2.25)$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el suplemento aumenta el índice omega-3 en 1.5 puntos de media. La mayor dispersión en el grupo suplementado indica una respuesta heterogénea (adherencia, absorción, índice basal, peso corporal o variantes genéticas, por ejemplo en FADS1/FADS2). Solo 4 de 14 suplementados (29 %) alcanzan el 8 % que suele considerarse cardioprotector.
+:::
+
+:::{#exr-contraste-ia-comparacion-medias-pareadas-ldl}
+Catorce voluntarios con hipercolesterolemia leve toman a diario durante 8 semanas un yogur enriquecido con 2 g de fitoesteroles. Se mide el colesterol LDL (mg/dL) al inicio y al final. Los datos están en el fichero [ldl-fitoesteroles.csv](datos/ldl-fitoesteroles.csv).
+
+a. ¿Por qué estas muestras son pareadas? Definir la variable diferencia (indicando el orden de la resta) y plantear las hipótesis.
+a. ¿Sobre qué variable hay que comprobar la normalidad: los valores iniciales, los finales o las diferencias?
+a. Pedir a la IA la t para datos pareados con su intervalo de confianza del 95 %. Después pedirle, a propósito, una t para muestras independientes con los mismos datos.
+a. Comparar ambos resultados y explicar por qué son tan distintos. Pista: pedir la correlación entre el LDL inicial y el final.
+a. Interpretar la reducción media en mg/dL y en %. Sin grupo control, ¿se puede atribuir al yogur? ¿Qué otros fenómenos podrían explicarla?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones pareadas (población 1: después de 8 semanas, población 2: al inicio).  
+Variable dependiente: Colesterol LDL (cuantitativa).  
+Tamaño muestral: $n=14$.  
+Variable diferencia: $D=$ LDL a 8 semanas $-$ LDL inicial. $\bar d=-9.93$ mg/dL, $s_d=13.46$.  
+Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.49$. Se acepta la normalidad. La normalidad se comprueba en las diferencias; que los valores finales den $p=0.034$ es irrelevante para la t pareada.  
+Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d< 0$.  
+Estadístico del contraste: $t=-2.76$ con 13 grados de libertad.  
+p-valor: $p=0.008$ (bilateral: $0.016$). Intervalo de confianza del 95 % para $\mu_d$: $(-17.7, -2.2)$ mg/dL. Tamaño del efecto: $d_z=0.74$.  
+Con la t para muestras independientes (incorrecta) se obtiene $t=-1.13$ con 26 grados de libertad y $p=0.27$. La correlación entre LDL inicial y final es $r=0.85$: la mayor parte de la variabilidad es entre personas y el diseño pareado la elimina.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que el LDL baja una media de unos 10 mg/dL (6.3 %), coherente con la reducción que se atribuye habitualmente a 2 g/día de fitoesteroles. Sin grupo control no puede atribuirse al yogur: regresión a la media (se seleccionó a personas con LDL alto), cambios de dieta por sentirse observados, estacionalidad o variabilidad analítica.
+:::
+
+:::{#exr-contraste-ia-comparacion-proporciones-fto-respuesta}
+En un programa de 6 meses de dieta hipocalórica se considera «respondedor» a quien pierde al menos el 5 % de su peso inicial. De los 96 portadores del alelo A del polimorfismo FTO rs9939609 (AA o AT), 38 fueron respondedores, mientras que de los 54 no portadores (TT), 31 fueron respondedores.
+
+a. Plantear las hipótesis sobre las proporciones de respondedores.
+a. ¿Qué contraste se debe aplicar? Comprobar las condiciones de validez (frecuencias esperadas).
+a. Pedir a la IA el test z para dos proporciones, el test $\chi^2$ con y sin corrección de Yates y el test exacto de Fisher, además del intervalo de confianza del 95 % para la diferencia de proporciones. ¿Qué relación hay entre el estadístico $z$ y el $\chi^2$ sin corrección?
+a. Las conclusiones pueden no coincidir entre métodos. ¿Qué se debe hacer si el p-valor está cerca de 0.05?
+a. Pedir también el riesgo relativo y la odds ratio, e interpretar uno de ellos para un profesional de la nutrición.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: portadores del alelo A, población 2: no portadores TT).  
+Variable dependiente: Respuesta a la dieta (cualitativa binaria).  
+Tamaños muestrales: $n_1=96$, $n_2=54$.  
+Proporciones muestrales: $\hat p_1=0.396$, $\hat p_2=0.574$.  
+Frecuencias esperadas: 44.2, 51.8, 24.8 y 29.2, todas mayores que 5.  
+Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
+Estadístico del contraste: $z=-2.10$ ($z^2=4.42=\chi^2$ sin corrección: son el mismo contraste).  
+p-valor: $p=0.036$. Con corrección de Yates: $\chi^2=3.73$, $p=0.053$. Test exacto de Fisher: $p=0.041$.  
+Intervalo de confianza del 95 % para $p_1-p_2$: $(-0.342, -0.014)$.  
+Riesgo relativo: $RR=0.69$; odds ratio: $OR=0.49$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula: los portadores del alelo A tienen una probabilidad de responder un 31 % menor. Sin embargo, la evidencia es débil: el intervalo llega casi a 0 y con la corrección de Yates (conservadora) el p-valor es 0.053. No deben extraerse dos conclusiones opuestas de 0.036 y 0.053; hay que informar del intervalo y pedir replicación. Un metaanálisis de datos individuales (Livingstone et al., BMJ 2016) no encontró diferencias en la pérdida de peso por genotipo FTO.
+:::
+
+:::{#exr-contraste-ia-comparacion-varianzas-tcf7l2}
+La nutrición personalizada parte de que la respuesta glucémica a una misma comida varía mucho entre personas. Se quiere saber si esa variabilidad es mayor en los homocigotos TT del polimorfismo TCF7L2 rs7903146 que en los CC. Se mide el área bajo la curva de glucosa a 2 horas (AUC, mmol·min/L) tras un desayuno estándar. Los datos están en el fichero [auc-glucosa-tcf7l2.csv](datos/auc-glucosa-tcf7l2.csv).
+
+a. ¿Qué parámetro se compara? Plantear las hipótesis.
+a. ¿Qué contraste se debe aplicar? ¿Por qué la normalidad es aquí más crítica que en una comparación de medias? ¿Qué alternativa robusta existe?
+a. Pedir a la IA el contraste F, el intervalo de confianza del 95 % para el cociente de varianzas y el test de Levene. Verificar que el estadístico F es el cociente de las dos varianzas muestrales y que el grupo del numerador es el correcto.
+a. Interpretar el resultado. ¿Qué implicaciones tendría para diseñar recomendaciones dietéticas por genotipo? ¿Se diferencian también las medias?
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Número de poblaciones: 2 poblaciones independientes (población 1: genotipo TT, población 2: genotipo CC).  
+Variable dependiente: AUC de glucosa (cuantitativa).  
+Tamaños muestrales: $n_1=16$, $n_2=20$.  
+Descriptivos: TT: $\bar x_1=204.1$, $s_1=56.5$; CC: $\bar x_2=192.9$, $s_2=28.0$.  
+Prueba de normalidad de Shapiro-Wilk: p-valor primera muestra: $0.41$, p-valor segunda muestra: $0.22$. Se acepta la normalidad en ambos grupos. Como el contraste $\chi^2$ de una varianza, el contraste F no es robusto a la falta de normalidad; la alternativa robusta es el test de Levene (o Brown-Forsythe).  
+Contraste de comparación de varianzas: $H_0:\sigma_1^2=\sigma_2^2$, $H_1:\sigma_1^2>\sigma_2^2$.  
+Estadístico del contraste: $F=56.5^2/28.0^2=4.09$ con 15 y 19 grados de libertad.  
+p-valor: $p=0.002$ (bilateral: $0.005$). Intervalo de confianza del 95 % para $\sigma_1^2/\sigma_2^2$: $(1.56, 11.34)$. Test de Levene: $p=0.002$.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la respuesta glucémica de los TT es unas 4 veces más variable (la desviación típica, el doble).  
+Comparación de medias (Welch): $t=0.73$ con 20.8 grados de libertad, $p=0.47$. Las medias no difieren, pero la dispersión sí. Una recomendación basada en la media del genotipo sería poco informativa para los TT, en quienes tendría más sentido medir la respuesta individual (por ejemplo, con monitorización continua de glucosa). Que no difieran las medias no significa que los grupos sean iguales.  
+Errores frecuentes de la IA: poner en el numerador el grupo de menor varianza ($F=0.24$) y calcular el p-valor en la cola equivocada.
+:::
+
+:::{#exr-contraste-ia-verificacion-folato}
+Diez mujeres en edad fértil toman 400 µg/día de ácido fólico durante 8 semanas. Se mide el folato sérico (ng/mL) antes y después. Los datos están en el fichero [folato-suplementacion.csv](datos/folato-suplementacion.csv). Un compañero ha pegado los datos en un asistente de IA y ha obtenido la siguiente respuesta:
+
+```
+He aplicado una prueba t de Welch para comparar las medias de los dos grupos.
+Media antes = 13.28 ng/mL (DE 4.20); media después = 17.21 ng/mL (DE 5.82).
+t = 1.730; gl = 16.37; p = 0.102. IC 95 % de la diferencia: (-0.88, 8.74).
+Conclusión: no hay evidencia de que la suplementación aumente el folato sérico.
+```
+
+a. Revisar la respuesta con la lista de comprobación. ¿Qué está bien y qué está mal?
+a. ¿Qué contraste debería haberse aplicado y por qué? ¿Cambiaría la conclusión?
+a. Repetir el análisis correcto con la IA y comparar los resultados.
+a. Reescribir la petición original para que este error no se pueda producir.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Lo que está bien: las medias, las desviaciones típicas y los cálculos de la t de Welch son correctos.  
+Lo que está mal: el contraste. Son las mismas 10 mujeres medidas dos veces, así que las muestras son pareadas. Pistas: los grados de libertad no enteros (indican Welch), la expresión «dos grupos» y que 9 de las 10 participantes aumentan su folato. Además, la conclusión es incorrecta: un p-valor no significativo no demuestra la ausencia de efecto.  
+Número de poblaciones: 2 poblaciones pareadas (población 1: después, población 2: antes).  
+Variable dependiente: Folato sérico (cuantitativa).  
+Tamaño muestral: $n=10$.  
+Variable diferencia: $D=$ después $-$ antes. $\bar d=3.93$ ng/mL, $s_d=2.67$.  
+Prueba de normalidad de Shapiro-Wilk de la diferencia: $p=0.93$. Se acepta la normalidad.  
+Contraste para la comparación de medias de poblaciones pareadas: $H_0:\mu_d=0$, $H_1:\mu_d> 0$.  
+Estadístico del contraste: $t=4.66$ con 9 grados de libertad.  
+p-valor: $p=0.0006$ (bilateral: $0.001$). Intervalo de confianza del 95 % para $\mu_d$: $(2.02, 5.84)$ ng/mL.  
+Como el p-valor es menor que el nivel de significación, se rechaza la hipótesis nula y se concluye que la suplementación aumenta el folato sérico unos 4 ng/mL. La correlación antes-después es $r=0.91$, por eso el diseño pareado gana tanta potencia.  
+Petición reescrita:
+
+```
+Cada fila corresponde a la MISMA participante medida antes y después de 8 semanas
+de ácido fólico. Calcula D = folato_despues - folato_antes para cada fila,
+comprueba la normalidad de D (Shapiro-Wilk) y haz una t de Student para datos
+pareados, H1: μ_D > 0, α = 0.05. Dame t, gl, p-valor e IC 95 % de μ_D,
+y el código R que has usado.
+```
+:::
+
+:::{#exr-contraste-ia-caso-integrador-dieta-fto}
+En un ensayo de 6 meses, 80 adultos con sobrepeso u obesidad se asignan al azar a una dieta mediterránea hipocalórica o a una dieta baja en grasa hipocalórica (40 por grupo). El fichero [dieta-fto-ensayo.csv](datos/dieta-fto-ensayo.csv) contiene el identificador, sexo, edad, genotipo FTO, dieta, peso basal y a 6 meses (kg) y glucosa basal y a 6 meses (mg/dL). Pedir a la IA que calcule primero la pérdida de peso en % como $100\cdot(\text{peso basal}-\text{peso 6 meses})/\text{peso basal}$ y comprobar a mano el valor de dos participantes. Para cada pregunta, seguir los cinco pasos.
+
+a. ¿Difiere el porcentaje medio de pérdida de peso entre las dos dietas?
+a. ¿Disminuye la glucosa en ayunas con la dieta mediterránea? ¿Y con la baja en grasa? ¿Permiten estos dos contrastes concluir que una dieta es mejor que la otra para la glucosa?
+a. ¿Difiere la proporción de respondedores (pérdida $\geq 5$ %) entre las dos dietas?
+a. Formular una pregunta sobre el genotipo FTO con estos datos, elegir el contraste y analizarla. Comentar el tamaño de los grupos y el problema de hacer muchas comparaciones con los mismos datos.
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución
+Comprobación: P001 pierde un 11.8 % y P002 un 1.5 %.
+
+a. Número de poblaciones: 2 poblaciones independientes (población 1: dieta mediterránea, población 2: dieta baja en grasa).  
+Variable dependiente: Pérdida de peso en % (cuantitativa).  
+Tamaños muestrales: $n_1=40$, $n_2=40$.  
+Descriptivos: mediterránea: $\bar x_1=5.43$ %, $s_1=3.14$; baja en grasa: $\bar x_2=3.79$ %, $s_2=3.50$.  
+Prueba de normalidad de Shapiro-Wilk: p-valores $0.52$ y $0.67$. Se acepta la normalidad. Test de Levene: $p=0.47$. Se acepta la igualdad de varianzas.  
+Contraste para la comparación de medias de poblaciones independientes con varianzas iguales: $H_0:\mu_1=\mu_2$, $H_1:\mu_1\neq\mu_2$.  
+Estadístico: $t=2.21$ con 78 grados de libertad. p-valor: $p=0.030$. Intervalo de confianza del 95 % para $\mu_1-\mu_2$: $(0.16, 3.12)$. $d=0.49$.  
+Se rechaza la hipótesis nula: la dieta mediterránea produce una pérdida de peso algo mayor, de magnitud moderada y estimada con poca precisión. Ojo: R ordena los grupos alfabéticamente (BajaGrasa primero), así que puede devolver la diferencia con el signo cambiado.
+
+a. Contrastes de comparación de medias de poblaciones pareadas dentro de cada dieta, con $D=$ glucosa a 6 meses $-$ glucosa basal y $H_0:\mu_d=0$, $H_1:\mu_d\neq 0$.  
+Mediterránea: $\bar d=-2.93$ mg/dL, $s_d=7.97$, $t=-2.32$ con 39 grados de libertad, $p=0.026$, intervalo $(-5.47, -0.38)$.  
+Baja en grasa: $\bar d=-0.23$ mg/dL, $s_d=7.97$, $t=-0.18$ con 39 grados de libertad, $p=0.86$, intervalo $(-2.77, 2.32)$.  
+Que un cambio sea significativo y el otro no, no demuestra que las dietas difieran. Para eso hay que comparar los cambios entre grupos con un contraste de muestras independientes: diferencia $=-2.70$ mg/dL, $t=-1.52$ con 78 grados de libertad, $p=0.13$, intervalo $(-6.25, 0.85)$. No hay evidencia suficiente de que la dieta mediterránea reduzca la glucosa más que la baja en grasa, y una bajada de 3 mg/dL tiene poca relevancia clínica.
+
+a. Contraste para la comparación de proporciones: $H_0:p_1=p_2$, $H_1:p_1\neq p_2$.  
+Proporciones muestrales: mediterránea $24/40=0.60$, baja en grasa $14/40=0.35$.  
+Estadístico: $z=2.24$. p-valor: $p=0.025$ (Fisher: $p=0.043$). Intervalo de confianza del 95 % para $p_1-p_2$: $(0.04, 0.46)$.  
+Se rechaza la hipótesis nula, de forma coherente con el apartado a, aunque al dicotomizar la pérdida de peso se pierde información.
+
+a. Ejemplo: ¿pierden menos peso los AA? Contraste de Welch: AA: $n=18$, $\bar x=4.13$ %, $s=2.53$; no AA: $n=62$, $\bar x=4.75$ %, $s=3.62$. $t=-0.83$ con 39.4 grados de libertad, $p=0.41$, intervalo $(-2.15, 0.90)$. No hay evidencia de diferencia, pero el intervalo es compatible con un efecto clínicamente relevante. Además, solo hay 18 AA, que no están equilibrados entre dietas (11 en mediterránea y 7 en baja en grasa), lo que puede confundir la comparación. Con cuatro o más contrastes sobre los mismos datos, la probabilidad de algún falso positivo crece (con 4 contrastes independientes a $\alpha=0.05$, cerca del 19 %). Lo adecuado sería declarar la hipótesis de antemano, ajustar los p-valores (Bonferroni, Holm) o modelizar la interacción dieta × genotipo.
+:::
